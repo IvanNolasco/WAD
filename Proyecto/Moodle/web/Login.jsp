@@ -8,8 +8,8 @@
     </head>
     <body>
         <s:form action="Login" >
-            <s:textfield name="userName" key="User Name:" />
-            <s:password name="password" key="Password:" />
+            <s:textfield name="userName" key="User Name:" required="true"/>
+            <s:password name="password" key="Password:" required="true"/>
             <s:submit value="Login" />
             <s:actionmessage  />
         </s:form>

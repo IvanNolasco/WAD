@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Welcome Teacher: <s:property value="userName" /></h1> 
+    <s:a href="Login.jsp">Sing out</s:a>
 </body>
 </html>

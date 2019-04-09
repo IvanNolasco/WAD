@@ -1,0 +1,16 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+ 
+	<package name="nombrepaquete" namespace="/Usuario" extends="struts-default">
+		<action name="Login" class="actionsupportpackage.LoginActionSupport">
+			<result name="success">/output1.jsp</result>
+                        <result name="profesor">/profesor.jsp</result>
+                        <result name="administrador">/admin.jsp</result>
+			<result name="input">/input1.jsp</result>                        
+		</action>
+	</package>
+ 
+</struts>

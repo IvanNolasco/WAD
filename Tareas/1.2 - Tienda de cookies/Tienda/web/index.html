@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>SuperStore</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <h1>SuperStore</h1>
+            <form method = "get">
+                <ul style="list-style-type:disc;">
+                    <li>Cómputo y electrónica<br>
+                        <input type="checkbox" name="article" value="Tablet" >Tablet<br>
+                        <input type="checkbox" name="article" value="LapTop">Lap Top<br>                 
+                    </li>
+                    <li>Videojuegos<br>
+                        <input type="checkbox" name="article" value="AssasinsCreedOrigins">Assasins Creed: Origins<br>
+                        <input type="checkbox" name="article" value="RedDeadRedemptionII">Red Dead Redemption II<br>                 
+                    </li>                 
+                </ul>
+                <input type='submit' value='Ver Carrito' onclick="this.form.action ='Carrito'"/>
+                <input type="submit" value="Agregar al carrito de compras" onclick="this.form.action ='Tienda'">                
+              </form>
+             
+        </div>
+    </body>
+</html>

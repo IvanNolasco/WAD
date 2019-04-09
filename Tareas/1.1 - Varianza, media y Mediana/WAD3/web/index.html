@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Media, Mediana y Varianza</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+            <form method ="get" >
+                <label for='cantidad'>Cantidad de datos:</label><input type='text' id='cantidad' name='cantidad'/>
+                <input type='button' value='Prueba' onclick='datos()'/><br><br>
+                <div id="dat">
+                </div>
+                
+            </form>
+        <script type="text/javascript">
+            function datos(){
+                var numDatos = parseInt(document.getElementById("cantidad").value);
+                var dat = document.getElementById("dat");
+                var str = "";
+                for (var i = 0; i < numDatos; i++) {
+                    str = str +"<label for='d"+(i+1)+"'>Dato "+(i+1)+":</label><input type='text' id='d"+(i+1)+"' name='d"+(i+1)+"'/><br>";                 
+                }
+                str = str +'<input type="submit" value="MMV" onclick="this.form.action = \'Serv1\'">'
+                dat.innerHTML = str;
+                
+            }
+        </script>
+    </body>
+</html>

@@ -7,6 +7,6 @@
 <title>Welcome Page</title>
 </head>
 <body>
-<h1>Welcome <s:property value="userName" />!</h1>
+    <h1>Welcome Teacher: <s:property value="userName" /></h1> 
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.hibernate.Session;
 
 public class LoginActionSupport extends ActionSupport {
  String userName,password;
+ int tipo;
  Session hibernateSession;
  Login login;
  @Override
@@ -27,7 +28,14 @@ public class LoginActionSupport extends ActionSupport {
  return INPUT;
  }
  addActionMessage("Welcome you logined");
- return SUCCESS;
+ tipo = login.getTipo();
+ if(tipo==0){
+     return "admin";
+ } else if(tipo==1){
+     return "teacher";
+ } else {
+     return "student";
+ }
  }
  public String getPassword() {
  return password;
@@ -41,4 +49,11 @@ public class LoginActionSupport extends ActionSupport {
  public void setUserName(String userName) {
  this.userName = userName;
  }
+ public int getTipo(){
+     return tipo;
+ }
+ public void setTipo(int tipo){
+     this.tipo = tipo;
+ }
+
 }

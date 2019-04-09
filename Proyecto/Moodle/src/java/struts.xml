@@ -8,8 +8,10 @@
 </package>
 <package name="actionsupportpackage" extends="struts-default">
 <action name="Login" method="execute" class="actionsupportpackage.LoginActionSupport">
-<result name="success" >output1.jsp</result>
-<result name="input" >input1.jsp</result>
+<result name="admin">WelcomeAdmin.jsp</result>
+<result name="student">WelcomeStudent.jsp</result>
+<result name="teacher">WelcomeTeacher.jsp</result>
+<result name="input">Login.jsp</result>
 </action>
 </package>
 </struts>

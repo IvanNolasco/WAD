@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,10 +9,7 @@
     <body>
         <h1>Questions Creation</h1>
         
-        <s:form action="NewQuestion" >
-            <s:submit value="Create New Question" />
-            <s:actionmessage  />
-        </s:form>
+        <button type="submit" formaction="NewQuestion">Create New Question</button>
     
         <table class="egt"> 
             <tr>

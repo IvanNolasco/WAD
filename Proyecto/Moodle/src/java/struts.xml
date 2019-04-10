@@ -7,11 +7,17 @@
 <package name="default" extends="struts-default">
 </package>
 <package name="actionsupportpackage" extends="struts-default">
+    
 <action name="Login" method="execute" class="actionsupportpackage.LoginActionSupport">
 <result name="admin">WelcomeAdmin.jsp</result>
 <result name="student">WelcomeStudent.jsp</result>
 <result name="teacher">WelcomeTeacher.jsp</result>
 <result name="input">Login.jsp</result>
 </action>
+
+<action name="QuestionCreation" method="execute" class="actionsupportpackage.QuestionCreationActionSupport"> 
+<result name="success">QuestionCreation.jsp</result>
+</action>
+
 </package>
 </struts>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9/04/2019 01:48:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entity.Login" table="login" catalog="moodle" optimistic-lock="version">
+        <id name="idLogin" type="java.lang.Integer">
+            <column name="idLogin" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="string">
+            <column name="userName" length="25" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="tipo" type="int">
+            <column name="tipo" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

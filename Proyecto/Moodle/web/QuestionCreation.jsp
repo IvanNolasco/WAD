@@ -9,7 +9,9 @@
     <body>
         <h1>Questions Creation</h1>
         
-        <button type="submit" formaction="CreateQuestion">Create Question</button>
+        <s:form action="CreateQuestion">
+            <s:submit value="Create Question"/>
+        </s:form>
     
         <table class="egt"> 
             <tr>

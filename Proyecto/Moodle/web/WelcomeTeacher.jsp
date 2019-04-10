@@ -8,7 +8,9 @@
 </head>
 <body>
     <h1>Welcome Teacher: <s:property value="userName" /></h1> 
-    <button type="submit" formaction="QuestionCreation">Question Creation</button>>
+    <s:form action="QuestionCreation">
+        <s:submit value="Questions Creation"/>
+    </s:form>
     <s:a href="Login.jsp">Sing out</s:a>
 </body>
 </html>

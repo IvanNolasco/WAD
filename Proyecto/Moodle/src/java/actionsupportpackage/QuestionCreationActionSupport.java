@@ -6,8 +6,10 @@
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-/**
- *
- * @author MAYRA
- */
 public class QuestionCreationActionSupport extends ActionSupport {
     
     public QuestionCreationActionSupport() {
@@ -37,11 +35,10 @@ public class QuestionCreationActionSupport extends ActionSupport {
         this.questions = questions;  
     }  
   
-    public String execute() {  
-        
+    public String execute() throws IOException {  
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("/WEB-INF/Questions.json"));
+            Object obj = parser.parse(new FileReader("Questions.json"));
             System.out.println();
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray questionArray = (JSONArray) jsonObject.get("Question");

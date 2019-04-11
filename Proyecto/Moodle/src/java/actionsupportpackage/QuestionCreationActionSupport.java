@@ -6,19 +6,8 @@
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class QuestionCreationActionSupport extends ActionSupport {
     
@@ -29,28 +18,17 @@ public class QuestionCreationActionSupport extends ActionSupport {
     
     public List<String> getQuestions() {  
         return questions;  
-    } 
-    
-    public void setQuestions(List<String> questions) {  
-        this.questions = questions;  
     }  
   
-    public String execute() throws IOException {  
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader("Questions.json"));
-            System.out.println();
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONArray questionArray = (JSONArray) jsonObject.get("Question");
-            for (Object q : questionArray){
-                jsonObject = (JSONObject) q;
-                String nombre = (String)jsonObject.get("nombre");
-                questions.add(nombre);
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return SUCCESS;
-    }
+    public String execute() {  
+        questions = new ArrayList<String>();  
+        questions.add("0");  
+        questions.add("1");  
+        questions.add("2");  
+        questions.add("3");  
+        questions.add("4");  
+        questions.add("5");  
+        return SUCCESS;  
+    } 
+    
 }

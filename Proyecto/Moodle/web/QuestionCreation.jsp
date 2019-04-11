@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,8 +8,9 @@
     <body>
         <h1>Questions Creation</h1>
         
-        <s:form action="CreateQuestion">
-            <s:submit value="Create Question"/>
+        <s:form action="NewQuestion" >
+            <s:submit value="Create New Question" />
+            <s:actionmessage  />
         </s:form>
     
         <table class="egt"> 
@@ -18,18 +18,17 @@
                 <td>Questions</td>
                 <td>Actions</td>
             </tr>
-            <s:iterator value="questions" >
             <tr>
                 <td>
-                    <s:property />
+                    <s:iterator value="questions" >  
+                    <s:property /></li>  
+                    </s:iterator>
                 </td>
                 <td>
                     <a href="ViewQuestion.jsp">View Question</a> |
                     <a href="ModifyQuestion.jsp">Modify Question</a> |
                     <a href="DeleteQuestion.jsp">Delete Question</a>
                 </td>
-            </tr>
-            </s:iterator>
                 
         </table>
     

@@ -21,7 +21,7 @@
          </header>
         
         <div class="container" id="contenido" theme="simple" cssClass="border border-primary">
-            <h1 class="h1 text-center" mb-3>Login</h1>
+            <h1 class="h1 text-center mb-3" >Login</h1>
             <s:form action="Login" theme="simple">
                <div class="form-group">
                     <s:label for="userName" theme="simple" cssClass="form-label" value="User:"/>

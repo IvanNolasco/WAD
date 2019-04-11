@@ -34,6 +34,9 @@
      </header>
     <div class="container" id="contenido" theme="simple" cssClass="border border-primary">
         <h1 class="h1 text-center mb-3" style="margin: 100px;">Welcome Student: <s:property value="userName" /> </h1>
+        <form action="QuestionCreation">
+            <s:submit value="Questions Creation"/>
+        </form>
     </div>
     
 </body>

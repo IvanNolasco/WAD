@@ -1,4 +1,4 @@
-<%@taglib uri="/struts-tags" prefix="s" %>
+<<%@taglib uri="/struts-tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                       <li class="nav-item active">
-                        <s:a class="nav-link" href="QuestionCreation.jsp">Create Questions<span class="sr-only">(current)</span></s:a>
+                        <a class="nav-link" href="QuestionCreation.jsp">Create Questions<span class="sr-only">(current)</span></a>
                       </li>
                     </ul>
                   </div>

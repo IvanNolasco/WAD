@@ -16,7 +16,7 @@
 </action>
 
 <action name="QuestionCreation" method="execute" class="actionsupportpackage.QuestionCreationActionSupport"> 
-<result name="success">QuestionCreation.jsp</result>
+<result name="success">Questions.jsp</result>
 </action>
 
 </package>

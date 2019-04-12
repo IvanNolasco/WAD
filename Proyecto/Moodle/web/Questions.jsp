@@ -9,7 +9,7 @@
     <body>
         <h1>Questions Creation</h1>
         
-        <s:form action="CreateQuestion">
+        <s:form action="CreateQuestion.jsp">
             <s:submit value="Create Question"/>
         </s:form>
     

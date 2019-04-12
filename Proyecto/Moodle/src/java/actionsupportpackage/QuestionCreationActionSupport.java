@@ -7,13 +7,10 @@ package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.FileReader;
-import java.io.FileWriter;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONArray;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -41,8 +38,8 @@ public class QuestionCreationActionSupport extends ActionSupport {
             JSONArray questionArray = (JSONArray) jsonObject.get("Question");
             for (Object q : questionArray){
                 jsonObject = (JSONObject) q;
-                String nombre = (String) jsonObject.get("nombre");
-                questions.add(nombre);
+                String name = (String) jsonObject.get("nombre");
+                questions.add(name);
             }
             
         }

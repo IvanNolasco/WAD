@@ -9,8 +9,9 @@
     </head>
     <body>
         <h1>Create a New Question</h1>
-        <s:form action="CreateAction">
+        <s:form action="CreateQuestion">
             <s:textfield name="ID" key="ID:" required="true" />
+            <s:textfield name="name" key="Name:" required="true" />
             <s:textfield name="question" key="Question:" required="true" />
             <s:textfield name="answer" key="Answer:" required="true" />
             <s:submit value="Next"/>

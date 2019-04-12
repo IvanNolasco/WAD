@@ -19,5 +19,9 @@
 <result name="success">Questions.jsp</result>
 </action>
 
+<action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport"> 
+<result name="success">FeedbackQuestion.jsp</result>
+</action>
+
 </package>
 </struts>

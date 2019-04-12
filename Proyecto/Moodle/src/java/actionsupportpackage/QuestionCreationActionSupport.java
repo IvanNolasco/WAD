@@ -28,6 +28,10 @@ public class QuestionCreationActionSupport extends ActionSupport {
         return questions;  
     } 
     
+    public void setQuestions(List<String> questions) {  
+        this.questions = questions;  
+    } 
+    
     public String execute() throws IOException { 
         questions = new ArrayList<String>();
         JSONParser parser = new JSONParser();

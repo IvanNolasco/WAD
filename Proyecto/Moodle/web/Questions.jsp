@@ -44,15 +44,14 @@
             <s:iterator value="questions" >
             <tr>
                 <td>
-                    <s:property />
+                    <s:property value="name"/>
                 </td>
                 <td>
                     <div class="btn-group btn-block" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-link" onclick="location.href='ViewQuestion.jsp'">View Question</button>
                         <button type="button" class="btn btn-link" onclick="location.href='ModifyQuestion.jsp'">Modify Question</button>
-                        <button type="button" class="btn btn-link" onclick="location.href='DeleteQuestion.jsp'">Delete Question</button>
-                    </div>
-                   
+                        <button type="button" class="btn btn-link" onclick="location.href='DeleteQuestion.action'"  >Delete Question</button>
+                    </div>                 
                 </td>
             </tr>
             </s:iterator>        

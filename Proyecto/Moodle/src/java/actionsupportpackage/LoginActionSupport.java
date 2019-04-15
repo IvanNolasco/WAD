@@ -12,6 +12,7 @@ public class LoginActionSupport extends ActionSupport {
  int tipo;
  Session hibernateSession;
  Login login;
+ 
  @Override
  public String execute() throws Exception {
  hibernateSession=HibernateUtil.getSessionFactory().openSession();

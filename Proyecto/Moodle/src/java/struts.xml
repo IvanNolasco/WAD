@@ -23,5 +23,9 @@
 <result name="success">FeedbackQuestion.jsp</result>
 </action>
 
+<action name="DeleteQuestion" method="execute" class="actionsupportpackage.DeleteQuestionActionSupport"> 
+<result name="success">SuccessDelete.jsp</result>
+</action>
+
 </package>
 </struts>

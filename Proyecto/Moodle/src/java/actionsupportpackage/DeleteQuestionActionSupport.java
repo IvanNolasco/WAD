@@ -7,35 +7,34 @@ package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.FileWriter;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class QuestionCreationActionSupport extends ActionSupport {
-    
-    public QuestionCreationActionSupport() {
+/**
+ *
+ * @author navi_
+ */
+public class DeleteQuestionActionSupport extends ActionSupport { 
+    public String dname;
+
+    public String getDname() {
+        return dname;
+    }
+
+    public void setDname(String dname) {
+        this.dname = dname;
     }
     
-    private List<Question> questions; 
-    
-    public List<Question> getQuestions() {  
-        return questions;  
-    } 
-    
-    public void setQuestions(List<Question> questions) {  
-        this.questions = questions;  
-    } 
-    
     @Override
-    public String execute() throws IOException { 
-        questions = new ArrayList<Question>();
-        
+    public String execute() throws Exception {
+        System.out.println("///////////////////////////////////////////////////////");
+        System.out.println(dname);
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/QuestionCreationActionSupport.class", "jsons/Questions.json/");
+        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/DeleteQuestionActionSupport.class", "jsons/Questions.json/");
         pathString=pathString.replace("file:/","");
         JSONParser parser = new JSONParser();
         try{
@@ -44,20 +43,23 @@ public class QuestionCreationActionSupport extends ActionSupport {
             for (Object q : questionArray){
                 JSONObject jsonObject = (JSONObject) q;
                 JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
-                String id = (String) questionJObject.get("id");
-                String name = (String) questionJObject.get("name");
-                String question = (String) questionJObject.get("question");
-                String answer = (String) questionJObject.get("answer");
-                Question questionObject = new Question(id, name, question, answer);
-                questions.add(questionObject);
+                String nameJ = (String) questionJObject.get("name");
+                if(nameJ.equals("nombre3")){
+                    questionArray.remove(jsonObject);
+                    break;
+                }
             }
+            FileWriter file = new FileWriter(pathString);
+            file.write(questionArray.toJSONString());
+            file.flush();
+            file.close();
             
         }
+        
         catch(Exception e){
             e.printStackTrace();
         }
         return SUCCESS;
     }
-
     
 }

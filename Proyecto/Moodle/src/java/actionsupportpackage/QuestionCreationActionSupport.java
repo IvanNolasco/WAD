@@ -44,11 +44,11 @@ public class QuestionCreationActionSupport extends ActionSupport {
         JSONParser parser = new JSONParser();
         try{
             Object obj = parser.parse(new FileReader(pathString));
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONArray questionArray = (JSONArray) jsonObject.get("Question");
+            JSONArray questionArray = (JSONArray) obj;
             for (Object q : questionArray){
-                jsonObject = (JSONObject) q;
-                String name = (String) jsonObject.get("nombre");
+                JSONObject jsonObject = (JSONObject) q;
+                JSONObject question = (JSONObject) jsonObject.get("Question");
+                String name = (String) question.get("name");
                 questions.add(name);
             }
             

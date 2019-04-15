@@ -6,10 +6,15 @@
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class CreateQuestionActionSupport extends ActionSupport {
     
@@ -22,21 +27,38 @@ public class CreateQuestionActionSupport extends ActionSupport {
     }
     
     public String execute() throws Exception {
-        JSONObject obj = new JSONObject();
-	obj.put("ID", ID);
-	obj.put("name", name);
-	obj.put("question", question);
-        obj.put("answer", answer);
+        List<String> questions; 
+        questions = new ArrayList<String>();
         
-            try {
-                FileWriter file = new FileWriter("C:\\Users\\navi_\\OneDrive\\Documentos\\Questions1.json");
-		file.write(obj.toJSONString());
-		file.flush();
-		file.close();
-                return SUCCESS;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
+        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "jsons/Questions.json/");
+        pathString=pathString.replace("file:/","");
+        JSONParser parser = new JSONParser();
+        
+        try{
+            Object obj = parser.parse(new FileReader(pathString));
+            JSONArray questionArray = (JSONArray) obj;
+            
+            JSONObject q = new JSONObject();
+            q.put("id", ID);
+            q.put("name", name);
+            q.put("question", question);
+            q.put("answer", answer);
+            JSONObject newQuestion = new JSONObject();
+            newQuestion.put("Question", q);
+            
+            questionArray.add(newQuestion);
+            FileWriter file = new FileWriter(pathString);
+            file.write(questionArray.toJSONString());
+            file.flush();
+            file.close();
+            
+            return SUCCESS;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+       
         return "fail";
         
     }

@@ -34,12 +34,19 @@
                 </div>      
                 <s:submit  theme="simple" id="password" value="Access" cssClass="btn btn-block btn-dark mb-2"  />
                 <s:actionmessage  />
-            </s:form> 
+            </s:form>
+            <div id="like_button_container"></div>
         </div>
         
         
        
-        
+        <!-- Nota: cuando se despliegue, reemplazar "development.js" con "production.min.js". -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+        <!-- Cargamos nuestro componente de React. -->
+        <script src="like_button.js"type="text/babel"></script>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

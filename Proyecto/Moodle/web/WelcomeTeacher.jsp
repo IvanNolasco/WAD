@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                       <li class="nav-item active">
-                        <a class="nav-link" href="QuestionCreation.action">Create Questions<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="QuestionCreation.action">Questions<span class="sr-only">(current)</span></a>
                       </li>
                     </ul>
                   </div>
@@ -32,7 +32,7 @@
            </nav>
         </div>
      </header>
-    <div class="container" id="contenido" theme="simple" cssClass="border border-primary">
+    <div class="container">
         <h1 class="h1 text-center mb-3" style="margin: 100px;">Welcome Teacher: <s:property value="userName" /> </h1>
     </div>
     

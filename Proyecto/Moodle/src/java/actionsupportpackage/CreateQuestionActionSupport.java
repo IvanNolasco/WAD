@@ -43,7 +43,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
         
         
         
-        File salida = new File(pathString+"media/"+mediaFileName);
+        File salida = new File(pathString+"web/media/"+mediaFileName);
         FileInputStream in = new FileInputStream(media);
         FileOutputStream out = new FileOutputStream(salida);
         byte[] buf = new byte[1024];
@@ -66,6 +66,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             q.put("question", question);
             q.put("answer", answer);
             q.put("source", "media\\"+mediaFileName);
+            q.put("type", mediaContentType);
             JSONObject newQuestion = new JSONObject();
             newQuestion.put("Question", q);
             

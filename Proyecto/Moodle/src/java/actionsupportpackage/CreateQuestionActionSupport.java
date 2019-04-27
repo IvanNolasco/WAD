@@ -65,6 +65,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             q.put("name", name);
             q.put("question", question);
             q.put("answer", answer);
+            q.put("source", "media\\"+mediaFileName);
             JSONObject newQuestion = new JSONObject();
             newQuestion.put("Question", q);
             

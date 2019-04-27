@@ -22,12 +22,12 @@
 
 <action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport">
     <interceptor-ref name="fileUpload">
-        <param name="allowedTypes">image/jpeg,image/png</param>
+        <param name="allowedTypes">image/jpeg,image/png, audio/mpeg,video/mp4</param>
         <param name="maximumSize">2000000</param>
         <param name="allowedExtensions">jpeg,png</param>
     </interceptor-ref>
     <interceptor-ref name="defaultStack" /> 
-<result name="success">FeedbackQuestion.jsp</result>
+<result name="success">SuccessQuestion.jsp</result>
 </action>
 
 <action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 

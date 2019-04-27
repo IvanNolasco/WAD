@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                      <s:label for="media" theme="simple" cssClass="form-label" value="Media File:"/>
-                     <s:file name="media" id="media" theme="simple" cssClass="form-control-file" accept="image/jpeg,image/png"/>
+                     <s:file name="media" id="media" theme="simple" cssClass="form-control-file" accept="image/jpeg,image/png,audio/mpeg,video/mp4"/>
                 </div>
                
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>

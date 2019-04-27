@@ -23,6 +23,10 @@
 <result name="success">FeedbackQuestion.jsp</result>
 </action>
 
+<action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 
+<result name="success">SuccessQuestion.jsp</result>
+</action>
+
 <action name="DeleteQuestion" method="execute" class="actionsupportpackage.DeleteQuestionActionSupport"> 
 <result name="success">SuccessDelete.jsp</result>
 </action>

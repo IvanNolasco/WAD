@@ -31,6 +31,35 @@
                </nav>
             </div>
         </header>
-        <h1 class="container text-center" style="margin-top: 200px">The new question has been saved!</h1>
+        <div class="container">
+            <h1 class="text-center">Feedback</h1>
+            <s:form action="FeedbackQuestion">
+                <div class="form-group">
+                    <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>
+                    <s:textfield name="tries" id="tries" theme="simple" cssClass="form-control" required="true" />
+                </div>
+                <div class="form-group">
+                    <s:label for="initial" theme="simple" cssClass="form-label" value="Initial Feedback:"/>
+                    <s:textfield name="initial" id="initial" theme="simple" cssClass="form-control" required="true" />
+                </div>
+                <div class="form-group">
+                    <s:label for="evaluate" theme="simple" cssClass="form-label" value="Evaluate Feedback:"/>
+                    <s:textfield name="evaluate" id="evaluate" theme="simple" cssClass="form-control" required="true" />
+                </div>
+                <div class="form-group">
+                    <s:label for="correct" theme="simple" cssClass="form-label" value="Correct Feedback:"/>
+                    <s:textfield name="correct" id="correct" theme="simple" cssClass="form-control" required="true" />
+                </div>
+                <div class="form-group">
+                    <s:label for="incorrect" theme="simple" cssClass="form-label" value="Incorrect Feedback:"/>
+                    <s:textfield name="incorrect" id="incorrect" theme="simple" cssClass="form-control" required="true" />
+                </div>
+                <div class="form-group">
+                    <s:label for="triesFB" theme="simple" cssClass="form-label" value="Tries Feedback:"/>
+                    <s:textfield name="triesFB" id="triesFB" theme="simple" cssClass="form-control" required="true" />
+                </div>
+                <s:submit value="Save Question" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>
+            </s:form>
+        </div>
     </body>
 </html>

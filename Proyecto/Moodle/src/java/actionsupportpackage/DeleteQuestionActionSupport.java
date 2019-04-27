@@ -19,20 +19,19 @@ import org.json.simple.parser.JSONParser;
  * @author navi_
  */
 public class DeleteQuestionActionSupport extends ActionSupport { 
-    public String dname;
+    public String id;
 
-    public String getDname() {
-        return dname;
+    public String getId() {
+        return id;
     }
 
-    public void setDname(String dname) {
-        this.dname = dname;
+    public void setId(String id) {
+        this.id = id;
     }
     
     @Override
     public String execute() throws Exception {
-        System.out.println("///////////////////////////////////////////////////////");
-        System.out.println(dname);
+        
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/DeleteQuestionActionSupport.class", "jsons/Questions.json/");
         pathString=pathString.replace("file:/","");
@@ -43,8 +42,8 @@ public class DeleteQuestionActionSupport extends ActionSupport {
             for (Object q : questionArray){
                 JSONObject jsonObject = (JSONObject) q;
                 JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
-                String nameJ = (String) questionJObject.get("name");
-                if(nameJ.equals("nombre3")){
+                String nameJ = (String) questionJObject.get("id");
+                if(nameJ.equals(id)){
                     questionArray.remove(jsonObject);
                     break;
                 }

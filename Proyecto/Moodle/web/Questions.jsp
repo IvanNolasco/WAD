@@ -55,7 +55,7 @@
                         
                         <%
                             String id = idvar;
-                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='DeleteQuestion.action?id="+id+"'\">Delete Question</button>");
+                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"confirmar("+id+")\">Delete Question</button>");
                         %>
                         
                         
@@ -66,6 +66,17 @@
         </table>
         
     </div>
+        
+        <script type="text/javascript">
+            function confirmar(id){
+                window.alert(id);
+                if (confirm("Do you really want to delete this question?")) {
+                    location.href ="DeleteQuestion.action?id="+id;
+                } else {
+                    
+                }
+            }
+        </script>
         
     </body>
 </html>

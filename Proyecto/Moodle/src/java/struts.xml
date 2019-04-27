@@ -27,7 +27,7 @@
         <param name="allowedExtensions">jpeg,png</param>
     </interceptor-ref>
     <interceptor-ref name="defaultStack" /> 
-<result name="success">SuccessQuestion.jsp</result>
+<result name="success">FeedbackQuestion.jsp</result>
 </action>
 
 <action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 

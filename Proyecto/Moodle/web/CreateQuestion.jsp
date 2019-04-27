@@ -34,7 +34,7 @@
         </header>
         <div class="container">
             <h1 class="text-center">Create a New Question</h1>
-            <s:form action="CreateQuestion">
+            <s:form action="CreateQuestion"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <s:label for="ID" theme="simple" cssClass="form-label" value="ID:"/>
                     <s:textfield name="ID" id="ID" theme="simple" cssClass="form-control" required="true" />
@@ -51,6 +51,11 @@
                     <s:label for="answer" theme="simple" cssClass="form-label" value="Answer:"/>
                     <s:textfield name="answer" id="answer" theme="simple" cssClass="form-control" required="true" />
                 </div>
+                <div class="form-group">
+                     <s:label for="media" theme="simple" cssClass="form-label" value="Media File:"/>
+                     <s:file name="media" id="media" theme="simple" cssClass="form-control-file" accept="image/jpeg,image/png"/>
+                </div>
+               
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>
             </s:form>
         </div>

@@ -6,6 +6,9 @@
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,6 +25,9 @@ public class CreateQuestionActionSupport extends ActionSupport {
     public String name;
     public String question;
     public String answer;
+    private File media;
+    private String mediaContentType;
+    private String mediaFileName;
     
     public CreateQuestionActionSupport() {
     }
@@ -32,12 +38,26 @@ public class CreateQuestionActionSupport extends ActionSupport {
         questions = new ArrayList<String>();
         
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "jsons/Questions.json/");
+        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "");
         pathString=pathString.replace("file:/","");
-        JSONParser parser = new JSONParser();
         
+        
+        
+        File salida = new File(pathString+"media/"+mediaFileName);
+        FileInputStream in = new FileInputStream(media);
+        FileOutputStream out = new FileOutputStream(salida);
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
+        }
+        in.close();
+        out.close();
+        System.out.println(salida.getName()+","+salida.getAbsolutePath());
+        
+        JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader(pathString));
+            Object obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
             
             JSONObject q = new JSONObject();
@@ -49,7 +69,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             newQuestion.put("Question", q);
             
             questionArray.add(newQuestion);
-            FileWriter file = new FileWriter(pathString);
+            FileWriter file = new FileWriter(pathString+"jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();
@@ -64,4 +84,27 @@ public class CreateQuestionActionSupport extends ActionSupport {
         
     }
     
+    public File getMedia() {
+		return media;
+	}
+
+	public void setMedia(File media) {
+		this.media = media;
+	}
+
+	public String getMediaContentType() {
+		return mediaContentType;
+	}
+
+	public void setMediaContentType(String mediaContentType) {
+		this.mediaContentType = mediaContentType;
+	}
+
+	public String getMediaFileName() {
+		return mediaFileName;
+	}
+
+	public void setMediaFileName(String mediaFileName) {
+		this.mediaFileName = mediaFileName;
+	}
 }

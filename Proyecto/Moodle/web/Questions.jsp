@@ -69,7 +69,6 @@
         
         <script type="text/javascript">
             function confirmar(id){
-                window.alert(id);
                 if (confirm("Do you really want to delete this question?")) {
                     location.href ="DeleteQuestion.action?id="+id;
                 } else {

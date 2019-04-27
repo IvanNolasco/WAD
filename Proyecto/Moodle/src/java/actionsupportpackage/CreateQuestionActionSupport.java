@@ -40,9 +40,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "");
         pathString=pathString.replace("file:/","");
-        
-        
-        
+  
         File salida = new File(pathString+"web/media/"+mediaFileName);
         FileInputStream in = new FileInputStream(media);
         FileOutputStream out = new FileOutputStream(salida);
@@ -53,7 +51,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
         }
         in.close();
         out.close();
-        System.out.println(salida.getName()+","+salida.getAbsolutePath());
         
         JSONParser parser = new JSONParser();
         try{

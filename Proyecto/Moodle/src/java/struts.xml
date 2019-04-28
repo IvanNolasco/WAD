@@ -37,5 +37,9 @@
 <result name="success">ModifyQuestion.jsp</result>
 </action>
 
+<action name="ViewQuestion" method="execute" class="actionsupportpackage.ViewQuestionActionSupport"> 
+<result name="success">ViewQuestion.jsp</result>
+</action>
+
 </package>
 </struts>

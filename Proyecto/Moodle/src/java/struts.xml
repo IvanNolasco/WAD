@@ -42,5 +42,9 @@
 <result name="success">ModifyQuestion.jsp</result>
 </action>
 
+<action name="ModifyQuestion2" method="execute" class="actionsupportpackage.ModifyQuestion2ActionSupport"> 
+<result name="success">ModifyFeedback.jsp</result>
+</action>
+
 </package>
 </struts>

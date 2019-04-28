@@ -34,7 +34,7 @@
         </header>
         <div class="container">
             <h1 class="text-center">Modify Question</h1>
-            <s:form action="CreateQuestion"  method="post" enctype="multipart/form-data">
+            <s:form action="ModifyQuestion2"  method="post" enctype="multipart/form-data">
                 
                 <s:set var="idvar" value="id"/>
                 <jsp:useBean id="idvar" type="java.lang.String" />

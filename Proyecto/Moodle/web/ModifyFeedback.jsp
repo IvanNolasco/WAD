@@ -66,35 +66,35 @@
                 %>
                 </div>
                 <div class="form-group">
-                <s:label for="initial" theme="simple" cssClass="form-label" value="Tries:"/>
+                <s:label for="initial" theme="simple" cssClass="form-label" value="Initial Feedback:"/>
                 <%
                     String initial = initialvar;
                     out.print("<input type='text' name='initial' id='initial' class='form-control' required='true' value='"+initial+"'/>");
                 %>
                 </div>
                 <div class="form-group">
-                <s:label for="evaluate" theme="simple" cssClass="form-label" value="Tries:"/>
+                <s:label for="evaluate" theme="simple" cssClass="form-label" value="Evaluate Feedback:"/>
                 <%
                     String evaluate = evaluatevar;
                     out.print("<input type='text' name='evaluate' id='evaluate' class='form-control' required='true' value='"+evaluate+"'/>");
                 %>
                 </div>
                 <div class="form-group">
-                <s:label for="correct" theme="simple" cssClass="form-label" value="Tries:"/>
+                <s:label for="correct" theme="simple" cssClass="form-label" value="Correct Feedback:"/>
                 <%
                     String correct = correctvar;
                     out.print("<input type='text' name='correct' id='correct' class='form-control' required='true' value='"+correct+"'/>");
                 %>
                 </div>
                 <div class="form-group">
-                <s:label for="incorrect" theme="simple" cssClass="form-label" value="Tries:"/>
+                <s:label for="incorrect" theme="simple" cssClass="form-label" value="Incorrect Feedback:"/>
                 <%
                     String incorrect = incorrectvar;
                     out.print("<input type='text' name='incorrect' id='incorrect' class='form-control' required='true' value='"+incorrect+"'/>");
                 %>
                 </div>
                 <div class="form-group">
-                <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>
+                <s:label for="tries" theme="simple" cssClass="form-label" value="Tries Feedback:"/>
                 <%
                     String triesFB = triesFBvar;
                     out.print("<input type='text' name='triesFB' id='triesFB' class='form-control' required='true' value='"+triesFB+"'/>");

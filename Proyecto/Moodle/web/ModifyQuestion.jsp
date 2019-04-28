@@ -44,6 +44,10 @@
                 <jsp:useBean id="questionvar" type="java.lang.String" />
                 <s:set var="answervar" value="answer"/>
                 <jsp:useBean id="answervar" type="java.lang.String" />
+                <s:set var="sourcevar" value="mediaFileName"/>
+                <jsp:useBean id="sourcevar" type="java.lang.String" />
+                <s:set var="contentvar" value="mediaContentType"/>
+                <jsp:useBean id="contentvar" type="java.lang.String" />
                     
                 <div class="form-group">
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
@@ -72,6 +76,10 @@
                     <%
                         String answer = answervar;
                         out.print("<input type=\"text\" name= \"answer\" id=\"answer\" class=\"form-control\" required=\"true\" value=\""+answer+"\"/>");
+                        String mediaFileName = sourcevar;
+                        out.print("<input type=\"text\" name= \"mediaFileName\" id=\"mediaFileName\" class=\"form-control\" required=\"true\" value=\""+mediaFileName+"\" style='display:none' />");
+                        String mediaContentType = contentvar;
+                        out.print("<input type=\"text\" name= \"mediaContentType\" id=\"mediaContentType\" class=\"form-control\" required=\"true\" value=\""+mediaContentType+"\" style='display:none' />");  
                     %>
                 </div>
                 <div class="form-group">

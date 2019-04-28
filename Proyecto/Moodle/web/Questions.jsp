@@ -50,11 +50,14 @@
                 </td>
                 <td>
                     <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-link" onclick="location.href='ViewQuestion.jsp'">View Question</button>
-                        <button type="button" class="btn btn-link" onclick="location.href='ModifyQuestion.jsp'">Modify Question</button>
                         
                         <%
                             String id = idvar;
+                            
+                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ViewQuestion.action?id="+id+"'\">View Question</button>");
+                            
+                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ModifyQuestion.action?id="+id+"'\">Modify Question</button>");
+                        
                             out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"confirmar("+id+")\">Delete Question</button>");
                         %>
                         

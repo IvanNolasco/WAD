@@ -28,6 +28,7 @@
     </interceptor-ref>
     <interceptor-ref name="defaultStack" /> 
 <result name="success">FeedbackQuestion.jsp</result>
+<result name="IDExistent">IDExistent.jsp</result>
 </action>
 
 <action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 

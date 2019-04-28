@@ -35,26 +35,41 @@ public class CreateQuestionActionSupport extends ActionSupport {
     @Override
     public String execute() throws Exception {
         
+        
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "");
         pathString=pathString.replace("file:/","");
-  
-        File salida = new File(pathString+"web/media/"+mediaFileName);
-        FileInputStream in = new FileInputStream(media);
-        FileOutputStream out = new FileOutputStream(salida);
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-        in.close();
-        out.close();
         
         JSONParser parser = new JSONParser();
+        
         try{
             Object obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
-            
+            for (Object q : questionArray){
+                JSONObject jsonObject = (JSONObject) q;
+                JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
+                String idE = (String) questionJObject.get("id");
+                if(idE.equals(this.id)){
+                    System.out.println(idE);
+                    System.out.println(this.id);
+                    return "IDExistent";
+                }
+            }
+
+            File salida = new File(pathString+"web/media/"+mediaFileName);
+            FileInputStream in = new FileInputStream(media);
+            FileOutputStream out = new FileOutputStream(salida);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+
+            obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
+            questionArray = (JSONArray) obj;
+
             JSONObject q = new JSONObject();
             q.put("id", id);
             q.put("name", name);
@@ -64,13 +79,13 @@ public class CreateQuestionActionSupport extends ActionSupport {
             q.put("type", mediaContentType);
             JSONObject newQuestion = new JSONObject();
             newQuestion.put("Question", q);
-            
+
             questionArray.add(newQuestion);
             FileWriter file = new FileWriter(pathString+"jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();
-            
+
             return SUCCESS;
         }
         catch(Exception e){

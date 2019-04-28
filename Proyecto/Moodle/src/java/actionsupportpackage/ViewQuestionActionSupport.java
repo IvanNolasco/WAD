@@ -89,7 +89,13 @@ public class ViewQuestionActionSupport extends ActionSupport {
         this.answer = answer;
     }
 
-    
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
     
     
 }

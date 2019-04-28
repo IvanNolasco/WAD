@@ -49,10 +49,16 @@
             </div>
             <div class="col">
                 <s:set var="srcvar" value="source"/>
+                <s:set var="typevar" value="type"/>
                 <jsp:useBean id="srcvar" type="java.lang.String" />
+                <jsp:useBean id="typevar" type="java.lang.String" />
                 <% 
-                    String src = srcvar;
-                    out.print("<img src='"+srcvar+"' class='img-thumbnail mx-auto d-block' style='max-width:50%;width:auto;height:auto;'>");
+                    if (typevar.startsWith("image"))
+                        out.print("<img src='"+srcvar+"' class='img-thumbnail mx-auto d-block' style='max-width:50%;width:auto;height:auto;'>");
+                    if(typevar.startsWith("audio"))
+                        out.print("<audio src='"+srcvar+"' controls />");
+                    if(typevar.startsWith("video"))
+                        out.print("<video src='"+srcvar+"' width='640' height='480' controls></video>");
                 %>
                 
             </div>

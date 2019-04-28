@@ -38,5 +38,9 @@
 <result name="success">SuccessDelete.jsp</result>
 </action>
 
+<action name="ModifyQuestion" method="execute" class="actionsupportpackage.ModifyQuestionActionSupport"> 
+<result name="success">ModifyQuestion.jsp</result>
+</action>
+
 </package>
 </struts>

@@ -6,6 +6,7 @@
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
@@ -33,22 +34,26 @@ public class DeleteQuestionActionSupport extends ActionSupport {
     public String execute() throws Exception {
         
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/DeleteQuestionActionSupport.class", "jsons/Questions.json/");
+        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/DeleteQuestionActionSupport.class", "");
         pathString=pathString.replace("file:/","");
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader(pathString));
+            Object obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
             for (Object q : questionArray){
                 JSONObject jsonObject = (JSONObject) q;
                 JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
                 String nameJ = (String) questionJObject.get("id");
+                String mediaFilePath = (String) questionJObject.get("source");
                 if(nameJ.equals(id)){
+                    File file = new File(pathString+"web/"+mediaFilePath);
+                    System.out.println(mediaFilePath);
+                    System.out.println(file.delete());
                     questionArray.remove(jsonObject);
                     break;
                 }
             }
-            FileWriter file = new FileWriter(pathString);
+            FileWriter file = new FileWriter(pathString+"jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();

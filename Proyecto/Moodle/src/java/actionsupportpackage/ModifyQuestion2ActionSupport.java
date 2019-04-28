@@ -42,16 +42,19 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ModifyQuestion2ActionSupport.class", "");
         pathString=pathString.replace("file:/","");
   
-        File salida = new File(pathString+"web/media/"+mediaFileName);
-        FileInputStream in = new FileInputStream(media);
-        FileOutputStream out = new FileOutputStream(salida);
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
+        if(media!=null)
+        {
+            File salida = new File(pathString+"web/media/"+mediaFileName);
+            FileInputStream in = new FileInputStream(media);
+            FileOutputStream out = new FileOutputStream(salida);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
         }
-        in.close();
-        out.close();
         
         JSONParser parser = new JSONParser();
         try{

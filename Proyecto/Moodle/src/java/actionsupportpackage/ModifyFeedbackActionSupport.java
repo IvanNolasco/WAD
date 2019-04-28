@@ -17,10 +17,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-/**
- *
- * @author MAYRA
- */
 public class ModifyFeedbackActionSupport extends ActionSupport {
     
     public String id;

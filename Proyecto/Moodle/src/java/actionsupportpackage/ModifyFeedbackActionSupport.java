@@ -13,8 +13,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,7 +21,7 @@ import org.json.simple.parser.JSONParser;
  *
  * @author MAYRA
  */
-public class FeedbackQuestionActionSupport extends ActionSupport {
+public class ModifyFeedbackActionSupport extends ActionSupport {
     
     public String id;
     public String tries;
@@ -32,16 +30,13 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
     public String correct;
     public String incorrect;
     public String triesFB;
-           
     
-    public FeedbackQuestionActionSupport() {
+    public ModifyFeedbackActionSupport() {
     }
     
-    @Override
     public String execute() throws Exception {
-        
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/FeedbackQuestionActionSupport.class", "");
+        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ModifyFeedbackActionSupport.class", "");
         pathString=pathString.replace("file:/","");
         
         JSONParser parser = new JSONParser();
@@ -56,30 +51,38 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
             f.put("evaluate", evaluate);
             f.put("correct", correct);
             f.put("incorrect", incorrect);
-            f.put("incorrect", incorrect);
             f.put("triesFB", triesFB);
             JSONObject newFeedback = new JSONObject();
-            newFeedback.put("Feedback", f);      
+            newFeedback.put("Feedback", f);
+            
+            for (Object fA : feedbackArray){
+                JSONObject jsonObject = (JSONObject) fA;
+                JSONObject feedbackJObject = (JSONObject) jsonObject.get("Feedback");
+                String nameJ = (String) feedbackJObject.get("id");
+                if(nameJ.equals(id)){
+                    feedbackArray.remove(jsonObject);
+                    break;
+                }
+            }
+            
             feedbackArray.add(newFeedback);
             FileWriter file = new FileWriter(pathString+"jsons/Feedbacks.json/");
             file.write(feedbackArray.toJSONString());
             file.flush();
             file.close();
-            return SUCCESS;
         }
         catch(Exception e){
             e.printStackTrace();
         }
-       
-        return "fail";
+        return SUCCESS;
     }
 
-    public String getID() {
+    public String getId() {
         return id;
     }
 
-    public void setID(String ID) {
-        this.id = ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTries() {
@@ -130,6 +133,5 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
         this.triesFB = triesFB;
     }
     
-   
     
 }

@@ -42,9 +42,9 @@
                      <jsp:useBean id="anvar" type="java.lang.String" />
                     <div class="form-group">
                         <label for="ans" theme="simple" cssClass="form-label">Tu respuesta:</label>
-                        <%="<textarea name='ans' id='ans' class='form-control' disabled='true' >"+anvar+"</textarea>"%>
+                        <textarea name='ans' id='ans' class='form-control'></textarea>
                     </div>
-                        <s:submit value="Send answer" theme="simple" cssClass="btn btn-block btn-dark mb-2" disabled="true"/>
+                        <s:submit value="Send answer" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>
                 </s:form>
             </div>
             <div class="col">

@@ -21,6 +21,11 @@
 </action>
 
 <action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport">
+    <interceptor-ref name="fileUpload">
+        <param name="allowedTypes">image/jpeg,image/jpg,image/png, audio/mpeg,video/mp4</param>
+        <param name="maximumSize">2000000</param>
+        <param name="allowedExtensions">jpeg,png</param>
+    </interceptor-ref>
     <interceptor-ref name="defaultStack" /> 
 <result name="success">FeedbackQuestion.jsp</result>
 </action>

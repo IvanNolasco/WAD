@@ -21,7 +21,7 @@ import org.json.simple.parser.JSONParser;
 
 public class CreateQuestionActionSupport extends ActionSupport {
     
-    public String ID;
+    public String id;
     public String name;
     public String question;
     public String answer;
@@ -34,8 +34,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        List<String> questions; 
-        questions = new ArrayList<String>();
         
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "");
@@ -58,7 +56,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             JSONArray questionArray = (JSONArray) obj;
             
             JSONObject q = new JSONObject();
-            q.put("id", ID);
+            q.put("id", id);
             q.put("name", name);
             q.put("question", question);
             q.put("answer", answer);
@@ -106,4 +104,38 @@ public class CreateQuestionActionSupport extends ActionSupport {
 	public void setMediaFileName(String mediaFileName) {
 		this.mediaFileName = mediaFileName;
 	}
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+        
+        
 }

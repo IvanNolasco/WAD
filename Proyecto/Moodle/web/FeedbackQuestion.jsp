@@ -35,6 +35,10 @@
             <h1 class="text-center">Feedback</h1>
             <s:form action="FeedbackQuestion">
                 <div class="form-group">
+                    <s:label for="ID" theme="simple" cssClass="form-label" value="ID:"/>
+                    <s:property value="ID"/>
+                    </div> 
+                <div class="form-group">
                     <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>
                     <s:textfield name="tries" id="tries" theme="simple" cssClass="form-control" required="true" />
                 </div>

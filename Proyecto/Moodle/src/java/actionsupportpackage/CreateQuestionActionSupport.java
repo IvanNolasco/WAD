@@ -21,7 +21,7 @@ import org.json.simple.parser.JSONParser;
 
 public class CreateQuestionActionSupport extends ActionSupport {
     
-    public String ID;
+    public String id;
     public String name;
     public String question;
     public String answer;
@@ -56,7 +56,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             JSONArray questionArray = (JSONArray) obj;
             
             JSONObject q = new JSONObject();
-            q.put("id", ID);
+            q.put("id", id);
             q.put("name", name);
             q.put("question", question);
             q.put("answer", answer);
@@ -105,12 +105,12 @@ public class CreateQuestionActionSupport extends ActionSupport {
 		this.mediaFileName = mediaFileName;
 	}
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

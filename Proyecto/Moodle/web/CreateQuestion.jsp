@@ -36,8 +36,8 @@
             <h1 class="text-center">Create a New Question</h1>
             <s:form action="CreateQuestion"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <s:label for="ID" theme="simple" cssClass="form-label" value="ID:"/>
-                    <s:textfield name="ID" id="ID" theme="simple" cssClass="form-control" required="true" />
+                    <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
+                    <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" />
                 </div>
                 <div class="form-group">
                     <s:label for="name" theme="simple" cssClass="form-label" value="Name:"/>

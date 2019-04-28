@@ -25,8 +25,8 @@ import org.json.simple.parser.JSONParser;
  */
 public class FeedbackQuestionActionSupport extends ActionSupport {
     
-    public String ID;
-    public int tries;
+    public String id;
+    public String tries;
     public String initial;
     public String evaluate;
     public String correct;
@@ -50,7 +50,7 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
             JSONArray feedbackArray = (JSONArray) obj;
             
             JSONObject f = new JSONObject();
-            f.put("id", ID);
+            f.put("id", id);
             f.put("tries", tries);
             f.put("initial", initial);
             f.put("evaluate", evaluate);
@@ -75,18 +75,18 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
     }
 
     public String getID() {
-        return ID;
+        return id;
     }
 
     public void setID(String ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
-    public int getTries() {
+    public String getTries() {
         return tries;
     }
 
-    public void setTries(int tries) {
+    public void setTries(String tries) {
         this.tries = tries;
     }
 

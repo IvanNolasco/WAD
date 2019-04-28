@@ -34,9 +34,17 @@
         <div class="container">
             <h1 class="text-center">Feedback</h1>
             <s:form action="FeedbackQuestion">
+                
+                <s:property value="id"/>
+                <s:set var="idvar" value="id"/>
+                <jsp:useBean id="idvar" type="java.lang.String" />
+                
                 <div class="form-group">
-                    <s:label for="ID" theme="simple" cssClass="form-label" value="ID:"/>
-                    <s:property value="ID"/>
+                    <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
+                   <%
+                        String id = idvar;
+                        out.print("<input type='text' name='id' id='id' class='form-control' required='true' value='"+id+"' readonly/>");
+                    %>
                     </div> 
                 <div class="form-group">
                     <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>

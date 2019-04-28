@@ -1,3 +1,6 @@
+<%@taglib uri="/struts-tags" prefix="s" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +34,7 @@
         </header>
         <div class="container">
             <h1 class="text-center">Modify Feedback</h1>
-            <s:form action="FeedbackQuestion"  method="post" enctype="multipart/form-data">
+            <s:form action="ModifyFeedback"  method="post" enctype="multipart/form-data">
                 
                 <s:set var="idvar" value="id"/>
                 <jsp:useBean id="idvar" type="java.lang.String" />
@@ -52,49 +55,49 @@
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
                     <%
                         String id = idvar;
-                        out.print("<input type='text' name='id' id='id' class='form-control' required='true' value="+id+"/>");
+                        out.print("<input type=\"text\" name=\"id\" id=\"id\" class=\"form-control\" required=\"true\" value=\""+id+"\" readonly/>");
                     %>
                 </div>
                 <div class="form-group">
                 <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>
                 <%
                     String tries = triesvar;
-                    out.print("<input type='text' name='tries' id='tries' class='form-control' required='true' value="+tries+"/>");
+                    out.print("<input type='text' name='tries' id='tries' class='form-control' required='true' value='"+tries+"'/>");
                 %>
                 </div>
                 <div class="form-group">
                 <s:label for="initial" theme="simple" cssClass="form-label" value="Tries:"/>
                 <%
                     String initial = initialvar;
-                    out.print("<input type='text' name='initial' id='initial' class='form-control' required='true' value="+initial+"/>");
+                    out.print("<input type='text' name='initial' id='initial' class='form-control' required='true' value='"+initial+"'/>");
                 %>
                 </div>
                 <div class="form-group">
                 <s:label for="evaluate" theme="simple" cssClass="form-label" value="Tries:"/>
                 <%
                     String evaluate = evaluatevar;
-                    out.print("<input type='text' name='evaluate' id='evaluate' class='form-control' required='true' value="+evaluate+"/>");
+                    out.print("<input type='text' name='evaluate' id='evaluate' class='form-control' required='true' value='"+evaluate+"'/>");
                 %>
                 </div>
                 <div class="form-group">
                 <s:label for="correct" theme="simple" cssClass="form-label" value="Tries:"/>
                 <%
                     String correct = correctvar;
-                    out.print("<input type='text' name='correct' id='correct' class='form-control' required='true' value="+correct+"/>");
+                    out.print("<input type='text' name='correct' id='correct' class='form-control' required='true' value='"+correct+"'/>");
                 %>
                 </div>
                 <div class="form-group">
                 <s:label for="incorrect" theme="simple" cssClass="form-label" value="Tries:"/>
                 <%
                     String incorrect = incorrectvar;
-                    out.print("<input type='text' name='incorrect' id='incorrect' class='form-control' required='true' value="+incorrect+"/>");
+                    out.print("<input type='text' name='incorrect' id='incorrect' class='form-control' required='true' value='"+incorrect+"'/>");
                 %>
                 </div>
                 <div class="form-group">
                 <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>
                 <%
                     String triesFB = triesFBvar;
-                    out.print("<input type='text' name='triesFB' id='triesFB' class='form-control' required='true' value="+triesFB+"/>");
+                    out.print("<input type='text' name='triesFB' id='triesFB' class='form-control' required='true' value='"+triesFB+"'/>");
                 %>
                 </div>
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>

@@ -49,7 +49,7 @@
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
                     <%
                         String id = idvar;
-                        out.print("<input type=\"text\" name=\"id\" id=\"id\" class=\"form-control\" required=\"true\" value=\""+id+"\"/>");
+                        out.print("<input type=\"text\" name=\"id\" id=\"id\" class=\"form-control\" required=\"true\" value=\""+id+"\" readonly/>");
                     %>
                 </div>
                 <div class="form-group">

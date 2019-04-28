@@ -34,8 +34,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        List<String> questions; 
-        questions = new ArrayList<String>();
         
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "");
@@ -109,4 +107,38 @@ public class CreateQuestionActionSupport extends ActionSupport {
 	public void setMediaFileName(String mediaFileName) {
 		this.mediaFileName = mediaFileName;
 	}
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+        
+        
 }

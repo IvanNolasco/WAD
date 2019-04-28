@@ -42,17 +42,23 @@
                      <jsp:useBean id="anvar" type="java.lang.String" />
                     <div class="form-group">
                         <label for="ans" theme="simple" cssClass="form-label">Tu respuesta:</label>
-                        <%="<textarea name='ans' id='ans' class='form-control' disabled='true' >"+anvar+"</textarea>"%>
+                        <textarea name='ans' id='ans' class='form-control'></textarea>
                     </div>
-                        <s:submit value="Send answer" theme="simple" cssClass="btn btn-block btn-dark mb-2" disabled="true"/>
+                        <s:submit value="Send answer" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>
                 </s:form>
             </div>
             <div class="col">
                 <s:set var="srcvar" value="source"/>
+                <s:set var="typevar" value="type"/>
                 <jsp:useBean id="srcvar" type="java.lang.String" />
+                <jsp:useBean id="typevar" type="java.lang.String" />
                 <% 
-                    String src = srcvar;
-                    out.print("<img src='"+srcvar+"' class='img-thumbnail mx-auto d-block' style='max-width:50%;width:auto;height:auto;'>");
+                    if (typevar.startsWith("image"))
+                        out.print("<img src='"+srcvar+"' class='img-thumbnail mx-auto d-block' style='max-width:50%;width:auto;height:auto;'>");
+                    if(typevar.startsWith("audio"))
+                        out.print("<audio src='"+srcvar+"' controls />");
+                    if(typevar.startsWith("video"))
+                        out.print("<video src='"+srcvar+"' width='640' height='480' controls></video>");
                 %>
                 
             </div>

@@ -15,10 +15,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-/**
- *
- * @author navi_
- */
 public class DeleteQuestionActionSupport extends ActionSupport { 
     public String id;
 
@@ -60,6 +56,26 @@ public class DeleteQuestionActionSupport extends ActionSupport {
             
         }
         
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        try{
+            Object obj = parser.parse(new FileReader(pathString+"jsons/Feedbacks.json/"));
+            JSONArray feedbackArray = (JSONArray) obj;
+            for (Object fA : feedbackArray){
+                JSONObject jsonObject = (JSONObject) fA;
+                JSONObject feedbackJObject = (JSONObject) jsonObject.get("Feedback");
+                String nameJ = (String) feedbackJObject.get("id");
+                if(nameJ.equals(id)){
+                    feedbackArray.remove(jsonObject);
+                    break;
+                }
+            }
+            FileWriter file = new FileWriter(pathString+"jsons/Feedbacks.json/");
+            file.write(feedbackArray.toJSONString());
+            file.flush();
+            file.close();
+        }
         catch(Exception e){
             e.printStackTrace();
         }

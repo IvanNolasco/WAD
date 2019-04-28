@@ -1,17 +1,65 @@
-<%-- 
-    Document   : ViewQuestion
-    Created on : 27/04/2019, 08:32:26 PM
-    Author     : luis_
---%>
-
+<%@taglib uri="/struts-tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>View Question</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <header class="encabezado">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <h1 class="display-6">Moodle</h1>
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                          <li class="nav-item active">
+                            <a class="nav-link" href="QuestionCreation.action">Questions<span class="sr-only">(current)</span></a>
+                          </li>
+                        </ul>
+                      </div>
+                    <span class="navbar-text">
+                       <button type="button" class="btn btn-link text-light" onclick="location.href='Login.jsp'">Sing out</button>
+                   </span>
+               </nav>
+            </div>
+        </header>
+        <div class="container">
+            <h1 class="text-center">View Question</h1>
+            
+            <p class="h2 text-center border border-dark rounded bg-light"><s:property value="question" /></p>
+            <div class="row">
+            <div class="col">
+                <s:form action="CreateQuestion"  method="post" enctype="multipart/form-data">
+                     <s:set var="anvar" value="answer"/>
+                     <jsp:useBean id="anvar" type="java.lang.String" />
+                    <div class="form-group">
+                        <label for="ans" theme="simple" cssClass="form-label">Tu respuesta:</label>
+                        <%="<textarea name='ans' id='ans' class='form-control' disabled='true' >"+anvar+"</textarea>"%>
+                    </div>
+                        <s:submit value="Send answer" theme="simple" cssClass="btn btn-block btn-dark mb-2" disabled="true"/>
+                </s:form>
+            </div>
+            <div class="col">
+                <s:set var="srcvar" value="source"/>
+                <jsp:useBean id="srcvar" type="java.lang.String" />
+                <% 
+                    String src = srcvar;
+                    out.print("<img src='"+srcvar+"' class='img-thumbnail mx-auto d-block' style='max-width:50%;width:auto;height:auto;'>");
+                %>
+                
+            </div>
+            </div>
+            
+            
+        </div>
+        
     </body>
 </html>

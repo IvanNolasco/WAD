@@ -36,11 +36,11 @@ public class QuestionCreationActionSupport extends ActionSupport {
         questions = new ArrayList<String>();
         
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/QuestionCreationActionSupport.class", "jsons/Questions.json/");
+        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/QuestionCreationActionSupport.class", "");
         pathString=pathString.replace("file:/","");
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader(pathString));
+            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
             for (Object q : questionArray){
                 JSONObject jsonObject = (JSONObject) q;

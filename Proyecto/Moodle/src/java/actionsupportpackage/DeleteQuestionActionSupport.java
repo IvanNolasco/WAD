@@ -34,7 +34,7 @@ public class DeleteQuestionActionSupport extends ActionSupport {
         pathString=pathString.replace("file:/","");
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
+            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
             for (Object q : questionArray){
                 JSONObject jsonObject = (JSONObject) q;
@@ -49,7 +49,7 @@ public class DeleteQuestionActionSupport extends ActionSupport {
                     break;
                 }
             }
-            FileWriter file = new FileWriter(pathString+"jsons/Questions.json/");
+            FileWriter file = new FileWriter(pathString+"web/jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();
@@ -60,7 +60,7 @@ public class DeleteQuestionActionSupport extends ActionSupport {
             e.printStackTrace();
         }
         try{
-            Object obj = parser.parse(new FileReader(pathString+"jsons/Feedbacks.json/"));
+            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Feedbacks.json/"));
             JSONArray feedbackArray = (JSONArray) obj;
             for (Object fA : feedbackArray){
                 JSONObject jsonObject = (JSONObject) fA;
@@ -71,7 +71,7 @@ public class DeleteQuestionActionSupport extends ActionSupport {
                     break;
                 }
             }
-            FileWriter file = new FileWriter(pathString+"jsons/Feedbacks.json/");
+            FileWriter file = new FileWriter(pathString+"web/jsons/Feedbacks.json/");
             file.write(feedbackArray.toJSONString());
             file.flush();
             file.close();

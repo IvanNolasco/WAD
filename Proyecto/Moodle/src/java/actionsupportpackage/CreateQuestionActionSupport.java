@@ -34,7 +34,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
         JSONParser parser = new JSONParser();
         try{
             //Se abre el JSON de las preguntas y se asigna a un JSON array, el cual tiene cada pregunta como elemento de un "arreglo"
-            Object obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
+            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
             //Se recorre cada elemento del arreglo
             for (Object q : questionArray){
@@ -64,7 +64,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             in.close();
             out.close();
 
-            obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
+            obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             questionArray = (JSONArray) obj;
             
             //se contrute el JSON de la nueva pregunta
@@ -79,7 +79,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             newQuestion.put("Question", q);
             //
             questionArray.add(newQuestion);
-            FileWriter file = new FileWriter(pathString+"jsons/Questions.json/");
+            FileWriter file = new FileWriter(pathString+"web/jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();

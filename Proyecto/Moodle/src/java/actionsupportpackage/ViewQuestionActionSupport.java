@@ -38,9 +38,9 @@ public class ViewQuestionActionSupport extends ActionSupport {
         JSONParser parser = new JSONParser();
         try{
             //Se abre el JSON de las preguntas y se asigna a un JSON array, el cual tiene cada pregunta como elemento de un "arreglo"
-            Object obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
+            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             //Se realiza lo mismo para el JSON del feedback
-            Object objF = parser.parse(new FileReader(pathString+"jsons/Feedbacks.json/"));
+            Object objF = parser.parse(new FileReader(pathString+"web/jsons/Feedbacks.json/"));
             JSONArray questionArray = (JSONArray) obj;
             JSONArray feedbackArray = (JSONArray) objF;            
             //Se recorre cada elemento del arreglo

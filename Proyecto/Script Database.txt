@@ -11,6 +11,7 @@ CREATE TABLE login(
 );
 
 INSERT INTO login VALUES (1,"admin","admin",0);
-INSERT INTO login VALUES (2, "mayrasho", "mayrasho",2);
-INSERT INTO login VALUES (3, "ivan","ivan",1);
-INSERT INTO login VALUES (4, "lentejuela","lentujela",2);
+INSERT INTO login VALUES (2, "Mayrasho", "mayrasho",2);
+INSERT INTO login VALUES (3, "Ivan","ivan",1);
+INSERT INTO login VALUES (4, "Loiz","loiz",2);
+INSERT INTO login VALUES (4, "Ruben Peredo","rpv",1);

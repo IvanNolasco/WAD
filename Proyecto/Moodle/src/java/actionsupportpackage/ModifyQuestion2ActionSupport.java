@@ -40,9 +40,7 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         //si hay un nuevo archivo multimedia se va a reescribir
         if(media!=null)
         {
-            //se especifica la tura del nuevo archivo multimedia
-            File salida = new File(pathString+"web/media/"+mediaFileName);
-            //se transfiere al servidor
+            File salida = new File(pathString+"web/"+mediaFileName);
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
             byte[] buf = new byte[1024];

@@ -47,7 +47,7 @@
                 <div class="col">
                     <form  method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="ans" theme="simple" cssClass="form-label">Tu respuesta:</label>
+                            <label for="ans" theme="simple" cssClass="form-label">Your answer:</label>
                             <textarea name='ans' id='ans' class='form-control'></textarea>
                         </div>
                         <div id="feed">

@@ -44,8 +44,8 @@
             <s:iterator value="questions">
             <tr>
                 <td>
-                    <s:property />
-                    <s:set var="idvar" />
+                    <s:property value="name"/>
+                    <s:set var="idvar" value="id"/>
                     <jsp:useBean id="idvar" type="java.lang.String" />
                 </td>
                 <td>

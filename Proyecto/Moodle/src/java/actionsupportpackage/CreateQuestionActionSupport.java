@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -11,10 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -34,29 +26,34 @@ public class CreateQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        
-        
+        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "");
         pathString=pathString.replace("file:/","");
-        
+        //Se inicializa el parser que interpretará la estructura del JSON
         JSONParser parser = new JSONParser();
-        
         try{
+            //Se abre el JSON de las preguntas y se asigna a un JSON array, el cual tiene cada pregunta como elemento de un "arreglo"
             Object obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
+            //Se recorre cada elemento del arreglo
             for (Object q : questionArray){
+                //Se obtiene la informacion de la pregunta en questionJObject
                 JSONObject jsonObject = (JSONObject) q;
                 JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
+                //Se obtiene el id de la pregunta
                 String idE = (String) questionJObject.get("id");
+                //Si el id coincide con el id obtenido en el jsp se recupera el resto de sus atributos y se rompe el ciclo
                 if(idE.equals(this.id)){
                     System.out.println(idE);
                     System.out.println(this.id);
                     return "IDExistent";
                 }
             }
-
+            
+            //se define la ruta para escribir el archivo multimedia 
             File salida = new File(pathString+"web/media/"+mediaFileName);
+            //se transfiere el archivo multimedia al servidor
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
             byte[] buf = new byte[1024];
@@ -69,7 +66,8 @@ public class CreateQuestionActionSupport extends ActionSupport {
 
             obj = parser.parse(new FileReader(pathString+"jsons/Questions.json/"));
             questionArray = (JSONArray) obj;
-
+            
+            //se contrute el JSON de la nueva pregunta
             JSONObject q = new JSONObject();
             q.put("id", id);
             q.put("name", name);
@@ -79,7 +77,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             q.put("type", mediaContentType);
             JSONObject newQuestion = new JSONObject();
             newQuestion.put("Question", q);
-
+            //
             questionArray.add(newQuestion);
             FileWriter file = new FileWriter(pathString+"jsons/Questions.json/");
             file.write(questionArray.toJSONString());

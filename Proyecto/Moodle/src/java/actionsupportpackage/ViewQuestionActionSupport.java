@@ -59,6 +59,7 @@ public class ViewQuestionActionSupport extends ActionSupport {
                     break;
                 }
             }
+            //Se recorre cada elemento del arreglo
             for (Object f : feedbackArray) {
                 System.out.println("entre aqui");
                 //Se obtiene la informacion del feedback de la pregunta en questionJObject

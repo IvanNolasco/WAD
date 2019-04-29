@@ -1,5 +1,2 @@
-<<<<<<< HEAD
 [{"Feedback":{"tries":"5","correct":"Yes, that is a bear.","incorrect":"No, that is incorrect.","initial":"Listen and ansmer","triesFB":"No, that is incorrect. Try again.","id":"3CM4-Q2","evaluate":"Click on the 'Send answer' button."}},{"Feedback":{"tries":"7","correct":"tfyvgubhjk","incorrect":"ntfygu","initial":"View the video and answer the question.","triesFB":"tvyg","id":"3CM4-Q3","evaluate":"gyubhjn"}},{"Feedback":{"tries":"3","correct":"Yes, that is a owl.","incorrect":"No, that is incorrect.","initial":"Answer the question.","triesFB":"No, that is incorrect. Try again.","id":"3CM4-Q1","evaluate":"Click on the "}}]
-=======
-[{"Feedback":{"tries":"5","correct":"Yes, that is a bear.","incorrect":"No, that is incorrect.","initial":"Listen and ansmer","triesFB":"No, that is incorrect. Try again.","id":"3CM4-Q2","evaluate":"Click on the 'Send answer' button."}}]
->>>>>>> f25fe2cc784cd6f8182ce857b840fb6b1ccd1324
+

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -38,13 +33,16 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
     }
     
     public String execute() throws Exception {
+        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ModifyQuestion2ActionSupport.class", "");
         pathString=pathString.replace("file:/","");
-  
+        //si hay un nuevo archivo multimedia se va a reescribir
         if(media!=null)
         {
+            //se especifica la tura del nuevo archivo multimedia
             File salida = new File(pathString+"web/media/"+mediaFileName);
+            //se transfiere al servidor
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
             byte[] buf = new byte[1024];
@@ -58,9 +56,10 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         
         JSONParser parser = new JSONParser();
         try{
+            //se recuperan las preguntas del archivo JSON y se guardan en un arreglo
             Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
-            
+            //se contruye un nuevo objeto json con la informacion de la pregunta
             JSONObject q = new JSONObject();
             q.put("id", id);
             q.put("name", name);
@@ -70,22 +69,26 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             q.put("type", mediaContentType);
             JSONObject newQuestion = new JSONObject();
             newQuestion.put("Question", q);
-            
+            //se recorre el arreglo de jsons
             for (Object qA : questionArray){
                 JSONObject jsonObject = (JSONObject) qA;
                 JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
                 String nameJ = (String) questionJObject.get("id");
                 String mediaFilePath = (String) questionJObject.get("source");
+                //se busca la pregunta con el mismo id 
                 if(nameJ.equals(id)){
+                    //al encontrarse la pregunta se elimina el multimedia antiguo asociado a esa pregunta
                     File file = new File(pathString+"web/"+mediaFilePath);
                     System.out.println(mediaFilePath);
                     System.out.println(file.delete());
+                    //se elimina la pregunta del arreglo
                     questionArray.remove(jsonObject);
                     break;
                 }
             }
-            
+            //se agrega al arreglo la pregunta que s emodifico
             questionArray.add(newQuestion);
+            //se sobreescribe el archivo JSON con el arreglo
             FileWriter file = new FileWriter(pathString+"web/jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
@@ -96,13 +99,16 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         }
         
         try{
+            //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LOS FEEDBACK
             Object obj = parser.parse(new FileReader(pathString+"web/jsons/Feedbacks.json/"));
             JSONArray feedbackArray = (JSONArray) obj;
             for (Object f : feedbackArray){
                 JSONObject jsonObject = (JSONObject) f;
                 JSONObject questionJObject = (JSONObject) jsonObject.get("Feedback");
                 String idJ = (String) questionJObject.get("id");
+                //se busca el feedback correspondiente al id
                 if(idJ.equals(id)){
+                    //se recupera cada dato del feedback
                     this.id = (String) questionJObject.get("id");
                     this.tries = (String) questionJObject.get("tries");
                     this.initial = (String) questionJObject.get("initial");
@@ -113,10 +119,6 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
                     break;
                 }
             }
-            FileWriter file = new FileWriter(pathString+"web/jsons/Feedbacks.json/");
-            file.write(feedbackArray.toJSONString());
-            file.flush();
-            file.close(); 
         }
         catch(Exception e){
             e.printStackTrace();

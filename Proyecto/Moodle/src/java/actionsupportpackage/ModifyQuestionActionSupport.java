@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -86,18 +81,23 @@ public class ModifyQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
+        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ModifyQuestionActionSupport.class", "");
         pathString=pathString.replace("file:/","");
         JSONParser parser = new JSONParser();
         try{
+            //se abre el JSON con las preguntas
             Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
+            //se recorre el arreglo de JSONs
             for (Object q : questionArray){
                 JSONObject jsonObject = (JSONObject) q;
                 JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
                 String idJ = (String) questionJObject.get("id");
+                //se busca la pregunta correspondiente al id
                 if(idJ.equals(id)){
+                    //se recuperan los datos de la pregunta
                     this.name = (String) questionJObject.get("name");
                     this.question = (String) questionJObject.get("question");
                     this.answer = (String) questionJObject.get("answer");
@@ -106,11 +106,6 @@ public class ModifyQuestionActionSupport extends ActionSupport {
                     break;
                 }
             }
-            FileWriter file = new FileWriter(pathString);
-            file.write(questionArray.toJSONString());
-            file.flush();
-            file.close();
-            
         }
         
         catch(Exception e){

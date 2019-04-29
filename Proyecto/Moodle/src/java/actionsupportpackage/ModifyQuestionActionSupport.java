@@ -106,7 +106,7 @@ public class ModifyQuestionActionSupport extends ActionSupport {
                     break;
                 }
             }
-            FileWriter file = new FileWriter(pathString);
+            FileWriter file = new FileWriter(pathString+"web/jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();

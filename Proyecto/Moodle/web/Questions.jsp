@@ -58,7 +58,7 @@
                             
                             out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ModifyQuestion.action?id="+id+"'\">Modify Question</button>");
                         
-                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"confirmar("+id+")\">Delete Question</button>");
+                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"confirmar('"+id+"')\">Delete Question</button>");
                         %>
                         
                         

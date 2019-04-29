@@ -99,8 +99,10 @@
                         triesDiv.innerHTML = "<p class='h4 text-right'>Tries:"+--tries+"</p>"
                         correct.innerHTML = "<div class='alert alert-warning'><p><%= varTriesFB %></p></div>";
                         
-                    }else
+                    }else{
                         correct.innerHTML = "<div class='alert alert-danger'><p><%= varIncorrect %></p></div>";
+                        document.getElementById("send").disabled = true;
+                    }
                 }
             </script>
     </body>

@@ -5,19 +5,18 @@
 <constant name="struts.multipart.saveDir" value="Moodle/" />
 <include file="example.xml"/>
 <!-- Configuration for the default package. -->
-<package name="default" extends="struts-default">
-</package>
+
 <package name="actionsupportpackage" extends="struts-default">
     
 <action name="Login" method="execute" class="actionsupportpackage.LoginActionSupport">
-<result name="admin">WelcomeAdmin.jsp</result>
-<result name="student">WelcomeStudent.jsp</result>
-<result name="teacher">WelcomeTeacher.jsp</result>
-<result name="input">Login.jsp</result>
+    <result name="admin">WelcomeAdmin.jsp</result>
+    <result name="student">WelcomeStudent.jsp</result>
+    <result name="teacher">WelcomeTeacher.jsp</result>
+    <result name="input">Login.jsp</result>
 </action>
 
 <action name="QuestionCreation" method="execute" class="actionsupportpackage.QuestionCreationActionSupport"> 
-<result name="success">Questions.jsp</result>
+    <result name="success">Questions.jsp</result>
 </action>
 
 <action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport">
@@ -27,7 +26,7 @@
         <param name="allowedExtensions">jpeg,png,mp4,jpg,mp3</param>
     </interceptor-ref>
     <interceptor-ref name="defaultStack" /> 
-<result name="success">FeedbackQuestion.jsp</result>
+    <result name="success">FeedbackQuestion.jsp</result>
 </action>
 
 <action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 

@@ -35,7 +35,6 @@
             <h1 class="text-center">Feedback</h1>
             <s:form action="FeedbackQuestion">
                 
-                <s:property value="id"/>
                 <s:set var="idvar" value="id"/>
                 <jsp:useBean id="idvar" type="java.lang.String" />
                 

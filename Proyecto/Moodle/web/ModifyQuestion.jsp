@@ -86,7 +86,7 @@
                      <s:label for="media" theme="simple" cssClass="form-label" value="Media File:"/>
                      <s:file name="media" id="media" theme="simple" cssClass="form-control-file" accept="image/jpeg,image/png,audio/mpeg,video/mp4"/>
                      <div class="alert alert-warning" role="alert">
-                        if you do not choose a file, it will stay the original
+                        If you do not choose a new file, it will stay the original.
                     </div>
                 </div>
                

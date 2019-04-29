@@ -41,11 +41,11 @@
                 <th>Questions</th>
                 <th>Actions</th>
             </tr>
-            <s:iterator value="questions" >
+            <s:iterator value="questions">
             <tr>
                 <td>
-                    <s:property value="id"/>
-                    <s:set var="idvar" value="id"/>
+                    <s:property />
+                    <s:set var="idvar" />
                     <jsp:useBean id="idvar" type="java.lang.String" />
                 </td>
                 <td>

@@ -33,13 +33,13 @@
      </header>
     <div class="container">
         <h1 class='text-center'>Questions Creation</h1>
-        <s:form action="CreateQuestion.jsp">
-            <s:submit theme="simple" cssClass="btn btn-block btn-dark" value="Create Question"/>
+        <s:form action="CreateQuestion.jsp" theme="simple" cssClass="text-center">
+            <s:submit theme="simple" cssClass="btn btn-dark" value="Create Question"/>
         </s:form>
         <table class="table table-striped table-borderless"> 
             <tr>
                 <th>Questions</th>
-                <th>Actions</th>
+                <th class="text-center">Actions</th>
             </tr>
             <s:iterator value="questions">
             <tr>

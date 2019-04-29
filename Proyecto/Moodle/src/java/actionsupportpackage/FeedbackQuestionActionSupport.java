@@ -42,7 +42,7 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
         
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader(pathString+"jsons/Feedbacks.json/"));
+            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Feedbacks.json/"));
             JSONArray feedbackArray = (JSONArray) obj;
             
             JSONObject f = new JSONObject();
@@ -57,7 +57,7 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
             JSONObject newFeedback = new JSONObject();
             newFeedback.put("Feedback", f);      
             feedbackArray.add(newFeedback);
-            FileWriter file = new FileWriter(pathString+"jsons/Feedbacks.json/");
+            FileWriter file = new FileWriter(pathString+"web/jsons/Feedbacks.json/");
             file.write(feedbackArray.toJSONString());
             file.flush();
             file.close();

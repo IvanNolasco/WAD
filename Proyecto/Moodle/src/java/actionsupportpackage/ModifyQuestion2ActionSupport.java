@@ -44,7 +44,7 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
   
         if(media!=null)
         {
-            File salida = new File(pathString+"web/media/"+mediaFileName);
+            File salida = new File(pathString+"web/"+mediaFileName);
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
             byte[] buf = new byte[1024];

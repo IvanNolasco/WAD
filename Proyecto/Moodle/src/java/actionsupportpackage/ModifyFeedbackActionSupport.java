@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
@@ -31,15 +23,18 @@ public class ModifyFeedbackActionSupport extends ActionSupport {
     }
     
     public String execute() throws Exception {
+        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LOS FEEDBACK
         URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ModifyFeedbackActionSupport.class", "");
         pathString=pathString.replace("file:/","");
         
         JSONParser parser = new JSONParser();
         try{
+            //se abre el archivo de los feedbacks
             Object obj = parser.parse(new FileReader(pathString+"web/jsons/Feedbacks.json/"));
             JSONArray feedbackArray = (JSONArray) obj;
             
+            //se contruye el objeto json del nuevo feedback
             JSONObject f = new JSONObject();
             f.put("id", id);
             f.put("tries", tries);
@@ -50,18 +45,21 @@ public class ModifyFeedbackActionSupport extends ActionSupport {
             f.put("triesFB", triesFB);
             JSONObject newFeedback = new JSONObject();
             newFeedback.put("Feedback", f);
-            
+            //se recorre el arreglo de feedback
             for (Object fA : feedbackArray){
                 JSONObject jsonObject = (JSONObject) fA;
                 JSONObject feedbackJObject = (JSONObject) jsonObject.get("Feedback");
                 String nameJ = (String) feedbackJObject.get("id");
+                //se busca el feedback correspondiente al id
                 if(nameJ.equals(id)){
+                    //al encontrarse se remueve del arreglo de feedbacks
                     feedbackArray.remove(jsonObject);
                     break;
                 }
             }
-            
+            //se agrega al arreglo el nuevo feedback
             feedbackArray.add(newFeedback);
+            //se sobreescribe el archivo json de feedbacks
             FileWriter file = new FileWriter(pathString+"web/jsons/Feedbacks.json/");
             file.write(feedbackArray.toJSONString());
             file.flush();

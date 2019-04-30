@@ -1,7 +1,6 @@
 package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.INPUT;
-import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.Login;
 import entity.HibernateUtil;

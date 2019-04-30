@@ -2,9 +2,7 @@ package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.net.URL;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -148,6 +146,4 @@ public class ViewQuestionActionSupport extends ActionSupport {
     public String getTriesFB() {
         return triesFB;
     }
-    
-    
 }

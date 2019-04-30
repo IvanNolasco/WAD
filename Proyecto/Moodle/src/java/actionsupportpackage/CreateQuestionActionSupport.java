@@ -50,7 +50,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
                     return "IDExistent";
                 }
             }
-            
             //se define la ruta para escribir el archivo multimedia 
             File salida = new File(pathString+"web/media/"+mediaFileName);
             //se transfiere el archivo multimedia al servidor
@@ -67,7 +66,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             questionArray = (JSONArray) obj;
             
-            //se contrute el JSON de la nueva pregunta
+            //se contruye el JSON de la nueva pregunta
             JSONObject q = new JSONObject();
             q.put("id", id);
             q.put("name", name);
@@ -77,8 +76,9 @@ public class CreateQuestionActionSupport extends ActionSupport {
             q.put("type", mediaContentType);
             JSONObject newQuestion = new JSONObject();
             newQuestion.put("Question", q);
-            //
+            //se agrega el objeto JSON de la nueva pregunta a la lista de JSONs 
             questionArray.add(newQuestion);
+            //se sobreescribe el archivo
             FileWriter file = new FileWriter(pathString+"web/jsons/Questions.json/");
             file.write(questionArray.toJSONString());
             file.flush();
@@ -148,7 +148,5 @@ public class CreateQuestionActionSupport extends ActionSupport {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
-        
-        
+    }     
 }

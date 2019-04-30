@@ -42,8 +42,12 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ModifyQuestion2ActionSupport.class", "");
         pathString=pathString.replace("file:/","");
   
+        int sobre=0; //Variable para sobreescribir el archivo si es necesario
+        System.out.println(media.toString());
+        
         if(media!=null)
         {
+            
             File salida = new File(pathString+"web/"+mediaFileName);
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
@@ -54,6 +58,7 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             }
             in.close();
             out.close();
+            sobre=1;
         }
         
         JSONParser parser = new JSONParser();
@@ -66,7 +71,10 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             q.put("name", name);
             q.put("question", question);
             q.put("answer", answer);
-            q.put("source", "media\\"+mediaFileName);
+            if(sobre==0)
+                q.put("source", mediaFileName);
+            else
+                q.put("source", "media\\"+mediaFileName);
             q.put("type", mediaContentType);
             JSONObject newQuestion = new JSONObject();
             newQuestion.put("Question", q);

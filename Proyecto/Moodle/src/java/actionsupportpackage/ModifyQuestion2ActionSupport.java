@@ -39,12 +39,12 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         pathString=pathString.replace("file:/","");
   
         int sobre=0; //Variable para sobreescribir el archivo si es necesario
-        System.out.println(media.toString());
         
+        //Si el usuario mete un archivo nuevo se crea el file y se guarda en el servidor
         if(media!=null)
         {
             
-            File salida = new File(pathString+"web/"+mediaFileName);
+            File salida = new File(pathString+"web/media/"+mediaFileName);
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
             byte[] buf = new byte[1024];
@@ -68,9 +68,11 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             q.put("name", name);
             q.put("question", question);
             q.put("answer", answer);
+            //Si no se seleccionó ningun archivo, se vuelve a escribir la ruta del archivo original en el json
             if(sobre==0)
                 q.put("source", mediaFileName);
             else
+            //Si se seleccionó algún archivo, este se guardará en la carpeta media    
                 q.put("source", "media\\"+mediaFileName);
             q.put("type", mediaContentType);
             JSONObject newQuestion = new JSONObject();
@@ -83,10 +85,11 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
                 String mediaFilePath = (String) questionJObject.get("source");
                 //se busca la pregunta con el mismo id 
                 if(nameJ.equals(id)){
-                    //al encontrarse la pregunta se elimina el multimedia antiguo asociado a esa pregunta
-                    File file = new File(pathString+"web/"+mediaFilePath);
-                    System.out.println(mediaFilePath);
-                    System.out.println(file.delete());
+                    if (sobre == 1) {
+                        //al encontrarse la pregunta se elimina el multimedia antiguo asociado a esa pregunta
+                        File file = new File(pathString+"web/"+mediaFilePath);
+                        System.out.println(file.delete());
+                    }
                     //se elimina la pregunta del arreglo
                     questionArray.remove(jsonObject);
                     break;

@@ -99,7 +99,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             List lista=raiz.getChildren("teacher");
             for (Object l : lista) {
                 Element teacher = (Element)l;
-                if (teacher.getAttributeValue(name) == userName) {
+                if (teacher.getAttributeValue("username").equals(userName)) {
                     Element quest = new Element("question");
                     quest.setAttribute("id", id);
                     quest.setAttribute("name", name);
@@ -110,8 +110,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
                     teacher.addContent(quest);
                 }
             }
-            
-            
             //AGREGA EL USUARIO AL ELEMENTO RAIZ
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);

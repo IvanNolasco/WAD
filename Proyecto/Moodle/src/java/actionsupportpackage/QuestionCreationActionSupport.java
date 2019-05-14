@@ -45,18 +45,18 @@ public class QuestionCreationActionSupport extends ActionSupport {
         //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try {
-        SAXBuilder builder = new SAXBuilder();
-        File xmlFile = new File(path+"\\xmls\\Questions.xml");
-        Document document = builder.build(xmlFile);
-        Element root = document.getRootElement();
-        List teachersList = root.getChildren("teacher");
+            SAXBuilder builder = new SAXBuilder();
+            File xmlFile = new File(path+"\\xmls\\Questions.xml");
+            Document document = builder.build(xmlFile);
+            Element root = document.getRootElement();
+            List teachersList = root.getChildren("teacher");
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
                 if(username.equals(this.userName)){
                     List questionsList = teacher.getChildren("question");
                     for(int j=0;j<questionsList.size();j++){
-                        Element question = (Element)questionsList.get(i);
+                        Element question = (Element)questionsList.get(j);
                         String id = question.getAttributeValue("id");
                         String name = question.getAttributeValue("name");
                         String questionText = question.getAttributeValue("question");
@@ -64,7 +64,7 @@ public class QuestionCreationActionSupport extends ActionSupport {
                         Question questionObject = new Question(id, name, questionText, answer);
                         questions.add(questionObject);
                     }
-                    
+
                 }
             }
              
@@ -72,28 +72,6 @@ public class QuestionCreationActionSupport extends ActionSupport {
         catch(JDOMException e) {
             e.printStackTrace();
         }
-        /*
-        String pathString = ServletActionContext.getServletContext().getRealPath("/");
-        pathString=pathString.replace("build\\web\\", "web\\jsons\\Questions.json\\");
-        JSONParser parser = new JSONParser();
-        try{
-            Object obj = parser.parse(new FileReader(pathString));
-            JSONArray questionArray = (JSONArray) obj;
-            for (Object q : questionArray){
-                JSONObject jsonObject = (JSONObject) q;
-                JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
-                String id = (String) questionJObject.get("id");
-                String name = (String) questionJObject.get("name");
-                String question = (String) questionJObject.get("question");
-                String answer = (String) questionJObject.get("answer");
-                Question questionObject = new Question(id, name, question, answer);
-                questions.add(questionObject);
-            }
-            
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }*/
         return SUCCESS;
     }
 }

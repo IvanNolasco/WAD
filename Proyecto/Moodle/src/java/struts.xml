@@ -2,25 +2,57 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
+<constant name="struts.multipart.saveDir" value="Moodle/" />
 <include file="example.xml"/>
 <!-- Configuration for the default package. -->
-<package name="default" extends="struts-default">
-</package>
+
 <package name="actionsupportpackage" extends="struts-default">
     
 <action name="Login" method="execute" class="actionsupportpackage.LoginActionSupport">
-<result name="admin">WelcomeAdmin.jsp</result>
-<result name="student">WelcomeStudent.jsp</result>
-<result name="teacher">WelcomeTeacher.jsp</result>
-<result name="input">Login.jsp</result>
+    <result name="admin">WelcomeAdmin.jsp</result>
+    <result name="student">WelcomeStudent.jsp</result>
+    <result name="teacher">WelcomeTeacher.jsp</result>
+    <result name="input">Login.jsp</result>
 </action>
 
 <action name="QuestionCreation" method="execute" class="actionsupportpackage.QuestionCreationActionSupport"> 
-<result name="success">Questions.jsp</result>
+    <result name="success">Questions.jsp</result>
 </action>
 
-<action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport"> 
-<result name="success">FeedbackQuestion.jsp</result>
+<action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport">
+    <interceptor-ref name="fileUpload">
+        <param name="allowedTypes">image/jpeg,image/jpg,image/png,audio/mpeg,video/mpeg,audio/mp3,video/mp4</param>
+        <param name="maximumSize">2000000</param>
+        <param name="allowedExtensions">jpeg,png,mp4,jpg,mp3,mpeg</param>
+    </interceptor-ref>
+    <interceptor-ref name="defaultStack" /> 
+
+    <result name="success">FeedbackQuestion.jsp</result>
+    <result name="IDExistent">IDExistent.jsp</result>
+</action>
+
+<action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 
+<result name="success">SuccessQuestion.jsp</result>
+</action>
+
+<action name="DeleteQuestion" method="execute" class="actionsupportpackage.DeleteQuestionActionSupport"> 
+<result name="success">SuccessDelete.jsp</result>
+</action>
+
+<action name="ModifyQuestion" method="execute" class="actionsupportpackage.ModifyQuestionActionSupport"> 
+<result name="success">ModifyQuestion.jsp</result>
+</action>
+
+<action name="ModifyQuestion2" method="execute" class="actionsupportpackage.ModifyQuestion2ActionSupport"> 
+<result name="success">ModifyFeedback.jsp</result>
+</action>
+
+<action name="ModifyFeedback" method="execute" class="actionsupportpackage.ModifyFeedbackActionSupport"> 
+<result name="success">ModifySuccess.jsp</result>
+</action>
+
+<action name="ViewQuestion" method="execute" class="actionsupportpackage.ViewQuestionActionSupport"> 
+<result name="success">ViewQuestion.jsp</result>
 </action>
 
 </package>

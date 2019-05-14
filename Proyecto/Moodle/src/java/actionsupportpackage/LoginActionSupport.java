@@ -1,7 +1,6 @@
 package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.INPUT;
-import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.Login;
 import entity.HibernateUtil;
@@ -12,6 +11,7 @@ public class LoginActionSupport extends ActionSupport {
  int tipo;
  Session hibernateSession;
  Login login;
+ 
  @Override
  public String execute() throws Exception {
  hibernateSession=HibernateUtil.getSessionFactory().openSession();

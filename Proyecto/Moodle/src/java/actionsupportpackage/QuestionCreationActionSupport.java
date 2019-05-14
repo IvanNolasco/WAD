@@ -16,7 +16,16 @@ public class QuestionCreationActionSupport extends ActionSupport {
     }
     
     private List<Question> questions; 
-    
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public List<Question> getQuestions() {  
         return questions;  
     } 

@@ -10,6 +10,9 @@
         <title>Main Page</title>
     </head>
 <body>
+    <s:set var="userNameVar" value="userName"/>
+    <jsp:useBean id="userNameVar" type="java.lang.String" />
+    
     <header class="encabezado">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -22,7 +25,11 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                       <li class="nav-item active">
-                        <a class="nav-link" href="QuestionCreation.action">Questions<span class="sr-only">(current)</span></a>
+                          
+                        <%
+                            String userName = userNameVar;
+                            out.print("<a class=\"nav-link\" href=\"QuestionCreation.action?userName="+userName+"\">Questions<span class=\"sr-only\">(current)</span></a>");
+                        %>
                       </li>
                     </ul>
                   </div>

@@ -28,6 +28,7 @@
                           
                         <%
                             String userName = userNameVar;
+                            session.setAttribute("username", userName);
                             out.print("<a class=\"nav-link\" href=\"QuestionCreation.action?userName="+userName+"\">Questions<span class=\"sr-only\">(current)</span></a>");
                         %>
                       </li>

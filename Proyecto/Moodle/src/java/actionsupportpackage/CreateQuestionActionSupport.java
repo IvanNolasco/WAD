@@ -7,7 +7,13 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
+import java.util.List;
 import org.apache.struts2.ServletActionContext;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -29,6 +35,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("username");
         pathString=pathString.replace("build\\web\\", "");
         //Se inicializa el parser que interpretará la estructura del JSON
         JSONParser parser = new JSONParser();
@@ -83,6 +90,34 @@ public class CreateQuestionActionSupport extends ActionSupport {
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();
+            
+            //Write XML
+            SAXBuilder builder = new SAXBuilder();
+            File archivoXML = new File(pathString+"web/xmls/Questions.xml");
+            Document documento=builder.build(archivoXML);
+            Element raiz = documento.getRootElement();
+            List lista=raiz.getChildren("teacher");
+            for (Object l : lista) {
+                Element teacher = (Element)l;
+                if (teacher.getAttributeValue(name) == userName) {
+                    Element quest = new Element("question");
+                    quest.setAttribute("id", id);
+                    quest.setAttribute("name", name);
+                    quest.setAttribute("question", question);
+                    quest.setAttribute("answer", answer);
+                    quest.setAttribute("source", "media\\"+mediaFileName);
+                    quest.setAttribute("type", mediaContentType);
+                    teacher.addContent(quest);
+                }
+            }
+            
+            
+            //AGREGA EL USUARIO AL ELEMENTO RAIZ
+            Format formato = Format.getPrettyFormat();
+            XMLOutputter xmloutputter = new XMLOutputter(formato);
+            FileWriter writer= new FileWriter(pathString+"web/xmls/Questions.xml");
+            xmloutputter.output(documento, writer);
+            writer.close();
 
             return SUCCESS;
         }

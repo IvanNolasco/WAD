@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <questions>
 	<teacher username="ivan">
 		<question id="3" question="What animal appears in the video?" answer="eagle" name="Eagle video" source="media\\Eagle - 748.mp4" type="video\/mp4" />

@@ -18,7 +18,6 @@ import org.json.simple.parser.JSONParser;
 
 public class DeleteQuestionActionSupport extends ActionSupport { 
     public String id;
-    public String username;
 
     public String getId() {
         return id;
@@ -27,14 +26,6 @@ public class DeleteQuestionActionSupport extends ActionSupport {
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
     
     
     
@@ -42,6 +33,7 @@ public class DeleteQuestionActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String path = ServletActionContext.getServletContext().getRealPath("/");
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("username");
         try{
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");
@@ -51,7 +43,7 @@ public class DeleteQuestionActionSupport extends ActionSupport {
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
-                if(username.equals(this.username)){
+                if(username.equals(userName)){
                     List questionsList = teacher.getChildren("question");
                     List feedbackList = teacher.getChildren("feedback");
                     for(int j=0;j<questionsList.size();j++){

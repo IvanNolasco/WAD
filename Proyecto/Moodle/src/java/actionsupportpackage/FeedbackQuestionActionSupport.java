@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
+import org.apache.struts2.ServletActionContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,14 +26,13 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        
-        URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/FeedbackQuestionActionSupport.class", "");
-        pathString=pathString.replace("file:/","");
+        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
+        String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        pathString=pathString.replace("build\\web\\", "web\\jsons\\Feedbacks.json\\");
         
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Feedbacks.json/"));
+            Object obj = parser.parse(new FileReader(pathString));
             JSONArray feedbackArray = (JSONArray) obj;
             
             JSONObject f = new JSONObject();
@@ -47,7 +47,7 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
             JSONObject newFeedback = new JSONObject();
             newFeedback.put("Feedback", f);      
             feedbackArray.add(newFeedback);
-            FileWriter file = new FileWriter(pathString+"web/jsons/Feedbacks.json/");
+            FileWriter file = new FileWriter(pathString);
             file.write(feedbackArray.toJSONString());
             file.flush();
             file.close();

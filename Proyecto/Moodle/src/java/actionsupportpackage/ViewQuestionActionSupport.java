@@ -4,6 +4,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.FileReader;
 import java.net.URL;
+import org.apache.struts2.ServletActionContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -29,9 +30,8 @@ public class ViewQuestionActionSupport extends ActionSupport {
     @Override
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
-        URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ViewQuestionActionSupport.class", "");
-        pathString=pathString.replace("file:/","");
+        String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        pathString=pathString.replace("build\\web\\", "");
         //Se inicializa el parser que interpretará la estructura del JSON
         JSONParser parser = new JSONParser();
         try{

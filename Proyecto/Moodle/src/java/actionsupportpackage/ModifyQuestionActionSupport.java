@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
+import org.apache.struts2.ServletActionContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -82,13 +83,12 @@ public class ModifyQuestionActionSupport extends ActionSupport {
     @Override
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
-        URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/ModifyQuestionActionSupport.class", "");
-        pathString=pathString.replace("file:/","");
+        String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        pathString=pathString.replace("build\\web\\", "web\\jsons\\Questions.json\\");
         JSONParser parser = new JSONParser();
         try{
             //se abre el JSON con las preguntas
-            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
+            Object obj = parser.parse(new FileReader(pathString));
             JSONArray questionArray = (JSONArray) obj;
             //se recorre el arreglo de JSONs
             for (Object q : questionArray){

@@ -95,7 +95,7 @@
                     if (answer === correctAns) {
                         correct.innerHTML = "<div class='alert alert-success'><p><%= varCorrect %></p></div>";
                         document.getElementById("send").disabled = true;
-                    }else if(tries > 1){
+                    }else if(tries > 0){
                         triesDiv.innerHTML = "<p class='h4 text-right'>Tries:"+--tries+"</p>"
                         correct.innerHTML = "<div class='alert alert-warning'><p><%= varTriesFB %></p></div>";
                         

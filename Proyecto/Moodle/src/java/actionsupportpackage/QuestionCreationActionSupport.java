@@ -3,12 +3,12 @@ package actionsupportpackage;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.apache.struts2.ServletActionContext;
 
 public class QuestionCreationActionSupport extends ActionSupport {
     
@@ -27,14 +27,13 @@ public class QuestionCreationActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws IOException { 
-        questions = new ArrayList<Question>();
-        
-        URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/QuestionCreationActionSupport.class", "");
-        pathString=pathString.replace("file:/","");
+        questions = new ArrayList<Question>(); 
+        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
+        String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        pathString=pathString.replace("build\\web\\", "web\\jsons\\Questions.json\\");
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
+            Object obj = parser.parse(new FileReader(pathString));
             JSONArray questionArray = (JSONArray) obj;
             for (Object q : questionArray){
                 JSONObject jsonObject = (JSONObject) q;

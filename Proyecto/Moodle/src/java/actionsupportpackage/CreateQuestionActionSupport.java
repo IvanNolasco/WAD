@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
+import org.apache.struts2.ServletActionContext;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -27,9 +28,8 @@ public class CreateQuestionActionSupport extends ActionSupport {
     @Override
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
-        URL path=this.getClass().getProtectionDomain().getCodeSource().getLocation();
-        String pathString = path.toString().replace("build/web/WEB-INF/classes/actionsupportpackage/CreateQuestionActionSupport.class", "");
-        pathString=pathString.replace("file:/","");
+        String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        pathString=pathString.replace("build\\web\\", "");
         //Se inicializa el parser que interpretará la estructura del JSON
         JSONParser parser = new JSONParser();
         try{

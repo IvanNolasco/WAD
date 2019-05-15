@@ -2,10 +2,17 @@ package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
+import java.util.List;
 import org.apache.struts2.ServletActionContext;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,45 +31,42 @@ public class ModifyFeedbackActionSupport extends ActionSupport {
     }
     
     public String execute() throws Exception {
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("username");
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
-        String pathString = ServletActionContext.getServletContext().getRealPath("/");
-        
-        JSONParser parser = new JSONParser();
+        String path = ServletActionContext.getServletContext().getRealPath("/");
         try{
-            //se abre el archivo de los feedbacks
-            Object obj = parser.parse(new FileReader(pathString+"\\jsons\\Feedbacks.json\\"));
-            JSONArray feedbackArray = (JSONArray) obj;
-            
-            //se contruye el objeto json del nuevo feedback
-            JSONObject f = new JSONObject();
-            f.put("id", id);
-            f.put("tries", tries);
-            f.put("initial", initial);
-            f.put("evaluate", evaluate);
-            f.put("correct", correct);
-            f.put("incorrect", incorrect);
-            f.put("triesFB", triesFB);
-            JSONObject newFeedback = new JSONObject();
-            newFeedback.put("Feedback", f);
-            //se recorre el arreglo de feedback
-            for (Object fA : feedbackArray){
-                JSONObject jsonObject = (JSONObject) fA;
-                JSONObject feedbackJObject = (JSONObject) jsonObject.get("Feedback");
-                String nameJ = (String) feedbackJObject.get("id");
-                //se busca el feedback correspondiente al id
-                if(nameJ.equals(id)){
-                    //al encontrarse se remueve del arreglo de feedbacks
-                    feedbackArray.remove(jsonObject);
-                    break;
+            SAXBuilder builder = new SAXBuilder();
+            File xmlFile = new File(path+"\\xmls\\Questions.xml");
+            Document document = builder.build(xmlFile);
+            Element root = document.getRootElement();
+            List teachersList = root.getChildren("teacher");
+            for(int i=0;i<teachersList.size();i++) {
+                Element teacher = (Element)teachersList.get(i);
+                String username = teacher.getAttributeValue("username");  
+                if(username.equals(userName)){
+                    List feedbackList = teacher.getChildren("feedback");
+                    for(int j=0;j<feedbackList.size();j++){
+                        Element feedback = (Element)feedbackList.get(j);
+                        String feedbackid = feedback.getAttributeValue("id");
+                        System.out.println(this.id);
+                        if(feedbackid.equals(this.id)){
+                            feedbackList.remove(j);
+                            feedback.setAttribute("id",this.id);
+                            feedback.setAttribute("tries", tries);
+                            feedback.setAttribute("initial", initial);
+                            feedback.setAttribute("evaluate", evaluate);
+                            feedback.setAttribute("correct", correct);
+                            feedback.setAttribute("incorrect", incorrect);
+                            feedback.setAttribute("triesFB", triesFB);
+                            teacher.addContent(feedback);
+                        }
+                            Format formato = Format.getPrettyFormat();
+                            XMLOutputter xmloutputter = new XMLOutputter(formato);
+                            FileWriter writer = new FileWriter(path+"\\xmls\\Questions.xml");
+                            xmloutputter.output(document, writer);
+                    }
                 }
             }
-            //se agrega al arreglo el nuevo feedback
-            feedbackArray.add(newFeedback);
-            //se sobreescribe el archivo json de feedbacks
-            FileWriter file = new FileWriter(pathString);
-            file.write(feedbackArray.toJSONString());
-            file.flush();
-            file.close();
         }
         catch(Exception e){
             e.printStackTrace();

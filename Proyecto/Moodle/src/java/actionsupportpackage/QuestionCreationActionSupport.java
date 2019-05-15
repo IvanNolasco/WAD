@@ -2,13 +2,9 @@ package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.apache.struts2.ServletActionContext;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -31,7 +27,8 @@ public class QuestionCreationActionSupport extends ActionSupport {
     } 
     
     @Override
-    public String execute() throws IOException { 
+    public String execute() throws IOException {
+        //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         questions = new ArrayList<Question>(); 
         //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas

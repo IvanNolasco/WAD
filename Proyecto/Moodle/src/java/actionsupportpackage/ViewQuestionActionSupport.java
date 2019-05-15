@@ -2,12 +2,13 @@ package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
-import java.io.FileReader;
-import java.net.URL;
+import java.io.File;
+import java.util.List;
 import org.apache.struts2.ServletActionContext;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 
 public class ViewQuestionActionSupport extends ActionSupport {
     private String id;
@@ -29,54 +30,52 @@ public class ViewQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
+        //se recupera el username desde la sesion
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
-        String pathString = ServletActionContext.getServletContext().getRealPath("/");
-        pathString=pathString.replace("build\\web\\", "");
-        //Se inicializa el parser que interpretará la estructura del JSON
-        JSONParser parser = new JSONParser();
-        try{
-            //Se abre el JSON de las preguntas y se asigna a un JSON array, el cual tiene cada pregunta como elemento de un "arreglo"
-            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
-            //Se realiza lo mismo para el JSON del feedback
-            Object objF = parser.parse(new FileReader(pathString+"web/jsons/Feedbacks.json/"));
-            JSONArray questionArray = (JSONArray) obj;
-            JSONArray feedbackArray = (JSONArray) objF;            
-            //Se recorre cada elemento del arreglo
-            for (Object q : questionArray){
-                //Se obtiene la informacion de la pregunta en questionJObject
-                JSONObject jsonObject = (JSONObject) q;
-                JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
-                //Se obtiene el id de la pregunta
-                String idJ = (String) questionJObject.get("id");
-                //Si el id coincide con el id obtenido en el jsp se recupera el resto de sus atributos y se rompe el ciclo
-                if(idJ.equals(id)){
-                    this.question = (String) questionJObject.get("question");
-                    this.answer = (String) questionJObject.get("answer");
-                    this.source = (String) questionJObject.get("source");
-                    this.type = (String) questionJObject.get("type");
-                    break;
+        String path = ServletActionContext.getServletContext().getRealPath("/");
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            File xmlFile = new File(path+"\\xmls\\Questions.xml");
+            Document document = builder.build(xmlFile);
+            Element root = document.getRootElement();
+            List teachersList = root.getChildren("teacher");
+            for(int i=0;i<teachersList.size();i++) {
+                Element teacher = (Element)teachersList.get(i);
+                String username = teacher.getAttributeValue("username");  
+                if(username.equals(userName)){
+                    List questionsList = teacher.getChildren("question");
+                    List feedbacksList = teacher.getChildren("feedback");
+                    for(int j=0;j<questionsList.size();j++){
+                        Element questionE = (Element)questionsList.get(j);
+                        String idQ = questionE.getAttributeValue("id");
+                        if(idQ.equals(this.id)) {
+                            this.question = questionE.getAttributeValue("question");
+                            this.answer = questionE.getAttributeValue("answer");
+                            this.source = questionE.getAttributeValue("source");
+                            this.type = questionE.getAttributeValue("type");
+                            break;
+                        }   
+                    }
+                    for(int k=0;k<feedbacksList.size();k++){
+                        Element feedbackE = (Element)feedbacksList.get(k);
+                        String idF = feedbackE.getAttributeValue("id");
+                        if(idF.equals(this.id)) {
+                            this.tries = feedbackE.getAttributeValue("tries");
+                            this.initial = feedbackE.getAttributeValue("initial");
+                            this.evaluate = feedbackE.getAttributeValue("evaluate");
+                            this.correct = feedbackE.getAttributeValue("correct");
+                            this.incorrect = feedbackE.getAttributeValue("incorrect");
+                            this.triesFB = feedbackE.getAttributeValue("triesFB");
+                            break;
+                        }
+                        
+                    }
                 }
             }
-            //Se recorre cada elemento del arreglo
-            for (Object f : feedbackArray) {
-                System.out.println("entre aqui");
-                //Se obtiene la informacion del feedback de la pregunta en questionJObject
-                JSONObject jsonObject = (JSONObject) f;
-                JSONObject questionJObject = (JSONObject) jsonObject.get("Feedback");
-                //Se obtiene el id de la pregunta
-                String idJ = (String) questionJObject.get("id");
-                if(idJ.equals(id)){
-                    this.tries = (String) questionJObject.get("tries");
-                    this.evaluate = (String) questionJObject.get("evaluate");
-                    this.initial = (String) questionJObject.get("initial");
-                    this.correct = (String) questionJObject.get("correct");
-                    this.incorrect = (String) questionJObject.get("incorrect");
-                    this.triesFB = (String) questionJObject.get("triesFB");
-                }
-            }
+             
         }
-        
-        catch(Exception e){
+        catch(JDOMException e) {
             e.printStackTrace();
         }
         return SUCCESS;

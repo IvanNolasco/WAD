@@ -21,15 +21,6 @@ public class QuestionCreationActionSupport extends ActionSupport {
     }
     
     private List<Question> questions; 
-    private String userName;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public List<Question> getQuestions() {  
         return questions;  
@@ -41,6 +32,7 @@ public class QuestionCreationActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws IOException { 
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         questions = new ArrayList<Question>(); 
         //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas
         String path = ServletActionContext.getServletContext().getRealPath("/");
@@ -53,7 +45,7 @@ public class QuestionCreationActionSupport extends ActionSupport {
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
-                if(username.equals(this.userName)){
+                if(username.equals(userName)){
                     List questionsList = teacher.getChildren("question");
                     for(int j=0;j<questionsList.size();j++){
                         Element question = (Element)questionsList.get(j);

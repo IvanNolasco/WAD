@@ -35,10 +35,9 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
-        pathString=pathString.replace("build\\web\\", "");
-        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("username");
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         JSONParser parser = new JSONParser();
-        try{
+        try{/*
             Object obj = parser.parse(new FileReader(pathString+"web\\jsons\\Feedbacks.json\\"));
             JSONArray feedbackArray = (JSONArray) obj;
             
@@ -57,10 +56,10 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
             file.write(feedbackArray.toJSONString());
             file.flush();
             file.close();
-            
+            */
              //Write XML
             SAXBuilder builder = new SAXBuilder();
-            File archivoXML = new File(pathString+"web\\xmls\\Questions.xml\\");
+            File archivoXML = new File(pathString+"\\xmls\\Questions.xml\\");
             Document documento=builder.build(archivoXML);
             Element raiz = documento.getRootElement();
             List lista=raiz.getChildren("teacher");
@@ -81,7 +80,7 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
             //AGREGA EL USUARIO AL ELEMENTO RAIZ
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
-            FileWriter writer= new FileWriter(pathString+"web\\xmls\\Questions.xml\\");
+            FileWriter writer= new FileWriter(pathString+"\\xmls\\Questions.xml\\");
             xmloutputter.output(documento, writer);
             writer.close();
             

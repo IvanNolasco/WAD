@@ -35,11 +35,10 @@ public class CreateQuestionActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
-        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("username");
-        pathString=pathString.replace("build\\web\\", "");
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         //Se inicializa el parser que interpretará la estructura del JSON
         JSONParser parser = new JSONParser();
-        try{
+        try{ /*
             //Se abre el JSON de las preguntas y se asigna a un JSON array, el cual tiene cada pregunta como elemento de un "arreglo"
             Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
             JSONArray questionArray = (JSONArray) obj;
@@ -90,10 +89,10 @@ public class CreateQuestionActionSupport extends ActionSupport {
             file.write(questionArray.toJSONString());
             file.flush();
             file.close();
-            
+            */
             //Write XML
             SAXBuilder builder = new SAXBuilder();
-            File archivoXML = new File(pathString+"web/xmls/Questions.xml");
+            File archivoXML = new File(pathString+"/xmls/Questions.xml");
             Document documento=builder.build(archivoXML);
             Element raiz = documento.getRootElement();
             List lista=raiz.getChildren("teacher");
@@ -113,7 +112,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             //AGREGA EL USUARIO AL ELEMENTO RAIZ
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
-            FileWriter writer= new FileWriter(pathString+"web/xmls/Questions.xml");
+            FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");
             xmloutputter.output(documento, writer);
             writer.close();
 

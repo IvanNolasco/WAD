@@ -37,6 +37,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
+<<<<<<< HEAD
         try{           
         //se define la ruta para escribir el archivo multimedia 
         File salida = new File(pathString+"media/"+mediaFileName);
@@ -68,6 +69,29 @@ public class CreateQuestionActionSupport extends ActionSupport {
                 quest.setAttribute("source", "media\\"+mediaFileName);
                 quest.setAttribute("type", mediaContentType);
                 teacher.addContent(quest);
+=======
+        //Se inicializa el parser que interpretará la estructura del JSON
+        JSONParser parser = new JSONParser();
+        try{ 
+            //Write XML
+            SAXBuilder builder = new SAXBuilder();
+            File archivoXML = new File(pathString+"/xmls/Questions.xml");
+            Document documento=builder.build(archivoXML);
+            Element raiz = documento.getRootElement();
+            List lista=raiz.getChildren("teacher");
+            for (Object l : lista) {
+                Element teacher = (Element)l;
+                if (teacher.getAttributeValue("username").equals(userName)) {
+                    Element quest = new Element("question");
+                    quest.setAttribute("id", id);
+                    quest.setAttribute("name", name);
+                    quest.setAttribute("question", question);
+                    quest.setAttribute("answer", answer);
+                    quest.setAttribute("source", "media\\"+mediaFileName);
+                    quest.setAttribute("type", mediaContentType);
+                    teacher.addContent(quest);
+                }
+>>>>>>> e4f61793a248fc4200b069e4b98d234c068b0c11
             }
         }
         //AGREGA EL USUARIO AL ELEMENTO RAIZ

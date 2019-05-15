@@ -37,26 +37,7 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         JSONParser parser = new JSONParser();
-        try{/*
-            Object obj = parser.parse(new FileReader(pathString+"web\\jsons\\Feedbacks.json\\"));
-            JSONArray feedbackArray = (JSONArray) obj;
-            
-            JSONObject f = new JSONObject();
-            f.put("id", id);
-            f.put("tries", tries);
-            f.put("initial", initial);
-            f.put("evaluate", evaluate);
-            f.put("correct", correct);
-            f.put("incorrect", incorrect);
-            f.put("triesFB", triesFB);
-            JSONObject newFeedback = new JSONObject();
-            newFeedback.put("Feedback", f);      
-            feedbackArray.add(newFeedback);
-            FileWriter file = new FileWriter(pathString+"web\\jsons\\Feedbacks.json\\");
-            file.write(feedbackArray.toJSONString());
-            file.flush();
-            file.close();
-            */
+        try{
              //Write XML
             SAXBuilder builder = new SAXBuilder();
             File archivoXML = new File(pathString+"\\xmls\\Questions.xml\\");

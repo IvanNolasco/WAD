@@ -14,6 +14,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -43,76 +45,79 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String path = ServletActionContext.getServletContext().getRealPath("/");
   
-//        int sobre=0; //Variable para sobreescribir el archivo si es necesario
-//        
-//        //Si el usuario mete un archivo nuevo se crea el file y se guarda en el servidor
-//        if(media!=null)
-//        {
-//            
-//            File salida = new File(pathString+"web/media/"+mediaFileName);
-//            FileInputStream in = new FileInputStream(media);
-//            FileOutputStream out = new FileOutputStream(salida);
-//            byte[] buf = new byte[1024];
-//            int len;
-//            while ((len = in.read(buf)) > 0) {
-//                out.write(buf, 0, len);
-//            }
-//            in.close();
-//            out.close();
-//            sobre=1;
-//        }
-//        
-//        JSONParser parser = new JSONParser();
-//        try{
-//            //se recuperan las preguntas del archivo JSON y se guardan en un arreglo
-//            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
-//            JSONArray questionArray = (JSONArray) obj;
-//            //se contruye un nuevo objeto json con la informacion de la pregunta
-//            JSONObject q = new JSONObject();
-//            q.put("id", id);
-//            q.put("name", name);
-//            q.put("question", question);
-//            q.put("answer", answer);
-//            //Si no se seleccionó ningun archivo, se vuelve a escribir la ruta del archivo original en el json
-//            if(sobre==0)
-//                q.put("source", mediaFileName);
-//            else
-//            //Si se seleccionó algún archivo, este se guardará en la carpeta media    
-//                q.put("source", "media\\"+mediaFileName);
-//            q.put("type", mediaContentType);
-//            JSONObject newQuestion = new JSONObject();
-//            newQuestion.put("Question", q);
-//            //se recorre el arreglo de jsons
-//            for (Object qA : questionArray){
-//                JSONObject jsonObject = (JSONObject) qA;
-//                JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
-//                String nameJ = (String) questionJObject.get("id");
-//                String mediaFilePath = (String) questionJObject.get("source");
-//                //se busca la pregunta con el mismo id 
-//                if(nameJ.equals(id)){
-//                    if (sobre == 1) {
-//                        //al encontrarse la pregunta se elimina el multimedia antiguo asociado a esa pregunta
-//                        File file = new File(pathString+"web/"+mediaFilePath);
-//                        System.out.println(file.delete());
-//                    }
-//                    //se elimina la pregunta del arreglo
-//                    questionArray.remove(jsonObject);
-//                    break;
-//                }
-//            }
-//            //se agrega al arreglo la pregunta que s emodifico
-//            questionArray.add(newQuestion);
-//            //se sobreescribe el archivo JSON con el arreglo
-//            FileWriter file = new FileWriter(pathString+"web/jsons/Questions.json/");
-//            file.write(questionArray.toJSONString());
-//            file.flush();
-//            file.close();
-//        }
-//        catch(Exception e){
-//            e.printStackTrace();
-//        }
+        int sobre=0; //Variable para sobreescribir el archivo si es necesario
         
-         try {
+        //Si el usuario mete un archivo nuevo se crea el file y se guarda en el servidor
+        if(media!=null)
+        {
+            
+            File salida = new File(path+"media/"+mediaFileName);
+            FileInputStream in = new FileInputStream(media);
+            FileOutputStream out = new FileOutputStream(salida);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+            sobre=1;
+        }
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            File archivoXML = new File(path+"/xmls/Questions.xml");
+            Document documento=builder.build(archivoXML);
+            //Se crea el nuevo elemento con la informacion modificada
+            Element quest = new Element("question");
+            quest.setAttribute("id", id);
+            quest.setAttribute("name", name);
+            quest.setAttribute("question", question);
+            quest.setAttribute("answer", answer);
+            if (sobre == 0)
+                quest.setAttribute("source", mediaFileName);
+            else
+                quest.setAttribute("source", "media\\"+mediaFileName);
+            quest.setAttribute("type", mediaContentType);
+            
+            //Se recupera el elemento raiz
+            Element raiz = documento.getRootElement();
+            //Se recuperan todos los nodos teacher
+            List lista=raiz.getChildren("teacher");
+            //Se recorre cada uno de los teacher
+            for (Object l : lista) {
+                Element teacher = (Element)l;
+                //Se saca el profesor que coincida con el profesor en sesion
+                if (teacher.getAttributeValue("username").equals(userName)) {
+                    //Se listan todas las preguntas creadas por el profesor
+                    List questions = teacher.getChildren("question");
+                    //Se consigue la pregunta que coincida con el id
+                    for (Object qu : questions) {
+                        Element question = (Element)qu;
+                        System.out.println(question.getAttributeValue("id")+","+id);
+                        if (question.getAttributeValue("id").equals(id)) {
+                            System.out.println("entró aqui x2");
+                            if (sobre == 1) {
+                                //al encontrarse la pregunta se elimina el multimedia antiguo asociado a esa pregunta
+                                File file = new File(path+question.getAttributeValue("source"));
+                                System.out.println(file.delete());
+                            }
+                            System.out.println(questions.remove(qu));
+                        }
+                    }
+                    teacher.addContent(quest);
+                }
+            }
+            //Se escriben los cambios en el xml
+            Format formato = Format.getPrettyFormat();
+            XMLOutputter xmloutputter = new XMLOutputter(formato);
+            FileWriter writer= new FileWriter(path+"/xmls/Questions.xml");
+            xmloutputter.output(documento, writer);
+            writer.close();
+            
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        }
+        try {
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");
             Document document = builder.build(xmlFile);

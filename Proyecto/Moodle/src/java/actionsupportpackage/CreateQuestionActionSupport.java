@@ -13,6 +13,7 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -36,89 +37,49 @@ public class CreateQuestionActionSupport extends ActionSupport {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
-        //Se inicializa el parser que interpretará la estructura del JSON
-        JSONParser parser = new JSONParser();
-        try{ /*
-            //Se abre el JSON de las preguntas y se asigna a un JSON array, el cual tiene cada pregunta como elemento de un "arreglo"
-            Object obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
-            JSONArray questionArray = (JSONArray) obj;
-            //Se recorre cada elemento del arreglo
-            for (Object q : questionArray){
-                //Se obtiene la informacion de la pregunta en questionJObject
-                JSONObject jsonObject = (JSONObject) q;
-                JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
-                //Se obtiene el id de la pregunta
-                String idE = (String) questionJObject.get("id");
-                //Si el id coincide con el id obtenido en el jsp se recupera el resto de sus atributos y se rompe el ciclo
-                if(idE.equals(this.id)){
-                    System.out.println(idE);
-                    System.out.println(this.id);
-                    return "IDExistent";
-                }
-            }
-            //se define la ruta para escribir el archivo multimedia 
-            File salida = new File(pathString+"web/media/"+mediaFileName);
-            //se transfiere el archivo multimedia al servidor
-            FileInputStream in = new FileInputStream(media);
-            FileOutputStream out = new FileOutputStream(salida);
-            byte[] buf = new byte[1024];
-            int len;
-            while ((len = in.read(buf)) > 0) {
-                out.write(buf, 0, len);
-            }
-            in.close();
-            out.close();
-
-            obj = parser.parse(new FileReader(pathString+"web/jsons/Questions.json/"));
-            questionArray = (JSONArray) obj;
-            
-            //se contruye el JSON de la nueva pregunta
-            JSONObject q = new JSONObject();
-            q.put("id", id);
-            q.put("name", name);
-            q.put("question", question);
-            q.put("answer", answer);
-            q.put("source", "media\\"+mediaFileName);
-            q.put("type", mediaContentType);
-            JSONObject newQuestion = new JSONObject();
-            newQuestion.put("Question", q);
-            //se agrega el objeto JSON de la nueva pregunta a la lista de JSONs 
-            questionArray.add(newQuestion);
-            //se sobreescribe el archivo
-            FileWriter file = new FileWriter(pathString+"web/jsons/Questions.json/");
-            file.write(questionArray.toJSONString());
-            file.flush();
-            file.close();
-            */
-            //Write XML
-            SAXBuilder builder = new SAXBuilder();
-            File archivoXML = new File(pathString+"/xmls/Questions.xml");
-            Document documento=builder.build(archivoXML);
-            Element raiz = documento.getRootElement();
-            List lista=raiz.getChildren("teacher");
-            for (Object l : lista) {
-                Element teacher = (Element)l;
-                if (teacher.getAttributeValue("username").equals(userName)) {
-                    Element quest = new Element("question");
-                    quest.setAttribute("id", id);
-                    quest.setAttribute("name", name);
-                    quest.setAttribute("question", question);
-                    quest.setAttribute("answer", answer);
-                    quest.setAttribute("source", "media\\"+mediaFileName);
-                    quest.setAttribute("type", mediaContentType);
-                    teacher.addContent(quest);
-                }
-            }
-            //AGREGA EL USUARIO AL ELEMENTO RAIZ
-            Format formato = Format.getPrettyFormat();
-            XMLOutputter xmloutputter = new XMLOutputter(formato);
-            FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");
-            xmloutputter.output(documento, writer);
-            writer.close();
-
-            return SUCCESS;
+        try{           
+        //se define la ruta para escribir el archivo multimedia 
+        File salida = new File(pathString+"media/"+mediaFileName);
+        //se transfiere el archivo multimedia al servidor
+        FileInputStream in = new FileInputStream(media);
+        FileOutputStream out = new FileOutputStream(salida);
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = in.read(buf)) > 0) {
+            out.write(buf, 0, len);
         }
-        catch(Exception e){
+        in.close();
+        out.close();
+
+        //Write XML
+        SAXBuilder builder = new SAXBuilder();
+        File archivoXML = new File(pathString+"/xmls/Questions.xml");
+        Document documento=builder.build(archivoXML);
+        Element raiz = documento.getRootElement();
+        List lista=raiz.getChildren("teacher");
+        for (Object l : lista) {
+            Element teacher = (Element)l;
+            if (teacher.getAttributeValue("username").equals(userName)) {
+                Element quest = new Element("question");
+                quest.setAttribute("id", id);
+                quest.setAttribute("name", name);
+                quest.setAttribute("question", question);
+                quest.setAttribute("answer", answer);
+                quest.setAttribute("source", "media\\"+mediaFileName);
+                quest.setAttribute("type", mediaContentType);
+                teacher.addContent(quest);
+            }
+        }
+        //AGREGA EL USUARIO AL ELEMENTO RAIZ
+        Format formato = Format.getPrettyFormat();
+        XMLOutputter xmloutputter = new XMLOutputter(formato);
+        FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");
+        xmloutputter.output(documento, writer);
+        writer.close();
+
+        return SUCCESS;
+        }
+        catch(JDOMException e){
             e.printStackTrace();
         }
        

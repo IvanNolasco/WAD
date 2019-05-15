@@ -6,7 +6,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
+import java.util.List;
 import org.apache.struts2.ServletActionContext;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -82,36 +87,41 @@ public class ModifyQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
-        String pathString = ServletActionContext.getServletContext().getRealPath("/");
-        pathString=pathString.replace("build\\web\\", "web\\jsons\\Questions.json\\");
-        JSONParser parser = new JSONParser();
-        try{
-            //se abre el JSON con las preguntas
-            Object obj = parser.parse(new FileReader(pathString));
-            JSONArray questionArray = (JSONArray) obj;
-            //se recorre el arreglo de JSONs
-            for (Object q : questionArray){
-                JSONObject jsonObject = (JSONObject) q;
-                JSONObject questionJObject = (JSONObject) jsonObject.get("Question");
-                String idJ = (String) questionJObject.get("id");
-                //se busca la pregunta correspondiente al id
-                if(idJ.equals(id)){
-                    //se recuperan los datos de la pregunta
-                    this.name = (String) questionJObject.get("name");
-                    this.question = (String) questionJObject.get("question");
-                    this.answer = (String) questionJObject.get("answer");
-                    this.mediaFileName = (String) questionJObject.get("source");
-                    this.mediaContentType = (String) questionJObject.get("type");
-                    break;
+        String path = ServletActionContext.getServletContext().getRealPath("/");
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            File xmlFile = new File(path+"\\xmls\\Questions.xml");
+            Document document = builder.build(xmlFile);
+            Element root = document.getRootElement();
+            List teachersList = root.getChildren("teacher");
+            for(int i=0;i<teachersList.size();i++) {
+                Element teacher = (Element)teachersList.get(i);
+                String username = teacher.getAttributeValue("username");  
+                if(username.equals(userName)){
+                    List questionsList = teacher.getChildren("question");
+                    for(int j=0;j<questionsList.size();j++){
+                        Element question = (Element)questionsList.get(j);
+                        String questionid = question.getAttributeValue("id");
+                        if(questionid.equals(this.id)){
+                            this.name = question.getAttributeValue("name");
+                            this.question = question.getAttributeValue("question");
+                            this.answer = question.getAttributeValue("answer");
+                            this.mediaFileName = question.getAttributeValue("source");
+                            this.mediaContentType = question.getAttributeValue("type");
+                            break;
+                        }
+                    }
+
                 }
             }
-
+             
         }
-        
-        catch(Exception e){
+        catch(JDOMException e) {
             e.printStackTrace();
         }
+        
         return SUCCESS;
     }
     

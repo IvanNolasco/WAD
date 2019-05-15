@@ -26,12 +26,11 @@ public class ModifyFeedbackActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
-        pathString=pathString.replace("build\\web\\", "web\\jsons\\Feedbacks.json\\");
         
         JSONParser parser = new JSONParser();
         try{
             //se abre el archivo de los feedbacks
-            Object obj = parser.parse(new FileReader(pathString));
+            Object obj = parser.parse(new FileReader(pathString+"\\jsons\\Feedbacks.json\\"));
             JSONArray feedbackArray = (JSONArray) obj;
             
             //se contruye el objeto json del nuevo feedback

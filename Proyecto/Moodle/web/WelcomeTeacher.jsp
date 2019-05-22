@@ -12,7 +12,9 @@
 <body>
     <s:set var="userNameVar" value="userName"/>
     <jsp:useBean id="userNameVar" type="java.lang.String" />
-    
+    <%
+        session.setAttribute("userName", userNameVar);
+    %>
     <header class="encabezado">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,14 +26,11 @@
                 </a>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                      <li class="nav-item active"> 
+                        <a class="nav-link" href="QuestionCreation.action">Questions</a>
+                      </li>
                       <li class="nav-item active">
-                          
-                        <%
-                            String userName = userNameVar;
-                            session.setAttribute("userName", userName);
-                        %>
-                        <a class="nav-link" href="QuestionCreation.action">Questions<span class="sr-only">(current)</span></a>
-                        
+                        <a class="nav-link" href="ExamCreation.action">Exams</a>
                       </li>
                     </ul>
                   </div>

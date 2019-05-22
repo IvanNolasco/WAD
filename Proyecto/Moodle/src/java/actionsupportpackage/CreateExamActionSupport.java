@@ -1,8 +1,8 @@
 package actionsupportpackage;
 
+import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.ServletActionContext;
@@ -10,24 +10,21 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-
-public class QuestionCreationActionSupport extends ActionSupport {
+public class CreateExamActionSupport extends ActionSupport {
+     private List<Question> questions;
     
-    public QuestionCreationActionSupport() {
+    public CreateExamActionSupport() {
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
     
-    private List<Question> questions; 
-
-    public List<Question> getQuestions() {  
-        return questions;  
-    } 
-    
-    public void setQuestions(List<Question> questions) {  
-        this.questions = questions;  
-    } 
-    
-    @Override
-    public String execute() throws IOException {
+    public String execute() throws Exception {
         //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         questions = new ArrayList<Question>(); 

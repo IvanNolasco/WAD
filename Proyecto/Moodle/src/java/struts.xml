@@ -55,5 +55,17 @@
 <result name="success">ViewQuestion.jsp</result>
 </action>
 
+<action name="ExamCreation" method="execute" class="actionsupportpackage.ExamCreationActionSupport"> 
+<result name="success">Exams.jsp</result>
+</action>
+
+<action name="CreateExam" method="execute" class="actionsupportpackage.CreateExamActionSupport"> 
+<result name="success">CreateExam.jsp</result>
+</action>
+
+<action name="CreateExam2" method="execute" class="actionsupportpackage.CreateExam2ActionSupport"> 
+<result name="success" type="redirectAction">ExamCreation</result>
+</action>
+
 </package>
 </struts>

@@ -38,46 +38,47 @@ public class CreateQuestionActionSupport extends ActionSupport {
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try{           
-        //se define la ruta para escribir el archivo multimedia 
-        File salida = new File(pathString+"media/"+mediaFileName);
-        //se transfiere el archivo multimedia al servidor
-        FileInputStream in = new FileInputStream(media);
-        FileOutputStream out = new FileOutputStream(salida);
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0) {
-            out.write(buf, 0, len);
-        }
-        in.close();
-        out.close();
-
-        //Write XML
-        SAXBuilder builder = new SAXBuilder();
-        File archivoXML = new File(pathString+"/xmls/Questions.xml");
-        Document documento=builder.build(archivoXML);
-        Element raiz = documento.getRootElement();
-        List lista=raiz.getChildren("teacher");
-        for (Object l : lista) {
-            Element teacher = (Element)l;
-            if (teacher.getAttributeValue("username").equals(userName)) {
-                Element quest = new Element("question");
-                quest.setAttribute("id", id);
-                quest.setAttribute("name", name);
-                quest.setAttribute("question", question);
-                quest.setAttribute("answer", answer);
-                quest.setAttribute("source", "media\\"+mediaFileName);
-                quest.setAttribute("type", mediaContentType);
-                teacher.addContent(quest);
+            //se define la ruta para escribir el archivo multimedia 
+            File salida = new File(pathString+"media/"+mediaFileName);
+            //se transfiere el archivo multimedia al servidor
+            FileInputStream in = new FileInputStream(media);
+            FileOutputStream out = new FileOutputStream(salida);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
             }
-        }
-        //AGREGA EL USUARIO AL ELEMENTO RAIZ
-        Format formato = Format.getPrettyFormat();
-        XMLOutputter xmloutputter = new XMLOutputter(formato);
-        FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");
-        xmloutputter.output(documento, writer);
-        writer.close();
+            in.close();
+            out.close();
 
-        return SUCCESS;
+            //Write XML
+            SAXBuilder builder = new SAXBuilder();
+            File archivoXML = new File(pathString+"/xmls/Questions.xml");
+            Document documento=builder.build(archivoXML);
+            Element raiz = documento.getRootElement();
+            List lista=raiz.getChildren("teacher");
+            for (Object l : lista) {
+                Element teacher = (Element)l;
+                if (teacher.getAttributeValue("username").equals(userName)) {
+                    Element quest = new Element("question");
+                    quest.setAttribute("id", id);
+                    quest.setAttribute("name", name);
+                    quest.setAttribute("question", question);
+                    quest.setAttribute("answer", answer);
+                    quest.setAttribute("source", "media\\"+mediaFileName);
+                    quest.setAttribute("type", mediaContentType);
+                    teacher.addContent(quest);
+                    break;
+                }
+            }
+            //AGREGA EL USUARIO AL ELEMENTO RAIZ
+            Format formato = Format.getPrettyFormat();
+            XMLOutputter xmloutputter = new XMLOutputter(formato);
+            FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");
+            xmloutputter.output(documento, writer);
+            writer.close();
+
+            return SUCCESS;
         }
         catch(JDOMException e){
             e.printStackTrace();

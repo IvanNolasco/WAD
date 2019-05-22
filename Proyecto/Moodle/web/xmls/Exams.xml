@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exams>
+	<teacher username="ivan">
+		<exam name="Examen1">
+                    <question id="1"/>
+                    <question id="2"/>
+                    <question id="3"/>
+		</exam>
+                <exam name="Examen2">
+                    <question id="1"/>
+                    <question id="2"/>
+		</exam>
+                <exam name="Examen3">
+                    <question id="1"/>
+                    <question id="3"/>
+		</exam>
+	</teacher>
+</exams>

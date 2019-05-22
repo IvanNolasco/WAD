@@ -67,5 +67,9 @@
 <result name="success" type="redirectAction">ExamCreation</result>
 </action>
 
+<action name="DeleteExam" method="execute" class="actionsupportpackage.DeleteExamActionSupport"> 
+<result name="success" type="redirectAction">ExamCreation</result>
+</action>
+
 </package>
 </struts>

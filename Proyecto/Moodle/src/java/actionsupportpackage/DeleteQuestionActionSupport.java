@@ -33,7 +33,7 @@ public class DeleteQuestionActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String path = ServletActionContext.getServletContext().getRealPath("/");
-        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("username");
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try{
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");

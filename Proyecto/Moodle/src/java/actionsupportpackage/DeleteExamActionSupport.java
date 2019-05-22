@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -10,31 +15,26 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-public class CreateExam2ActionSupport extends ActionSupport {
-    private List<String> questionList;
-    private String nameE;
 
-    public List<String> getQuestionList() {
-        return questionList;
+/**
+ *
+ * @author luis_
+ */
+public class DeleteExamActionSupport extends ActionSupport {
+    public String name;
+
+    public String getName() {
+        return name;
     }
 
-    public void setQuestionList(List<String> questionList) {
-        this.questionList = questionList;
-    }
-
-    public String getNameE() {
-        return nameE;
-    }
-
-    public void setNameE(String nameE) {
-        this.nameE = nameE;
+    public void setName(String name) {
+        this.name = name;
     }
     
     public String execute() throws Exception {
-         //se recupera el username desde la sesion
-        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
-        //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas
+        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String path = ServletActionContext.getServletContext().getRealPath("/");
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try {
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Exams.xml");
@@ -44,19 +44,19 @@ public class CreateExam2ActionSupport extends ActionSupport {
             for (Object t : teachersList) {
                 Element teacher = (Element)t;
                 String username = teacher.getAttributeValue("username");
-                if (username.equals(userName)){
-                    Element exam = new Element("exam");
-                    exam.setAttribute("name",nameE);
-                    for (String id : questionList) {
-                        Element quest = new Element("question");
-                        quest.setAttribute("id", id);
-                         exam.addContent(quest);
+                if(username.equals(userName)){
+                    List examList = teacher.getChildren("exam");
+                    for (Object e : examList) {
+                        Element exam = (Element)e;
+                        if (exam.getAttributeValue("name").equals(name)) {
+                            examList.remove(e);
+                            break;
+                        }
                     }
-                    teacher.addContent(exam);
                     break;
                 }
             }
-            //AGREGA EL USUARIO AL ELEMENTO RAIZ
+             //AGREGA EL USUARIO AL ELEMENTO RAIZ
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
             FileWriter writer= new FileWriter(path+"\\xmls\\Exams.xml");
@@ -64,7 +64,6 @@ public class CreateExam2ActionSupport extends ActionSupport {
             writer.close();
         } catch (Exception e) {
         }
-        
         return SUCCESS;
     }
     

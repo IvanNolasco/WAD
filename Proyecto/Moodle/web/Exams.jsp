@@ -73,9 +73,9 @@
     </div>
         
         <script type="text/javascript">
-            function confirmar(id){
+            function confirmar(name){
                 if (confirm("Do you really want to delete this question?")) {
-                    location.href ="DeleteExam.action?id="+id;
+                    location.href ="DeleteExam.action?name="+name;
                 } else {
                     
                 }

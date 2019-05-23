@@ -71,5 +71,9 @@
 <result name="success" type="redirectAction">ExamCreation</result>
 </action>
 
+<action name="ViewExam" method="execute" class="actionsupportpackage.ViewExamActionSupport"> 
+<result name="success">ViewExam.jsp</result>
+</action>
+
 </package>
 </struts>

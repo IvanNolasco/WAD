@@ -4,6 +4,7 @@ import static com.opensymphony.xwork2.Action.INPUT;
 import com.opensymphony.xwork2.ActionSupport;
 import entity.Login;
 import entity.HibernateUtil;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
 
 public class LoginActionSupport extends ActionSupport {
@@ -29,6 +30,7 @@ public class LoginActionSupport extends ActionSupport {
  }
  addActionMessage("Welcome you logined");
  tipo = login.getTipo();
+ ServletActionContext.getRequest().getSession().setAttribute("userName",userName);
  if(tipo==0){
      return "admin";
  } else if(tipo==1){

@@ -1,4 +1,4 @@
-<<%@taglib uri="/struts-tags" prefix="s" %>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -10,11 +10,6 @@
         <title>Main Page</title>
     </head>
 <body>
-    <s:set var="userNameVar" value="userName"/>
-    <jsp:useBean id="userNameVar" type="java.lang.String" />
-    <%
-        session.setAttribute("userName", userNameVar);
-    %>
     <header class="encabezado">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,7 +36,11 @@
             </div>
          </header>
     <div class="container">
-        <h1 class="h1 text-center mb-3" style="margin: 100px;">Welcome Teacher: <s:property value="userName" /> </h1>
+        <h1 class="h1 text-center mb-3" style="margin: 100px;">Welcome Teacher:     
+                <%
+                    out.println((String)session.getAttribute("userName"));
+                %> 
+        </h1>
     </div>
     
 </body>

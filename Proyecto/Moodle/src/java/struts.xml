@@ -79,5 +79,9 @@
 <result name="success">ModifyExam.jsp</result>
 </action>
 
+<action name="ModifyExam2" method="execute" class="actionsupportpackage.ModifyExam2ActionSupport"> 
+<result name="success" type="redirectAction">ExamCreation</result>
+</action>
+
 </package>
 </struts>

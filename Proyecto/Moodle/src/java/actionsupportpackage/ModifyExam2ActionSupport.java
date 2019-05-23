@@ -60,17 +60,25 @@ public class ModifyExam2ActionSupport extends ActionSupport {
                 Element teacher = (Element)t;
                 String username = teacher.getAttributeValue("username");
                 if (username.equals(userName)){
-                    Element exam = new Element("exam");
-                    String name = exam.getAttributeValue("name");
-                    if(name.equals(nameE)){
-                        for (String id : questionList) {
-                        Element quest = new Element("question");
-                        quest.setAttribute("id", id);
-                         exam.addContent(quest);
+                    System.out.println("user");
+                    List examList = teacher.getChildren("exam");
+                    System.out.println(examList.size());
+                    for (Object e : examList) {
+                        Element exam = (Element)e;
+                        String name = exam.getAttributeValue("name");
+                        System.out.println(name);
+                        if(name.equals(nameE)){
+                            exam.removeChildren("question");
+                            System.out.println("exam");
+                            for (String id : questionList) {
+                                System.out.println(id);
+                                Element quest = new Element("question");
+                                quest.setAttribute("id", id);
+                                exam.addContent(quest);
+                            }
+                            break;
                         }
                     }
-                    teacher.addContent(exam);
-                    break;
                 }
             }
             //AGREGA EL USUARIO AL ELEMENTO RAIZ

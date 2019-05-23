@@ -40,7 +40,7 @@
             <div class="form-group row">
                 <s:label for="nameE" theme="simple" cssClass="col col-form-label" value="Name:"/>
                 <div class="col-11">
-                    <s:textfield name="nameE" id="nameE" theme="simple" cssClass="form-control" required="true" placeholder="Nombre del examen"/>
+                    <s:textfield name="nameE" id="nameE" theme="simple" cssClass="form-control" required="true" placeholder="Name of the exam"/>
                 </div>                
             </div>
             <table class="table table-striped table-borderless text-center"> 

@@ -36,7 +36,7 @@
      </header>
     <div class="container">
         <h1 class='text-center'>Questions</h1>
-        <s:form action="CreateExam2.action" theme="simple">
+        <s:form action="ModifyExam2.action" theme="simple">
             <div class="form-group row">
                 <s:label for="nameE" theme="simple" cssClass="col col-form-label" value="Name:"/>
                 <s:set var="namevar" value="id"/>
@@ -63,9 +63,8 @@
                         <%
                             String check = checkvar;
                             String id = idvar;
-                            out.print("<input type=\"checkbox\" name=\"chk\" value=\""+check+"\" fieldValue=\""+id+"\"/>");
+                            out.print("<input type=\"checkbox\" name=\"questionList\"  value=\""+id+"\" "+check+"/>");
                         %>
-                        <s:checkbox name="questions" value="(%check)" fieldValue="%{id}"/>
                         <s:property value="name"/>
                         
                         

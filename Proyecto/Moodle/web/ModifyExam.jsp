@@ -20,9 +20,12 @@
                 </a>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-                      <li class="nav-item active">
-                        <a class="nav-link" href="#">Questions</a>
-                      </li>
+                      <li class="nav-item active"> 
+                            <a class="nav-link" href="QuestionCreation.action">Questions</a>
+                          </li>
+                          <li class="nav-item active">
+                            <a class="nav-link" href="ExamCreation.action">Exams</a>
+                          </li>
                     </ul>
                   </div>
                 <span class="navbar-text">
@@ -41,7 +44,7 @@
                 <div class="col-11">
                     <%
                         String name = namevar;
-                        out.print("<input type=\"text\" name=\"name\" id=\"name\" class=\"form-control\" required=\"true\" value=\""+name+"\" readonly/>");
+                        out.print("<input type=\"text\" name=\"nameE\" id=\"nameE\" class=\"form-control\" required=\"true\" value=\""+name+"\" readonly/>");
                     %>
                     <s:textfield name="nameE" id="nameE" theme="simple" cssClass="form-control" required="true" value="($name)"/>
                 </div>                

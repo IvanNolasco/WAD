@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>Create Exam</title>
+        <title>View Exam</title>
     </head>
     <body>
         <header class="encabezado">
@@ -35,13 +35,11 @@
         </div>
      </header>
     <div class="container">
-        <h1 class='text-center'>Create Exam</h1>
+        <h1 class='text-center'>View Exam</h1>
         <s:form action="CreateExam2.action" theme="simple">
-            <div class="form-group row">
-                <s:label for="nameE" theme="simple" cssClass="col col-form-label" value="Name:"/>
-                <div class="col-11">
-                    <s:textfield name="nameE" id="nameE" theme="simple" cssClass="form-control" required="true" placeholder="Nombre del examen"/>
-                </div>                
+            <div class="h4">
+                <s:label theme="simple" value="Name:"/>
+                <s:property value="nameE"/>                
             </div>
             <table class="table table-striped table-borderless text-center"> 
                 <tr>
@@ -51,9 +49,7 @@
                 <s:iterator value="questions">
                 <tr>
                     <td>
-                        <s:checkbox name="questionList" value="false" fieldValue="%{id}"/>
                         <s:property value="name"/>
-                        
                         <s:set var="idvar" value="id"/>
                         <jsp:useBean id="idvar" type="java.lang.String" />
                     </td>
@@ -65,7 +61,6 @@
                 </tr>
                 </s:iterator>        
             </table>
-            <s:submit theme="simple" cssClass="btn btn-dark btn-block" value="Create Exam"/>
         </s:form>
     </div>
     </body>

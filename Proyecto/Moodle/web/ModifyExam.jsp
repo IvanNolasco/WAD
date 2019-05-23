@@ -46,7 +46,6 @@
                         String name = namevar;
                         out.print("<input type=\"text\" name=\"nameE\" id=\"nameE\" class=\"form-control\" required=\"true\" value=\""+name+"\" readonly/>");
                     %>
-                    <s:textfield name="nameE" id="nameE" theme="simple" cssClass="form-control" required="true" value="($name)"/>
                 </div>                
             </div>
             <table class="table table-striped table-borderless text-center"> 
@@ -57,7 +56,7 @@
                 <s:iterator value="questions">
                 <tr>
                     <td>
-                        <s:checkbox name="questionList" value="%(check)" fieldValue="%{id}"/>
+                        <s:checkbox name="questions" value="%(check)" fieldValue="%{id}"/>
                         <s:property value="name"/>
                         
                         <s:set var="idvar" value="id"/>

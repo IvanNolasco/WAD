@@ -71,6 +71,10 @@
 <result name="success" type="redirectAction">ExamCreation</result>
 </action>
 
+<action name="ViewExam" method="execute" class="actionsupportpackage.ViewExamActionSupport"> 
+<result name="success">ViewExam.jsp</result>
+</action>
+
 <action name="ModifyExam" method="execute" class="actionsupportpackage.ModifyExam"> 
 <result name="success">ModifyExam.jsp</result>
 </action>

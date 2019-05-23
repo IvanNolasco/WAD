@@ -56,7 +56,7 @@
                         
                         <%
                             
-                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ViewExam.action?id="+namevar+"'\">View Exam</button>");
+                            out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ViewExam.action?nameE="+namevar+"'\">View Exam</button>");
                             
                             out.print("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ModifyExam.action?id="+namevar+"'\">Modify Exam</button>");
                         

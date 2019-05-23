@@ -56,11 +56,19 @@
                 <s:iterator value="questions">
                 <tr>
                     <td>
-                        <s:checkbox name="questions" value="%(check)" fieldValue="%{id}"/>
-                        <s:property value="name"/>
-                        
+                        <s:set var="checkvar" value="check"/>
+                        <jsp:useBean id="checkvar" type="java.lang.String" />
                         <s:set var="idvar" value="id"/>
                         <jsp:useBean id="idvar" type="java.lang.String" />
+                        <%
+                            String check = checkvar;
+                            String id = idvar;
+                            out.print("<input type=\"checkbox\" name=\"chk\" value=\""+check+"\" fieldValue=\""+id+"\"/>");
+                        %>
+                        <s:checkbox name="questions" value="(%check)" fieldValue="%{id}"/>
+                        <s:property value="name"/>
+                        
+                        
                     </td>
                     <td>
                         <div class="btn-group btn-block" role="group" aria-label="Basic example">

@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>Create Exam</title>
+        <title>Modify Exam</title>
     </head>
     <body>
         <header class="encabezado">
@@ -39,7 +39,7 @@
         <s:form action="CreateExam2.action" theme="simple">
             <div class="form-group row">
                 <s:label for="nameE" theme="simple" cssClass="col col-form-label" value="Name:"/>
-                <s:set var="namevar" value="nameExam"/>
+                <s:set var="namevar" value="id"/>
                 <jsp:useBean id="namevar" type="java.lang.String" />
                 <div class="col-11">
                     <%

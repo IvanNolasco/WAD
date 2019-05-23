@@ -106,9 +106,9 @@ public class ModifyExam extends ActionSupport {
                         Question questionObject = new Question(idQ, name, questionText, answer);
                         Integer idI = Integer.parseInt(idQ);
                         if(questionsExam.contains(idI)){
-                            questionObject.setCheck("true");
+                            questionObject.setCheck("checked");
                         } else{
-                            questionObject.setCheck("false");
+                            questionObject.setCheck("");
                         }
                         questions.add(questionObject);
                     }

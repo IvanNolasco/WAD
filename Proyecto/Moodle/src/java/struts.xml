@@ -71,12 +71,8 @@
 <result name="success" type="redirectAction">ExamCreation</result>
 </action>
 
-<action name="ModifyExam" method="execute" class="actionsupportpackage.ModifyExamActionSupport"> 
+<action name="ModifyExam" method="execute" class="actionsupportpackage.ModifyExam"> 
 <result name="success">ModifyExam.jsp</result>
-</action>
-
-<action name="ModifyExam" method="execute" class="actionsupportpackage.Modify2ExamActionSupport"> 
-<result name="success" type="redirectAction">ExamCreation</result>
 </action>
 
 </package>

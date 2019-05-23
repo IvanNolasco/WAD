@@ -16,13 +16,16 @@
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="WelcomeTeacher.jsp">
                         <h1 class="display-6">Moodle</h1>
                     </a>
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                         <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+                          <li class="nav-item active"> 
+                            <a class="nav-link" href="QuestionCreation.action">Questions</a>
+                          </li>
                           <li class="nav-item active">
-                            <a class="nav-link" href="QuestionCreation.action">Questions<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="ExamCreation.action">Exams</a>
                           </li>
                         </ul>
                       </div>
@@ -31,7 +34,7 @@
                    </span>
                </nav>
             </div>
-        </header>
+         </header>
         <div class="container">
             <h1 class="text-center">Modify Question</h1>
             <s:form action="ModifyQuestion2"  method="post" enctype="multipart/form-data">

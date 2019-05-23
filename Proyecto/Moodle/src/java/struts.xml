@@ -75,5 +75,9 @@
 <result name="success">ViewExam.jsp</result>
 </action>
 
+<action name="ModifyExam" method="execute" class="actionsupportpackage.ModifyExam"> 
+<result name="success">ModifyExam.jsp</result>
+</action>
+
 </package>
 </struts>

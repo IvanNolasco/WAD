@@ -6,6 +6,7 @@ class Question {
     public String name;
     public String question;
     public String answer;
+    public Boolean check;
 
     public Question() {
     }
@@ -15,6 +16,7 @@ class Question {
         this.name = name;
         this.question = question;
         this.answer = answer;
+        this.check = false;
     }
 
     public void setId(String id) {
@@ -32,7 +34,11 @@ class Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-
+    
+    public void setCheck(Boolean check){
+        this.check = check;
+    }
+    
     public String getId() {
         return id;
     }
@@ -47,5 +53,9 @@ class Question {
 
     public String getAnswer() {
         return answer;
+    }
+    
+    public Boolean getCheck(){
+        return check;
     }
 }

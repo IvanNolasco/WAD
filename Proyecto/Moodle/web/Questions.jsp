@@ -37,6 +37,8 @@
     <div class="container">
         <h1 class='text-center'>Questions Creation</h1>
         <s:form action="CreateQuestion.jsp" theme="simple" cssClass="text-center">
+            
+            <s:select label="Select a question type" headerKey="-1" headerValue="Type" list="#{'1':'Jan', '2':'Feb', '3':'Mar', '4':'Apr'}" />;
             <s:submit theme="simple" cssClass="btn btn-dark" value="Create Question"/>
         </s:form>
         <table class="table table-striped table-borderless"> 
@@ -50,6 +52,9 @@
                     <s:property value="name"/>
                     <s:set var="idvar" value="id"/>
                     <jsp:useBean id="idvar" type="java.lang.String" />
+                </td>
+                <td>
+                    <s:property value="type"/>
                 </td>
                 <td>
                     <div class="btn-group btn-block" role="group" aria-label="Basic example">

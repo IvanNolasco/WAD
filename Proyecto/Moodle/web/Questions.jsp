@@ -37,13 +37,13 @@
     <div class="container">
         <h1 class='text-center'>Questions Creation</h1>
         <s:form action="CreateQuestion.jsp" theme="simple" cssClass="text-center">
-            
-            <s:select label="Select a question type" headerKey="-1" headerValue="Type" list="#{'1':'Jan', '2':'Feb', '3':'Mar', '4':'Apr'}" />;
-            <s:submit theme="simple" cssClass="btn btn-dark" value="Create Question"/>
+            <s:select label="Select a question type" id="selType" headerKey="-1" headerValue="Type" list="#{'1':'Fill in the blank', '2':'Partial Cretit'}" />
+            <s:submit theme="simple" cssClass="btn btn-dark" onclick="selectType()" value="Create Question"/>
         </s:form>
         <table class="table table-striped table-borderless"> 
             <tr>
                 <th>Questions</th>
+                <th>Type</th>
                 <th class="text-center">Actions</th>
             </tr>
             <s:iterator value="questions">
@@ -54,7 +54,10 @@
                     <jsp:useBean id="idvar" type="java.lang.String" />
                 </td>
                 <td>
-                    <s:property value="type"/>
+                    <s:if test="%{qtype=='fill'}">                     
+                        Fill in the blank
+                    </s:if>
+                    
                 </td>
                 <td>
                     <div class="btn-group btn-block" role="group" aria-label="Basic example">
@@ -85,6 +88,16 @@
                 } else {
                     
                 }
+            }
+            function selectType(){
+                var type = document.getElementById("selType").value;
+                if (type === '1') {
+                    location.href ="CreateQuestion.jsp";
+                }
+                else{
+                    location.href ="CreateQuestionP.jsp";
+                }
+                window.alert(type);
             }
         </script>
         

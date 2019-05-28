@@ -92,7 +92,7 @@
                         If you do not choose a new file, it will stay the original.
                     </div>
                 </div>
-               
+               <s:hidden name="qtype" id="qtype" value="Fill in the Black" />
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>
             </s:form>
         </div>

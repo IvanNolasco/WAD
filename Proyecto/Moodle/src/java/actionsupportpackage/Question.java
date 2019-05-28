@@ -3,6 +3,7 @@ package actionsupportpackage;
 class Question {
     
     public String id;
+    public String type;
     public String name;
     public String question;
     public String answer;
@@ -11,8 +12,9 @@ class Question {
     public Question() {
     }
 
-    public Question(String id, String name, String question, String answer) {
+    public Question(String id, String type, String name, String question, String answer) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.question = question;
         this.answer = answer;
@@ -21,6 +23,10 @@ class Question {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public void setType(String type){
+        this.type = type;
     }
 
     public void setName(String name) {
@@ -41,6 +47,10 @@ class Question {
     
     public String getId() {
         return id;
+    }
+    
+    public String getType(){
+        return type;
     }
 
     public String getName() {

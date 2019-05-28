@@ -16,6 +16,7 @@ import org.jdom2.input.SAXBuilder;
 public class ModifyQuestionActionSupport extends ActionSupport {
     
     public String id;
+    public String qtype;
     public String name;
     public String question;
     public String answer;
@@ -29,6 +30,14 @@ public class ModifyQuestionActionSupport extends ActionSupport {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public String getQtype(){
+        return qtype;
+    }
+    
+    public void setQtype(String qtype){
+        this.qtype = qtype;
     }
 
     public String getName() {
@@ -102,6 +111,7 @@ public class ModifyQuestionActionSupport extends ActionSupport {
                         Element question = (Element)questionsList.get(j);
                         String questionid = question.getAttributeValue("id");
                         if(questionid.equals(this.id)){
+                            this.qtype = question.getAttributeValue("qtype");
                             this.name = question.getAttributeValue("name");
                             this.question = question.getAttributeValue("question");
                             this.answer = question.getAttributeValue("answer");

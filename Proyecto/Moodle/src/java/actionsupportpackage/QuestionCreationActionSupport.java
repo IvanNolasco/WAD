@@ -47,11 +47,11 @@ public class QuestionCreationActionSupport extends ActionSupport {
                     for(int j=0;j<questionsList.size();j++){
                         Element question = (Element)questionsList.get(j);
                         String id = question.getAttributeValue("id");
-                        String type = question.getAttributeValue("type");
+                        String qtype = question.getAttributeValue("qtype");
                         String name = question.getAttributeValue("name");
                         String questionText = question.getAttributeValue("question");
                         String answer = question.getAttributeValue("answer");
-                        Question questionObject = new Question(id, type, name, questionText, answer);
+                        Question questionObject = new Question(id, qtype, name, questionText, answer);
                         questions.add(questionObject);
                     }
                     break;

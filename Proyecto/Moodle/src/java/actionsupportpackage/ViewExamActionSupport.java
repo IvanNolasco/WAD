@@ -72,10 +72,11 @@ public class ViewExamActionSupport extends ActionSupport {
                             Element questionQ = (Element) qQ;
                             if (questionQ.getAttributeValue("id").equals(questionE.getAttributeValue("id"))) {
                                 String id = questionQ.getAttributeValue("id");
+                                String type = questionQ.getAttributeValue("type");
                                 String name = questionQ.getAttributeValue("name");
                                 String questionText = questionQ.getAttributeValue("question");
                                 String answer = questionQ.getAttributeValue("answer");
-                                Question questionObject = new Question(id, name, questionText, answer);
+                                Question questionObject = new Question(id, type, name, questionText, answer);
                                 questions.add(questionObject);
                                 break;
                             }

@@ -100,10 +100,11 @@ public class ModifyExam extends ActionSupport {
                     for(int j=0;j<questionsList.size();j++){
                         Element question = (Element)questionsList.get(j);
                         String idQ = question.getAttributeValue("id");
+                        String qtype = question.getAttributeValue("qtype");
                         String name = question.getAttributeValue("name");
                         String questionText = question.getAttributeValue("question");
                         String answer = question.getAttributeValue("answer");
-                        Question questionObject = new Question(idQ, name, questionText, answer);
+                        Question questionObject = new Question(idQ, qtype, name, questionText, answer);
                         Integer idI = Integer.parseInt(idQ);
                         if(questionsExam.contains(idI)){
                             questionObject.setCheck("checked");

@@ -19,6 +19,7 @@ import org.jdom2.input.SAXBuilder;
 public class CreateQuestionActionSupport extends ActionSupport {
     
     public String id;
+    public String qtype;
     public String name;
     public String question;
     public String answer;
@@ -59,6 +60,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
                 if (teacher.getAttributeValue("username").equals(userName)) {
                     Element quest = new Element("question");
                     quest.setAttribute("id", id);
+                    quest.setAttribute("qtype", qtype);
                     quest.setAttribute("name", name);
                     quest.setAttribute("question", question);
                     quest.setAttribute("answer", answer);
@@ -115,6 +117,14 @@ public class CreateQuestionActionSupport extends ActionSupport {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public String getQtype(){
+        return qtype;
+    }
+    
+    public void setQtype(String qtype){
+        this.qtype = qtype;
     }
 
     public String getName() {

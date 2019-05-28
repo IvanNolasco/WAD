@@ -12,6 +12,8 @@ import org.jdom2.input.SAXBuilder;
 
 public class ViewQuestionActionSupport extends ActionSupport {
     private String id;
+    private String name;
+    private String qtype;
     private String question;
     private String answer;
     private String source;
@@ -50,6 +52,8 @@ public class ViewQuestionActionSupport extends ActionSupport {
                         Element questionE = (Element)questionsList.get(j);
                         String idQ = questionE.getAttributeValue("id");
                         if(idQ.equals(this.id)) {
+                            this.name = questionE.getAttributeValue("name");
+                            this.qtype = questionE.getAttributeValue("qtype");
                             this.question = questionE.getAttributeValue("question");
                             this.answer = questionE.getAttributeValue("answer");
                             this.source = questionE.getAttributeValue("source");

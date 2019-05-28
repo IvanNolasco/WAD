@@ -3,7 +3,7 @@ package actionsupportpackage;
 class Question {
     
     public String id;
-    public String type;
+    public String qtype;
     public String name;
     public String question;
     public String answer;
@@ -12,9 +12,9 @@ class Question {
     public Question() {
     }
 
-    public Question(String id, String type, String name, String question, String answer) {
+    public Question(String id, String qtype, String name, String question, String answer) {
         this.id = id;
-        this.type = type;
+        this.qtype = qtype;
         this.name = name;
         this.question = question;
         this.answer = answer;
@@ -25,8 +25,8 @@ class Question {
         this.id = id;
     }
     
-    public void setType(String type){
-        this.type = type;
+    public void setQtype(String qtype){
+        this.qtype = qtype;
     }
 
     public void setName(String name) {
@@ -49,8 +49,8 @@ class Question {
         return id;
     }
     
-    public String getType(){
-        return type;
+    public String getQtype(){
+        return qtype;
     }
 
     public String getName() {

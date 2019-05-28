@@ -20,6 +20,7 @@ import org.jdom2.output.XMLOutputter;
 public class ModifyQuestion2ActionSupport extends ActionSupport {
     
     public String id;
+    public String qtype;
     public String name;
     public String question;
     public String answer;
@@ -67,6 +68,7 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             //Se crea el nuevo elemento con la informacion modificada
             Element quest = new Element("question");
             quest.setAttribute("id", id);
+            quest.setAttribute("qtype", qtype);
             quest.setAttribute("name", name);
             quest.setAttribute("question", question);
             quest.setAttribute("answer", answer);
@@ -149,12 +151,20 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         return SUCCESS; 
     }
     
-        public String getId() {
+    public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public String getQtype(){
+        return qtype;
+    }
+    
+    public void setQtype(String qtype){
+        this.qtype = qtype;
     }
 
     public String getName() {

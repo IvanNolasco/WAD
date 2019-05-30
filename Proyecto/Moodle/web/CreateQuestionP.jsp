@@ -92,45 +92,31 @@
             });
             function addOption(){
                 var optList = document.getElementById("optionL");
-                if(max == null){
-                    var col = document.createElement("div");
-                    col.setAttribute("class","alert alert-danger m-3");
-                    col.setAttribute("role","alert");
-                    col.setAttribute("id","alert");
-                    var text = document.createTextNode("You must input a maximum number of options.");
-                    col.appendChild(text);
-                    optList.appendChild(col)
-                }
-                else if(optList.childElementCount/2 < max-1){
-                    if (document.getElementById("alert") != null)
-                        optList.removeChild(document.getElementById("alert"));
-                    var col = document.createElement("div");
-                    col.setAttribute("class","col-10 mt-2");
+                var col = document.createElement("div");
+                col.setAttribute("class","col-10 mt-2");
 
-                    var input = document.createElement("input");
-                    input.setAttribute("type","text");
-                    input.setAttribute("class","form-control");
-                    input.setAttribute("name","optionList["+i+"].text");
-                    input.setAttribute("placeholder","Option Answer");
+                var input = document.createElement("input");
+                input.setAttribute("type","text");
+                input.setAttribute("class","form-control");
+                input.setAttribute("name","optionList["+i+"].text");
+                input.setAttribute("placeholder","Option Answer");
 
-                    col.appendChild(input);
-                    optList.appendChild(col);
+                col.appendChild(input);
+                optList.appendChild(col);
 
-                    col = document.createElement("div");
-                    col.setAttribute("class","col-2 mt-2");
-                    input = document.createElement("input");
-                    input.setAttribute("type","number");
-                    input.setAttribute("class","form-control");
-                    input.setAttribute("name","optionList["+i+"].points");
-                    input.setAttribute("placeholder","Points");
-                    input.setAttribute("min","1");
-                    input.setAttribute("max","5");
+                col = document.createElement("div");
+                col.setAttribute("class","col-2 mt-2");
+                input = document.createElement("input");
+                input.setAttribute("type","number");
+                input.setAttribute("class","form-control");
+                input.setAttribute("name","optionList["+i+"].points");
+                input.setAttribute("placeholder","Points");
+                input.setAttribute("min","1");
+                input.setAttribute("max","5");
 
-                    col.appendChild(input);
-                    optList.appendChild(col);
-                    i ++;
-                }
-                
+                col.appendChild(input);
+                optList.appendChild(col);
+                i ++;               
             }
             function quitOption(){
                 var optList = document.getElementById("optionL");

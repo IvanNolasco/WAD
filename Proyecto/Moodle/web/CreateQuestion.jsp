@@ -47,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <s:label for="question" theme="simple" cssClass="form-label" value="Question:"/>
-                    <s:textfield name="question" id="question" theme="simple" cssClass="form-control" required="true" placeholder="Question Text"/>
+                    <s:textarea name="question" id="question" theme="simple" cssClass="form-control" required="true" placeholder="Question Text"/>
                 </div>
                 <div class="form-group">
                     <s:label for="answer" theme="simple" cssClass="form-label" value="Answer:"/>

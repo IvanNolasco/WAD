@@ -38,14 +38,7 @@
             <h1 class="text-center">Modify Question</h1>
             <s:form action="ModifyQuestion2"  method="post" enctype="multipart/form-data">
                 
-                <s:set var="idvar" value="id"/>
-                <jsp:useBean id="idvar" type="java.lang.String" />
-                <s:set var="namevar" value="name"/>
-                <jsp:useBean id="namevar" type="java.lang.String" />
-                <s:set var="questionvar" value="question"/>
-                <jsp:useBean id="questionvar" type="java.lang.String" />
-                <s:set var="answervar" value="answer"/>
-                <jsp:useBean id="answervar" type="java.lang.String" />
+                
                 <s:set var="sourcevar" value="mediaFileName"/>
                 <jsp:useBean id="sourcevar" type="java.lang.String" />
                 <s:set var="contentvar" value="mediaContentType"/>
@@ -53,35 +46,22 @@
                     
                 <div class="form-group">
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
-                    <%
-                        String id = idvar;
-                        out.print("<input type=\"text\" name=\"id\" id=\"id\" class=\"form-control\" required=\"true\" value=\""+id+"\" readonly/>");
-                    %>
+                    <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" value="%{id}" readonly="true"/>
                 </div>
                 <div class="form-group">
                     <s:label for="name" theme="simple" cssClass="form-label" value="Name:"/>
-                    <%
-                        String name = namevar;
-                        out.print("<input type=\"text\" name=\"name\" id=\"name\" class=\"form-control\" required=\"true\" value=\""+name+"\"/>");
-                    %>
+                    <s:textfield name="name" id="name" theme="simple" cssClass="form-control" required="true" value="%{name}"/>
                 </div>
                 <div class="form-group">
                     <s:label for="question" theme="simple" cssClass="form-label" value="Question:"/>
-                    <%
-                        String question = questionvar;
-                        out.print("<input type=\"text\" name=\"question\" id=\"question\" class=\"form-control\" required=\"true\" value=\""+question+"\"/>");
-                    %>
-                    
+                    <s:textfield name="question" id="question" theme="simple" cssClass="form-control" required="true" value="%{question}"/>
                 </div>
                 <div class="form-group">
                     <s:label for="answer" theme="simple" cssClass="form-label" value="Answer:"/>
+                    <s:textfield name="answer" id="answer" theme="simple" cssClass="form-control" required="true" value="%{answer}"/>
                     <%
-                        String answer = answervar;
-                        out.print("<input type=\"text\" name= \"answer\" id=\"answer\" class=\"form-control\" required=\"true\" value=\""+answer+"\"/>");
-                        String mediaFileName = sourcevar;
-                        out.print("<input type=\"text\" name= \"mediaFileName\" id=\"mediaFileName\" class=\"form-control\" required=\"true\" value=\""+mediaFileName+"\" style='display:none' />");
-                        String mediaContentType = contentvar;
-                        out.print("<input type=\"text\" name= \"mediaContentType\" id=\"mediaContentType\" class=\"form-control\" required=\"true\" value=\""+mediaContentType+"\" style='display:none' />");  
+                        out.print("<input type=\"text\" name= \"mediaFileName\" id=\"mediaFileName\" class=\"form-control\" required=\"true\" value=\""+sourcevar+"\" style='display:none' />");
+                        out.print("<input type=\"text\" name= \"mediaContentType\" id=\"mediaContentType\" class=\"form-control\" required=\"true\" value=\""+contentvar+"\" style='display:none' />");  
                     %>
                 </div>
                 <div class="form-group">

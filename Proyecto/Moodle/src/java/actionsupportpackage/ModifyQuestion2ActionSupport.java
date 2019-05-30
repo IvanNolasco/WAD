@@ -92,15 +92,13 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
                     //Se consigue la pregunta que coincida con el id
                     for (Object qu : questions) {
                         Element question = (Element)qu;
-                        System.out.println(question.getAttributeValue("id")+","+id);
                         if (question.getAttributeValue("id").equals(id)) {
-                            System.out.println("entró aqui x2");
                             if (sobre == 1) {
                                 //al encontrarse la pregunta se elimina el multimedia antiguo asociado a esa pregunta
                                 File file = new File(path+question.getAttributeValue("source"));
-                                System.out.println(file.delete());
+                                file.delete();
                             }
-                            System.out.println(questions.remove(qu));
+                            questions.remove(qu);
                         }
                     }
                     teacher.addContent(quest);

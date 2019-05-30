@@ -4,14 +4,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <title>Questions</title>
     </head>
-    <body>
+    
         <header class="encabezado">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -34,13 +33,21 @@
                </nav>
             </div>
          </header>
-    <div class="container">
+    
         <h1 class='text-center'>Questions Creation</h1>
-        <s:form action="CreateQuestion.jsp" theme="simple" cssClass="text-center">
-            <s:select label="Select a question type" id="selType" headerKey="-1" headerValue="Type" list="#{'1':'Fill in the blank', '2':'Partial Cretit'}" />
-            <s:submit theme="simple" cssClass="btn btn-dark" onclick="selectType()" value="Create Question"/>
+        <s:form theme="simple" cssClass="text-center container">
+            <div class="form-group text-left">
+                <label for="selType" class="form-label" >Question type:</label>
+                <select class="custom-select" id="selType">
+                    <option selected>Select a question type</option>
+                    <option value="1">Fill in the Blank</option>
+                    <option value="2">Partial Credit</option>
+                </select>
+            </div>
+               
+            <button type="button" class="btn btn-primary" onclick="selectType()">Create Question</button>
         </s:form>
-        <table class="table table-striped table-borderless"> 
+        <table class="table table-striped table-borderless container"> 
             <tr>
                 <th>Questions</th>
                 <th>Type</th>
@@ -79,14 +86,12 @@
             </s:iterator>        
         </table>
         
-    </div>
+    
         
         <script type="text/javascript">
             function confirmar(id){
                 if (confirm("Do you really want to delete this question?")) {
                     location.href ="DeleteQuestion.action?id="+id;
-                } else {
-                    
                 }
             }
             function selectType(){
@@ -97,9 +102,8 @@
                 else{
                     location.href ="CreateQuestionP.jsp";
                 }
-                window.alert(type);
             }
         </script>
         
-    </body>
+    
 </html>

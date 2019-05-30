@@ -4,14 +4,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <title>Feedback Question</title>
     </head>
     <body>
         <header class="encabezado">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -47,32 +46,32 @@
                         String id = idvar;
                         out.print("<input type='text' name='id' id='id' class='form-control' required='true' value='"+id+"' readonly/>");
                     %>
-                    </div> 
+                    </div>
                 <div class="form-group">
-                    <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>
-                    <s:textfield name="tries" id="tries" theme="simple" cssClass="form-control" required="true" />
+                    <label class="form-label" >Tries:</label>
+                    <input type="number" class="form-control" name="tries" id="tries" required placeholder="Question Tries" min="1"/>
                 </div>
                 <div class="form-group">
                     <s:label for="initial" theme="simple" cssClass="form-label" value="Initial Feedback:"/>
-                    <s:textfield name="initial" id="initial" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="initial" id="initial" theme="simple" cssClass="form-control" required="true" placeholder="Initial Feedback" />
                 </div>
                 <div class="form-group">
                     <s:label for="evaluate" theme="simple" cssClass="form-label" value="Evaluate Feedback:"/>
-                    <s:textfield name="evaluate" id="evaluate" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="evaluate" id="evaluate" theme="simple" cssClass="form-control" required="true" placeholder="Evaluate Feedback"/>
                 </div>
                 <div class="form-group">
                     <s:label for="correct" theme="simple" cssClass="form-label" value="Correct Feedback:"/>
-                    <s:textfield name="correct" id="correct" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="correct" id="correct" theme="simple" cssClass="form-control" required="true" placeholder="Correct Feedback"/>
                 </div>
                 <div class="form-group">
                     <s:label for="incorrect" theme="simple" cssClass="form-label" value="Incorrect Feedback:"/>
-                    <s:textfield name="incorrect" id="incorrect" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="incorrect" id="incorrect" theme="simple" cssClass="form-control" required="true" placeholder="Incorrect Feedback"/>
                 </div>
                 <div class="form-group">
                     <s:label for="triesFB" theme="simple" cssClass="form-label" value="Tries Feedback:"/>
-                    <s:textfield name="triesFB" id="triesFB" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="triesFB" id="triesFB" theme="simple" cssClass="form-control" required="true"placeholder="Tries Feedback" />
                 </div>
-                <s:submit value="Save Question" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>
+                <s:submit value="Save Question" theme="simple" cssClass="btn btn-block btn-primary mb-2"/>
             </s:form>
         </div>
     </body>

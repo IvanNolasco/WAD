@@ -5,14 +5,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <title>Create Question</title>
     </head>
     <body>
         <header class="encabezado">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -36,30 +35,33 @@
             </div>
          </header>
         <div class="container">
-            <h1 class="text-center">Create a New Question</h1>
+            <h1 class="text-center">Create a New Fill in the blank Question</h1>
             <s:form action="CreateQuestion"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
-                    <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" />
+                    <label for="id" class="form-label">ID:</label>
+                    <input type="number" class="form-control" name="id" id="id" required placeholder="Question ID" min="1"/>
                 </div>
                 <div class="form-group">
                     <s:label for="name" theme="simple" cssClass="form-label" value="Name:"/>
-                    <s:textfield name="name" id="name" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="name" id="name" theme="simple" cssClass="form-control" required="true" placeholder="Question Name"/>
                 </div>
                 <div class="form-group">
                     <s:label for="question" theme="simple" cssClass="form-label" value="Question:"/>
-                    <s:textfield name="question" id="question" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="question" id="question" theme="simple" cssClass="form-control" required="true" placeholder="Question Text"/>
                 </div>
                 <div class="form-group">
                     <s:label for="answer" theme="simple" cssClass="form-label" value="Answer:"/>
-                    <s:textfield name="answer" id="answer" theme="simple" cssClass="form-control" required="true" />
+                    <s:textfield name="answer" id="answer" theme="simple" cssClass="form-control" required="true" placeholder="Question Answer"/>
                 </div>
                 <div class="form-group">
-                     <s:label for="media" theme="simple" cssClass="form-label" value="Media File:"/>
-                     <s:file name="media" id="media" theme="simple" cssClass="form-control-file" required="true" accept="image/jpeg,image/jpg,image/png,audio/mp3,audio/mpeg,video/mpeg,video/mp4"/>
+                    <label class="for-label" >Media File:</label>
+                    <div class="custom-file">
+                        <label for="media" class="custom-file-label">Choose a file</label>
+                        <input type="file" name="media" id="media" class="custom-file-input" required accept="image/*,audio/*,video/*"/>
+                    </div>
                 </div>
-                     <s:hidden name="qtype" id="qtype" value="Fill in the Black" />
-                <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-dark mb-2"/>
+                     <s:hidden name="qtype" id="qtype" value="fill" />
+                <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-primary mb-2"/>
             </s:form>
         </div>
         

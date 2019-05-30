@@ -4,14 +4,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <title>View Question</title>
     </head>
     <body>
         <header class="encabezado">
             <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -50,12 +49,12 @@
                 <div class="col">
                     <form  method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="ans" theme="simple" cssClass="form-label">Your answer:</label>
+                            <label for="ans" class="form-label">Your answer:</label>
                             <textarea name='ans' id='ans' class='form-control'></textarea>
                         </div>
                         <div id="feed">
                         </div>
-                        <input type="button" id="send" value="Send answer" onclick="eval()"  class="btn btn-block btn-dark mb-2"/>
+                        <input type="button" id="send" value="Send answer" onclick="eval()"  class="btn btn-block btn-primary mb-2"/>
                         <div class="alert alert-warning" role="alert">
                             <s:property value="evaluate" />
                         </div> 

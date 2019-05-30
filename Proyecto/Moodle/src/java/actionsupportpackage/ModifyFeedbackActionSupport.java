@@ -28,7 +28,7 @@ public class ModifyFeedbackActionSupport extends ActionSupport {
     }
     
     public String execute() throws Exception {
-        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("username");
+        String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try{
@@ -39,16 +39,16 @@ public class ModifyFeedbackActionSupport extends ActionSupport {
             List teachersList = root.getChildren("teacher");
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
-                String username = teacher.getAttributeValue("username");  
-                if(username.equals(userName)){
+                String username = teacher.getAttributeValue("username");
+                if(username.equals(userName)){                   
                     List feedbackList = teacher.getChildren("feedback");
                     for(int j=0;j<feedbackList.size();j++){
                         Element feedback = (Element)feedbackList.get(j);
                         String feedbackid = feedback.getAttributeValue("id");
-                        System.out.println(this.id);
                         if(feedbackid.equals(this.id)){
                             feedbackList.remove(j);
                             feedback.setAttribute("id",this.id);
+                            
                             feedback.setAttribute("tries", tries);
                             feedback.setAttribute("initial", initial);
                             feedback.setAttribute("evaluate", evaluate);

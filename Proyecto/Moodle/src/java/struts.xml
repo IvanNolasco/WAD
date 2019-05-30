@@ -32,11 +32,11 @@
 </action>
 
 <action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 
-<result name="success">SuccessQuestion.jsp</result>
+<result name="success" type="redirectAction">QuestionCreation</result>
 </action>
 
 <action name="DeleteQuestion" method="execute" class="actionsupportpackage.DeleteQuestionActionSupport"> 
-<result name="success">SuccessDelete.jsp</result>
+<result name="success" type="redirectAction">QuestionCreation</result>
 </action>
 
 <action name="ModifyQuestion" method="execute" class="actionsupportpackage.ModifyQuestionActionSupport"> 
@@ -48,7 +48,7 @@
 </action>
 
 <action name="ModifyFeedback" method="execute" class="actionsupportpackage.ModifyFeedbackActionSupport"> 
-<result name="success">ModifySuccess.jsp</result>
+<result name="success" type="redirectAction">QuestionCreation</result>
 </action>
 
 <action name="ViewQuestion" method="execute" class="actionsupportpackage.ViewQuestionActionSupport"> 

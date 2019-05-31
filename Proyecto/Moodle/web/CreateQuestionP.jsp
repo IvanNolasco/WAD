@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" >Maximum number of options:</label>
-                    <input type="number" class="form-control" name="maxQuant" id="maxQuant" required="true" placeholder="Amount" min="2"/>
+                    <input type="number" class="form-control" name="maxQuant" id="maxQuant" required="true" placeholder="Amount" min="1"/>
                 </div>
                 <div class="form-group">
                     <label class="for-label" >Media File:</label>
@@ -70,9 +70,15 @@
                         <div class="col-2">
                             <input type="number" class="form-control" name="optionList[0].points" placeholder="Points" min="1" max="5" />
                         </div>
+                        <div class="col-10 mt-2">
+                            <input type="text" class="form-control" name="optionList[1].text" placeholder="Option Answer"/> 
+                        </div>
+                        <div class="col-2 mt-2">
+                            <input type="number" class="form-control" name="optionList[1].points" placeholder="Points" min="1" max="5" />
+                        </div>
                     </div>
-                    <input type="button" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
-                    <input type="button" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />
+                    <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
+                    <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />
                 </div>               
                 <s:hidden name="qtype" id="qtype" value="partial" />
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-primary"/>
@@ -80,10 +86,18 @@
         </div>
         <script src="js/jquery-3.4.1.min.js"></script>
         <script>
-            var i = 1;
+            var i = 2;
             var max;
-            $("#maxQuant").change(function (){
-               max = document.getElementById("maxQuant").value;
+            $("#addBtn").click(function (){
+                var optList = document.getElementById("optionL");
+                document.getElementById("maxQuant").setAttribute("max",optList.childElementCount / 2-1);
+            });
+            $("#quitBtn").click(function (){
+                var optList = document.getElementById("optionL");
+                var maxQuant = document.getElementById("maxQuant");
+                maxQuant.setAttribute("max",optList.childElementCount / 2-1);
+                if (maxQuant.value > maxQuant.getAttribute("max"))
+                    maxQuant.value = maxQuant.getAttribute("max");
             });
             // Add the following code if you want the name of the file appear on select
             $(".custom-file-input").on("change", function () {
@@ -120,9 +134,11 @@
             }
             function quitOption(){
                 var optList = document.getElementById("optionL");
-                optList.removeChild(optList.lastChild);
-                optList.removeChild(optList.lastChild);
-                i--;
+                if (optList.childElementCount/2 > 2) {
+                    optList.removeChild(optList.lastChild);
+                    optList.removeChild(optList.lastChild);
+                    i--;
+                }
             }
         </script>
     </body>

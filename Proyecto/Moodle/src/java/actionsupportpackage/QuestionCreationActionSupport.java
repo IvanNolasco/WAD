@@ -10,27 +10,24 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 public class QuestionCreationActionSupport extends ActionSupport {
-    
-    public QuestionCreationActionSupport() {
-    }
-    
-    private List<Question> questions; 
+    private List<Question> questions;
+    private String questionsJSON;
 
-    public List<Question> getQuestions() {  
-        return questions;  
-    } 
-    
-    public void setQuestions(List<Question> questions) {  
-        this.questions = questions;  
-    } 
+    public String getQuestionsJSON() {
+        return questionsJSON;
+    }
+
+    public void setQuestionsJSON(String questionsJSON) {
+        this.questionsJSON = questionsJSON;
+    }
     
     @Override
     public String execute() throws IOException {
         //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
-        questions = new ArrayList<Question>(); 
         //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try {
@@ -39,6 +36,7 @@ public class QuestionCreationActionSupport extends ActionSupport {
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            JSONArray list = new JSONArray();
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
@@ -51,13 +49,18 @@ public class QuestionCreationActionSupport extends ActionSupport {
                         String name = question.getAttributeValue("name");
                         String questionText = question.getAttributeValue("question");
                         String answer = question.getAttributeValue("answer");
-                        Question questionObject = new Question(id, qtype, name, questionText, answer);
-                        questions.add(questionObject);
+                        JSONObject obj = new JSONObject();
+                        obj.put("id", id);
+                        obj.put("qtype", qtype);
+                        obj.put("name", name);
+                        obj.put("questionText", questionText);
+                        obj.put("answer", answer);
+                        list.add(obj);
                     }
                     break;
                 }
             }
-             
+            questionsJSON = list.toJSONString();
         }
         catch(JDOMException e) {
             e.printStackTrace();

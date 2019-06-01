@@ -8,7 +8,7 @@ import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
 
 public class LoginActionSupport extends ActionSupport {
- String userName,password;
+ private String userName,password;
  int tipo;
  Session hibernateSession;
  Login login;
@@ -39,15 +39,9 @@ public class LoginActionSupport extends ActionSupport {
      return "student";
  }
  }
- public String getPassword() {
- return password;
- }
- public void setPassword(String password) {
- this.password = password;
- }
- public String getUserName() {
- return userName;
- }
+    public void setPassword(String password) {
+        this.password = password;
+    }
  public void setUserName(String userName) {
  this.userName = userName;
  }

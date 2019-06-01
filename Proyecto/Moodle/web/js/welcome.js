@@ -1,13 +1,11 @@
 import Form from './Components.js';
-import { Header, Titulo } from './Components.js';
-
+import { Header, Titulo, Welcome } from './Components.js';
 function App() {
   return React.createElement(
     'div',
     { className: 'App' },
-    React.createElement(Header, null),
-    React.createElement(Titulo, { title: 'Login' }),
-    React.createElement(Form, null)
+    React.createElement(Header, { user: user }),
+    React.createElement(Welcome, { user: user })
   );
 }
 

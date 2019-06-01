@@ -12,11 +12,10 @@
         <div id="root"></div>
        
         <!-- Cargar React. -->
-        <!-- Nota: cuando se despliegue, reemplazar "development.js" con "production.min.js". -->
         <script src="js/react.min.js" crossorigin></script>
         <script src="js/react-dom.min.js" crossorigin></script>
         <!-- Cargamos nuestro componente de React. -->
         <script type="module" src="js/app.js"></script>
-        <script type="module" src="js/Login.js"></script>
+        <script type="module" src="js/Components.js"></script>
     </body>
 </html>

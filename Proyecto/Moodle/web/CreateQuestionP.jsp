@@ -21,10 +21,10 @@
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                         <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                           <li class="nav-item active"> 
-                            <a class="nav-link" href="QuestionCreation.action">Questions</a>
+                            <a class="nav-link" href="QuestionCreation">Questions</a>
                           </li>
                           <li class="nav-item active">
-                            <a class="nav-link" href="ExamCreation.action">Exams</a>
+                            <a class="nav-link" href="ExamCreation">Exams</a>
                           </li>
                         </ul>
                       </div>

@@ -1,5 +1,5 @@
-import Form from './Components.js';
-import { Header, Titulo, TableObj } from './Components.js';
+import Titulo from './Components.js';
+import { Header, TableObj } from './Components.js';
 
 function App() {
     return React.createElement(
@@ -43,12 +43,6 @@ function App() {
         ),
         React.createElement(TableObj, null)
     );
-}
-
-function confirmar(id) {
-    if (confirm("Do you really want to delete this question?")) {
-        location.href = "DeleteQuestion.action?id=" + id;
-    }
 }
 function selectType() {
     var type = document.getElementById("selType").value;

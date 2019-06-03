@@ -13,7 +13,6 @@ import org.jdom2.input.SAXBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 public class QuestionCreationActionSupport extends ActionSupport {
-    private List<Question> questions;
     private String questionsJSON;
 
     public String getQuestionsJSON() {
@@ -47,14 +46,11 @@ public class QuestionCreationActionSupport extends ActionSupport {
                         String id = question.getAttributeValue("id");
                         String qtype = question.getAttributeValue("qtype");
                         String name = question.getAttributeValue("name");
-                        String questionText = question.getAttributeValue("question");
-                        String answer = question.getAttributeValue("answer");
                         JSONObject obj = new JSONObject();
                         obj.put("id", id);
                         obj.put("qtype", qtype);
                         obj.put("name", name);
-                        obj.put("questionText", questionText);
-                        obj.put("answer", answer);
+
                         list.add(obj);
                     }
                     break;

@@ -1,5 +1,5 @@
-import Form from './Components.js';
-import { Header, Titulo, Welcome } from './Components.js';
+import Titulo from './Components.js';
+import { Header, Welcome } from './Components.js';
 function App() {
   return React.createElement(
     'div',

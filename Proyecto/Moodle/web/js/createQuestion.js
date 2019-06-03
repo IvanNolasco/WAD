@@ -1,13 +1,13 @@
 import Titulo from './Components.js';
-import { Header, Login } from './Components.js';
+import { Header, FormQuestion } from './Components.js';
 
 function App() {
   return React.createElement(
     'div',
     { className: 'App' },
-    React.createElement(Header, null),
-    React.createElement(Titulo, { title: 'Login' }),
-    React.createElement(Login, null)
+    React.createElement(Header, { user: user }),
+    React.createElement(Titulo, { title: 'Create a New Fill in the blank Question' }),
+    React.createElement(FormQuestion, null)
   );
 }
 

@@ -335,27 +335,26 @@ var FormQuestion = function (_React$Component7) {
     return FormQuestion;
 }(React.Component);
 
-var Question = function (_React$Component8) {
-    _inherits(Question, _React$Component8);
+var QuestionP = function (_React$Component8) {
+    _inherits(QuestionP, _React$Component8);
 
-    function Question() {
+    function QuestionP() {
         var _ref2;
 
         var _temp2, _this9, _ret2;
 
-        _classCallCheck(this, Question);
+        _classCallCheck(this, QuestionP);
 
         for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
             args[_key2] = arguments[_key2];
         }
 
-        return _ret2 = (_temp2 = (_this9 = _possibleConstructorReturn(this, (_ref2 = Question.__proto__ || Object.getPrototypeOf(Question)).call.apply(_ref2, [this].concat(args))), _this9), _this9.state = {
-            answer: "",
+        return _ret2 = (_temp2 = (_this9 = _possibleConstructorReturn(this, (_ref2 = QuestionP.__proto__ || Object.getPrototypeOf(QuestionP)).call.apply(_ref2, [this].concat(args))), _this9), _this9.state = {
             id: "",
-            media: null,
             name: "",
             qtype: "",
-            question: ""
+            question: "",
+            max: ""
         }, _this9.handleChange = function (e) {
             var target = e.target;
             var value = target.type === 'file' ? target.files[0] : target.value;
@@ -368,14 +367,104 @@ var Question = function (_React$Component8) {
         }, _temp2), _possibleConstructorReturn(_this9, _ret2);
     }
 
-    _createClass(Question, [{
+    _createClass(QuestionP, [{
         key: "render",
         value: function render() {
             var _React$createElement;
 
             return React.createElement(
                 "form",
-                (_React$createElement = { onSubmit: this.handleSubmit, method: "POST", id: "formQ", className: "container text-left" }, _defineProperty(_React$createElement, "id", "formQ"), _defineProperty(_React$createElement, "enctype", "multipart/form-data"), _React$createElement),
+                (_React$createElement = { onSubmit: this.handleSubmit, method: "POST", id: "formQP", className: "container text-left" }, _defineProperty(_React$createElement, "id", "formQP"), _defineProperty(_React$createElement, "enctype", "multipart/form-data"), _React$createElement),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Question ID",
+                    text: "ID",
+                    title: "id",
+                    type: "number",
+                    value: this.state.id
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Question Name",
+                    text: "Name",
+                    title: "name",
+                    type: "text",
+                    value: this.state.name
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Question Text",
+                    text: "Question",
+                    title: "question",
+                    type: "textarea",
+                    value: this.state.question
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Choose a media file",
+                    text: "Media File",
+                    title: "media",
+                    type: "file"
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Amount",
+                    text: "Maximum number of options",
+                    title: "max",
+                    type: "number"
+                }),
+                React.createElement("input", { type: "hidden", name: "qtype", value: "partial", id: "qtype" }),
+                React.createElement("input", { type: "submit", value: "Next", className: "btn btn-block btn-primary mb-2" })
+            );
+        }
+    }]);
+
+    return QuestionP;
+}(React.Component);
+
+;
+
+var Question = function (_React$Component9) {
+    _inherits(Question, _React$Component9);
+
+    function Question() {
+        var _ref3;
+
+        var _temp3, _this10, _ret3;
+
+        _classCallCheck(this, Question);
+
+        for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+            args[_key3] = arguments[_key3];
+        }
+
+        return _ret3 = (_temp3 = (_this10 = _possibleConstructorReturn(this, (_ref3 = Question.__proto__ || Object.getPrototypeOf(Question)).call.apply(_ref3, [this].concat(args))), _this10), _this10.state = {
+            answer: "",
+            id: "",
+            media: null,
+            name: "",
+            qtype: "",
+            question: ""
+        }, _this10.handleChange = function (e) {
+            var target = e.target;
+            var value = target.type === 'file' ? target.files[0] : target.value;
+            var name = target.name;
+            _this10.setState(_defineProperty({}, name, value));
+        }, _this10.handleSubmit = function (event) {
+            event.preventDefault();
+            var data = new FormData(event.target);
+            _this10.props.vista(data);
+        }, _temp3), _possibleConstructorReturn(_this10, _ret3);
+    }
+
+    _createClass(Question, [{
+        key: "render",
+        value: function render() {
+            var _React$createElement2;
+
+            return React.createElement(
+                "form",
+                (_React$createElement2 = { onSubmit: this.handleSubmit, method: "POST", id: "formQ", className: "container text-left" }, _defineProperty(_React$createElement2, "id", "formQ"), _defineProperty(_React$createElement2, "enctype", "multipart/form-data"), _React$createElement2),
                 React.createElement(FormGroup, {
                     onChange: this.handleChange,
                     ph: "Question ID",
@@ -426,44 +515,44 @@ var Question = function (_React$Component8) {
 
 ;
 
-var Feedback = function (_React$Component9) {
-    _inherits(Feedback, _React$Component9);
+var Feedback = function (_React$Component10) {
+    _inherits(Feedback, _React$Component10);
 
     function Feedback() {
-        var _ref3;
+        var _ref4;
 
-        var _temp3, _this10, _ret3;
+        var _temp4, _this11, _ret4;
 
         _classCallCheck(this, Feedback);
 
-        for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-            args[_key3] = arguments[_key3];
+        for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+            args[_key4] = arguments[_key4];
         }
 
-        return _ret3 = (_temp3 = (_this10 = _possibleConstructorReturn(this, (_ref3 = Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call.apply(_ref3, [this].concat(args))), _this10), _this10.state = {
-            id: _this10.props.id,
+        return _ret4 = (_temp4 = (_this11 = _possibleConstructorReturn(this, (_ref4 = Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call.apply(_ref4, [this].concat(args))), _this11), _this11.state = {
+            id: _this11.props.id,
             tries: "",
             initial: "",
             evaluate: "",
             correct: "",
             incorrect: "",
             triesFB: ""
-        }, _this10.handleChange = function (e) {
+        }, _this11.handleChange = function (e) {
             var target = e.target;
             var name = target.name;
-            _this10.setState(_defineProperty({}, name, target.value));
-        }, _temp3), _possibleConstructorReturn(_this10, _ret3);
+            _this11.setState(_defineProperty({}, name, target.value));
+        }, _temp4), _possibleConstructorReturn(_this11, _ret4);
     }
 
     _createClass(Feedback, [{
         key: "render",
         value: function render() {
-            var _React$createElement2;
+            var _React$createElement3;
 
             console.log(this.props.id);
             return React.createElement(
                 "form",
-                (_React$createElement2 = { action: "FeedbackQuestion", method: "POST", id: "formQ", className: "container text-left" }, _defineProperty(_React$createElement2, "id", "formQ"), _defineProperty(_React$createElement2, "enctype", "multipart/form-data"), _React$createElement2),
+                (_React$createElement3 = { action: "FeedbackQuestion", method: "POST", id: "formQ", className: "container text-left" }, _defineProperty(_React$createElement3, "id", "formQ"), _defineProperty(_React$createElement3, "enctype", "multipart/form-data"), _React$createElement3),
                 React.createElement(FormGroup, {
                     onChange: this.handleChange,
                     ph: "Question ID",
@@ -531,29 +620,116 @@ var Feedback = function (_React$Component9) {
 
 ;
 
-var Login = function (_React$Component10) {
-    _inherits(Login, _React$Component10);
+var FeedbackP = function (_React$Component11) {
+    _inherits(FeedbackP, _React$Component11);
+
+    function FeedbackP() {
+        var _ref5;
+
+        var _temp5, _this12, _ret5;
+
+        _classCallCheck(this, FeedbackP);
+
+        for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+            args[_key5] = arguments[_key5];
+        }
+
+        return _ret5 = (_temp5 = (_this12 = _possibleConstructorReturn(this, (_ref5 = FeedbackP.__proto__ || Object.getPrototypeOf(FeedbackP)).call.apply(_ref5, [this].concat(args))), _this12), _this12.state = {
+            id: _this12.props.id,
+            initial: "",
+            evaluate: "",
+            correct: "",
+            incorrect: ""
+        }, _this12.handleChange = function (e) {
+            var target = e.target;
+            var name = target.name;
+            _this12.setState(_defineProperty({}, name, target.value));
+        }, _temp5), _possibleConstructorReturn(_this12, _ret5);
+    }
+
+    _createClass(FeedbackP, [{
+        key: "render",
+        value: function render() {
+            var _React$createElement4;
+
+            console.log(this.props.id);
+            return React.createElement(
+                "form",
+                (_React$createElement4 = { action: "FeedbackQuestionP", method: "POST", id: "formQP", className: "container text-left" }, _defineProperty(_React$createElement4, "id", "formQP"), _defineProperty(_React$createElement4, "enctype", "multipart/form-data"), _React$createElement4),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Question ID",
+                    readonly: true,
+                    text: "ID",
+                    title: "id",
+                    type: "number",
+                    value: this.state.id
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Initial Feedback",
+                    text: "Initial Feedback",
+                    title: "initial",
+                    type: "text",
+                    value: this.state.initial
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Evaluate Feedback",
+                    text: "Evaluate Feedback",
+                    title: "evaluate",
+                    type: "text",
+                    value: this.state.evaluate
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Correct Feedback",
+                    text: "Correct Feedback",
+                    title: "correct",
+                    type: "text",
+                    value: this.state.correct
+                }),
+                React.createElement(FormGroup, {
+                    onChange: this.handleChange,
+                    ph: "Incorrect Feedback",
+                    text: "Incorrect Feedback",
+                    title: "incorrect",
+                    type: "text",
+                    value: this.state.incorrect
+                }),
+                React.createElement("input", { type: "submit", value: "Next", className: "btn btn-block btn-primary mb-2" })
+            );
+        }
+    }]);
+
+    return FeedbackP;
+}(React.Component);
+
+;
+
+var Login = function (_React$Component12) {
+    _inherits(Login, _React$Component12);
 
     function Login() {
-        var _ref4;
+        var _ref6;
 
-        var _temp4, _this11, _ret4;
+        var _temp6, _this13, _ret6;
 
         _classCallCheck(this, Login);
 
-        for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-            args[_key4] = arguments[_key4];
+        for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+            args[_key6] = arguments[_key6];
         }
 
-        return _ret4 = (_temp4 = (_this11 = _possibleConstructorReturn(this, (_ref4 = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref4, [this].concat(args))), _this11), _this11.state = {
+        return _ret6 = (_temp6 = (_this13 = _possibleConstructorReturn(this, (_ref6 = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref6, [this].concat(args))), _this13), _this13.state = {
             userName: "",
             password: ""
-        }, _this11.handleChange = function (e) {
+        }, _this13.handleChange = function (e) {
             var target = e.target;
             var name = target.name;
             console.log(target.name);
-            _this11.setState(_defineProperty({}, name, e.target.value));
-        }, _temp4), _possibleConstructorReturn(_this11, _ret4);
+            _this13.setState(_defineProperty({}, name, e.target.value));
+        }, _temp6), _possibleConstructorReturn(_this13, _ret6);
     }
 
     _createClass(Login, [{
@@ -588,8 +764,8 @@ var Login = function (_React$Component10) {
 
 ;
 
-var Header = function (_React$Component11) {
-    _inherits(Header, _React$Component11);
+var Header = function (_React$Component13) {
+    _inherits(Header, _React$Component13);
 
     function Header() {
         _classCallCheck(this, Header);
@@ -616,8 +792,8 @@ Header.defaultProps = {
     user: null
 };
 
-var HeaderNotLogged = function (_React$Component12) {
-    _inherits(HeaderNotLogged, _React$Component12);
+var HeaderNotLogged = function (_React$Component14) {
+    _inherits(HeaderNotLogged, _React$Component14);
 
     function HeaderNotLogged() {
         _classCallCheck(this, HeaderNotLogged);
@@ -653,8 +829,8 @@ var HeaderNotLogged = function (_React$Component12) {
 
 ;
 
-var HeaderLogged = function (_React$Component13) {
-    _inherits(HeaderLogged, _React$Component13);
+var HeaderLogged = function (_React$Component15) {
+    _inherits(HeaderLogged, _React$Component15);
 
     function HeaderLogged() {
         _classCallCheck(this, HeaderLogged);
@@ -771,4 +947,4 @@ function changeF() {
 }
 
 export default Titulo;
-export { FormQuestion, Header, Login, TableObj, Welcome };
+export { FormQuestion, Header, Login, TableObj, Welcome, FeedbackP };

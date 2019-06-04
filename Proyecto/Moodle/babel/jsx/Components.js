@@ -178,6 +178,76 @@ class FormQuestion extends React.Component{
     }
 }
 
+
+class QuestionP extends React.Component{
+    state = {
+        id: "",
+        name: "",
+        qtype: "",
+        question: "",
+        max: ""
+    }
+    
+    handleChange = (e) => {
+        const target = e.target;
+        const value = target.type === 'file' ? target.files[0] : target.value;
+        const name = target.name;
+        this.setState({[name]: value});
+    }
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        this.props.vista(data);
+    }
+     render(){
+        return(
+            <form onSubmit={this.handleSubmit} method="POST" id="formQP" className="container text-left" id="formQP" enctype="multipart/form-data">
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Question ID" 
+                    text="ID" 
+                    title="id" 
+                    type ="number" 
+                    value={this.state.id} 
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Question Name" 
+                    text="Name" 
+                    title="name" 
+                    type="text" 
+                    value={this.state.name} 
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Question Text" 
+                    text="Question" 
+                    title="question" 
+                    type="textarea" 
+                    value={this.state.question} 
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Choose a media file" 
+                    text="Media File" 
+                    title="media" 
+                    type="file" 
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Amount" 
+                    text="Maximum number of options" 
+                    title="max"  
+                    type ="number" 
+                />
+                <input type="hidden" name="qtype" value="partial" id="qtype" />
+                <input type="submit" value="Next" className="btn btn-block btn-primary mb-2"/>
+            </form>
+        );
+    }
+};
+
+
 class Question extends React.Component{
     state = {
         answer: "",
@@ -329,6 +399,70 @@ class Feedback extends React.Component{
     }
 };
 
+class FeedbackP extends React.Component{
+    state = {
+        id: this.props.id,
+        initial: "",
+        evaluate: "",
+        correct: "",
+        incorrect: ""
+    }
+    handleChange = (e) => {
+        const target = e.target;
+        const name = target.name;
+        this.setState({[name]: target.value});
+    }
+    render(){
+        console.log(this.props.id);
+        return(
+            <form action="FeedbackQuestionP" method="POST" id="formQP" className="container text-left" id="formQP" enctype="multipart/form-data">
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Question ID"
+                    readonly={true} 
+                    text="ID" 
+                    title="id" 
+                    type ="number" 
+                    value={this.state.id}
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Initial Feedback" 
+                    text="Initial Feedback" 
+                    title="initial" 
+                    type="text" 
+                    value={this.state.initial} 
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Evaluate Feedback" 
+                    text="Evaluate Feedback" 
+                    title="evaluate" 
+                    type="text" 
+                    value={this.state.evaluate} 
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Correct Feedback" 
+                    text="Correct Feedback" 
+                    title="correct" 
+                    type="text" 
+                    value={this.state.correct} 
+                />
+                <FormGroup 
+                    onChange={this.handleChange}
+                    ph="Incorrect Feedback" 
+                    text="Incorrect Feedback" 
+                    title="incorrect" 
+                    type="text" 
+                    value={this.state.incorrect} 
+                />
+                <input type="submit" value="Next" className="btn btn-block btn-primary mb-2"/>
+            </form>
+        );
+    }
+};
+
 class Login extends React.Component{
     state = {
         userName: "",
@@ -448,6 +582,7 @@ export {
     Header,
     Login, 
     TableObj,
-    Welcome
+    Welcome,
+    FeedbackP
 };
 

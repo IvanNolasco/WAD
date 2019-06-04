@@ -10,15 +10,17 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 public class ViewExamActionSupport extends ActionSupport {
     private List<Question> questions;
-    private String nameE;
+    private String id;
 
-    public String getNameE() {
-        return nameE;
+    public String getId() {
+        return id;
     }
 
-    public void setNameE(String nameE) {
-        this.nameE = nameE;
+    public void setId(String id) {
+        this.id = id;
     }
+
+   
     
     public List<Question> getQuestions() {
         return questions;
@@ -49,7 +51,7 @@ public class ViewExamActionSupport extends ActionSupport {
                     for (Object e : examList) {
                         Element exam = (Element)e;
                         String name = exam.getAttributeValue("name");
-                        if (name.equals(nameE)){
+                        if (name.equals(id)){
                             questionList = exam.getChildren("question");
                             break;
                         }

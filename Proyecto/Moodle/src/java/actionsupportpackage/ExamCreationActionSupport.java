@@ -8,8 +8,12 @@ import org.apache.struts2.ServletActionContext;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
 public class ExamCreationActionSupport extends ActionSupport {
-     private List<String> exams; 
+    private List<String> exams;
+    private String examsJSON;
     public ExamCreationActionSupport() {
     }
 
@@ -19,6 +23,14 @@ public class ExamCreationActionSupport extends ActionSupport {
 
     public void setExams(List<String> exams) {
         this.exams = exams;
+    }
+
+    public String getExamsJSON() {
+        return examsJSON;
+    }
+
+    public void setExamsJSON(String examsJSON) {
+        this.examsJSON = examsJSON;
     }
     
     public String execute() throws Exception {
@@ -33,6 +45,7 @@ public class ExamCreationActionSupport extends ActionSupport {
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            JSONArray list = new JSONArray();
             for (Object t : teachersList) {
                 Element teacher = (Element)t;
                 String username = teacher.getAttributeValue("username");
@@ -40,11 +53,15 @@ public class ExamCreationActionSupport extends ActionSupport {
                     List examList = teacher.getChildren("exam");
                     for (Object e : examList) {
                         Element exam = (Element)e;
+                        JSONObject obj = new JSONObject();
+                        obj.put("name", exam.getAttributeValue("name"));
                         exams.add(exam.getAttributeValue("name"));
+                        list.add(obj);
                     }
                     break;
                 }
             }
+            examsJSON = list.toJSONString();
         } catch (Exception e) {
             e.printStackTrace();
         }

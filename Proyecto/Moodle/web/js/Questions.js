@@ -2,6 +2,7 @@ import Titulo from './Components.js';
 import { Header, TableObj } from './Components.js';
 
 function App() {
+    var encabezado = ["Questions", "Type", "Actions"];
     return React.createElement(
         'div',
         { className: 'App' },
@@ -41,7 +42,7 @@ function App() {
                 'Create Question'
             )
         ),
-        React.createElement(TableObj, null)
+        React.createElement(TableObj, { header: encabezado, list: questions })
     );
 }
 function selectType() {

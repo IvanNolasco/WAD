@@ -20,9 +20,8 @@
 </action>
 
 <action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport">
-    <result name="success">FeedbackQuestion.jsp</result>
+    <result name="success">CreateQuestion.jsp</result>
     <result name="IDExistent">IDExistent.jsp</result>
-    <result name="input">WelcomeAdmin.jsp</result>
 </action>
 
 <action name="FeedbackQuestion" method="execute" class="actionsupportpackage.FeedbackQuestionActionSupport"> 
@@ -71,6 +70,10 @@
 
 <action name="ModifyExam" method="execute" class="actionsupportpackage.ModifyExam"> 
 <result name="success">ModifyExam.jsp</result>
+</action>
+
+<action name="ModifyExam2" method="execute" class="actionsupportpackage.ModifyExam2ActionSupport"> 
+<result name="success" type="redirectAction">ExamCreation</result>
 </action>
 
 <action name="CreateQuestionP" method="execute" class="actionsupportpackage.CreateQuestionPActionSupport"> 

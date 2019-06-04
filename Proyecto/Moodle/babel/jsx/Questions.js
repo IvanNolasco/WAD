@@ -2,23 +2,24 @@ import Titulo from './Components.js';
 import {Header, TableObj} from './Components.js';
 
 function App() {
-  return (
-    <div className="App">
-        <Header user={user} />
-        <Titulo title="Questions Creation"/>
-        <div className="container text-center">
-            <div className="form-group text-left">
-                <label for="selType" className="form-label" >Question type:</label>
-                <select className="custom-select" id="selType">
-                    <option value="1">Fill in the Blank</option>
-                    <option value="2">Partial Credit</option>
-                </select>
+    const encabezado = ["Questions","Type", "Actions"];
+    return (
+        <div className="App">
+            <Header user={user} />
+            <Titulo title="Questions Creation"/>
+            <div className="container text-center">
+                <div className="form-group text-left">
+                    <label for="selType" className="form-label" >Question type:</label>
+                    <select className="custom-select" id="selType">
+                        <option value="1">Fill in the Blank</option>
+                        <option value="2">Partial Credit</option>
+                    </select>
+                </div>
+                <button type="button" className="btn btn-primary" onClick={() => selectType() } >Create Question</button>
             </div>
-            <button type="button" className="btn btn-primary" onClick={() => selectType() } >Create Question</button>
+            <TableObj header={encabezado} list={questions} />
         </div>
-      <TableObj />
-    </div>
-  );      
+    );      
 }
 function selectType(){
     var type = document.getElementById("selType").value;

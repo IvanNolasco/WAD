@@ -3,7 +3,6 @@ package actionsupportpackage;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.jdom2.Document;

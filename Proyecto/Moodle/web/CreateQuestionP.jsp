@@ -51,7 +51,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" >Maximum number of options:</label>
-                    <input type="number" class="form-control" name="maxQuant" id="maxQuant" required="true" placeholder="Amount" min="1"/>
+                    <input type="number" class="form-control" name="maxQuant" id="maxQuant" required="true" placeholder="Amount" min="1" max="1"/>
                 </div>
                 <div class="form-group">
                     <label class="for-label" >Media File:</label>

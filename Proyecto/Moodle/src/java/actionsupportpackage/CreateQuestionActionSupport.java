@@ -4,9 +4,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.net.URL;
 import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.jdom2.output.Format;
@@ -76,7 +74,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
             FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");
             xmloutputter.output(documento, writer);
             writer.close();
-
             return SUCCESS;
         }
         catch(JDOMException e){
@@ -86,65 +83,29 @@ public class CreateQuestionActionSupport extends ActionSupport {
         return "fail";
         
     }
-    
-    public File getMedia() {
-		return media;
-	}
 
-	public void setMedia(File media) {
-		this.media = media;
-	}
+    public void setMedia(File media) {
+            this.media = media;
+    }
 
-	public String getMediaContentType() {
-		return mediaContentType;
-	}
+    public void setMediaContentType(String mediaContentType) {
+            this.mediaContentType = mediaContentType;
+    }
 
-	public void setMediaContentType(String mediaContentType) {
-		this.mediaContentType = mediaContentType;
-	}
-
-	public String getMediaFileName() {
-		return mediaFileName;
-	}
-
-	public void setMediaFileName(String mediaFileName) {
-		this.mediaFileName = mediaFileName;
-	}
-
-    public String getId() {
-        return id;
+    public void setMediaFileName(String mediaFileName) {
+            this.mediaFileName = mediaFileName;
     }
 
     public void setId(String id) {
         this.id = id;
     }
     
-    public String getQtype(){
-        return qtype;
-    }
-    
     public void setQtype(String qtype){
         this.qtype = qtype;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
     public void setQuestion(String question) {
         this.question = question;
-    }
-
-    public String getAnswer() {
-        return answer;
     }
 
     public void setAnswer(String answer) {

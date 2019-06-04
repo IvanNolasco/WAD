@@ -21,14 +21,14 @@ import org.jdom2.output.XMLOutputter;
  * @author luis_
  */
 public class DeleteExamActionSupport extends ActionSupport {
-    public String name;
+    public String id;
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
     
     public String execute() throws Exception {
@@ -48,7 +48,7 @@ public class DeleteExamActionSupport extends ActionSupport {
                     List examList = teacher.getChildren("exam");
                     for (Object e : examList) {
                         Element exam = (Element)e;
-                        if (exam.getAttributeValue("name").equals(name)) {
+                        if (exam.getAttributeValue("name").equals(id)) {
                             examList.remove(e);
                             break;
                         }

@@ -1,7 +1,6 @@
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
+<DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,7 +35,7 @@
          </header>
         <div class="container">
             <h1 class="text-center">Create a New Partial Credit Question</h1>
-            <s:form action="CreateQuestion"  method="post" enctype="multipart/form-data">
+            <s:form action="CreateQuestionP"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
                     <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" placeholder="Question ID"/>

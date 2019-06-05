@@ -10,12 +10,15 @@ package actionsupportpackage;
  * @author luis_
  */
 public class Option {
-    private String text;
-    private int points;
+    private String text = "default";
+    private int points = 0;
 
     public Option(String text, int points) {
         this.text = text;
         this.points = points;
+    }
+
+    public Option() {
     }
 
     public int getPoints() {
@@ -32,5 +35,10 @@ public class Option {
 
     public void setText(String text) {
         this.text = text;
+    }
+    
+    @Override
+    public String toString(){
+        return "text:" + this.text + " points: " + String.valueOf(this.points);
     }
 }

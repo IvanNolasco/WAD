@@ -10,7 +10,7 @@ function App() {
             <div className="container text-center">
                 <button type="button" className="btn btn-primary" onClick={() => location.href ='CreateExam.action'} >Create Exam</button>
             </div>
-            <TableObj header={encabezado} list={exams} />
+            <TableObj header={encabezado} list={exams} actions={true}/>
         </div>
         
     );

@@ -19,7 +19,7 @@ function App() {
                 'Create Exam'
             )
         ),
-        React.createElement(TableObj, { header: encabezado, list: exams })
+        React.createElement(TableObj, { header: encabezado, list: exams, actions: true })
     );
 }
 

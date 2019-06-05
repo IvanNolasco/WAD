@@ -35,6 +35,7 @@ class Actions extends React.Component{
 class TableObj extends React.Component{   
     render() {
         const {
+            actions,
             header,
             list
         } = this.props;
@@ -54,11 +55,12 @@ class TableObj extends React.Component{
                         const listElement = type < 0 
                             ? Object.values(elem).reverse() 
                             : Object.values(elem).reverse().slice(1);
+                        const a = actions
+                            ? <Actions {...(type < 0 ? { type: "Exam", param: elem.name } : { type: "Question", param: elem.id })} />
+                            : null;
                         return (
                             <Row element={listElement} key={elem.id}>
-                                <Actions 
-                                    {...(type < 0 ? { type: "Exam", param: elem.name } : { type: "Question", param: elem.id })} 
-                                ></Actions>
+                               {a}
                             </Row>
                         );
                     })

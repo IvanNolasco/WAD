@@ -42,7 +42,7 @@ function App() {
                 'Create Question'
             )
         ),
-        React.createElement(TableObj, { header: encabezado, list: questions })
+        React.createElement(TableObj, { header: encabezado, list: questions, actions: true })
     );
 }
 function selectType() {

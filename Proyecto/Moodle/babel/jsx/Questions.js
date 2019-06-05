@@ -17,7 +17,7 @@ function App() {
                 </div>
                 <button type="button" className="btn btn-primary" onClick={() => selectType() } >Create Question</button>
             </div>
-            <TableObj header={encabezado} list={questions} />
+            <TableObj header={encabezado} list={questions} actions={true} />
         </div>
     );      
 }

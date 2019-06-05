@@ -79,7 +79,7 @@
                             <div class="col-2">
                                 <input type="number" class="form-control" name="optionList[0].points" placeholder="Points" min="1" max="5" value="%{points}"/>
                             </div>
-                    </s:iterator>
+                        </s:iterator>
                     </div>
                     <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
                     <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />

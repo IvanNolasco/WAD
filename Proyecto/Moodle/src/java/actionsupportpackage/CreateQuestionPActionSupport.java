@@ -68,8 +68,6 @@ public class CreateQuestionPActionSupport extends ActionSupport {
                 Element teacher = (Element)l;
                 if (teacher.getAttributeValue("username").equals(userName)) {
                     Element quest = new Element("question");
-                    System.out.println("##############################################################################################");
-                    System.out.println("TAMAÑO DE optionList: " + optionList.size());
                     quest.setAttribute("id", id);
                     quest.setAttribute("qtype", qtype);
                     quest.setAttribute("name", name);

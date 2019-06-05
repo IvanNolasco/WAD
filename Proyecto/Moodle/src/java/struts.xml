@@ -77,12 +77,8 @@
 </action>
 
 <action name="CreateQuestionP" method="execute" class="actionsupportpackage.CreateQuestionPActionSupport"> 
-<result name="success" type="redirectAction">CreateFeedbackP.jsp</result>
+<result name="success">CreateFeedbackP.jsp</result>
 </action>
-
-
-
-
 
 </package>
 </struts>

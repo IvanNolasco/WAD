@@ -10,8 +10,8 @@ package actionsupportpackage;
  * @author luis_
  */
 public class Option {
-    private String text = "default";
-    private int points = 0;
+    private String text;
+    private int points;
 
     public Option(String text, int points) {
         this.text = text;

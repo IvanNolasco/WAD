@@ -37,8 +37,6 @@
         <div class="container">
             <h1 class="text-center">Modify Question</h1>
             <s:form action="ModifyQuestion2"  method="post" enctype="multipart/form-data">
-                
-                
                 <s:set var="sourcevar" value="mediaFileName"/>
                 <jsp:useBean id="sourcevar" type="java.lang.String" />
                 <s:set var="contentvar" value="mediaContentType"/>

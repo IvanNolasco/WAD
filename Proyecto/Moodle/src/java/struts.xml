@@ -80,5 +80,9 @@
 <result name="success">CreateFeedbackP.jsp</result>
 </action>
 
+<action name="CreateFeedbackP" method="execute" class="actionsupportpackage.CreateFeedbackPActionSupport"> 
+<result name="success" type="redirectAction">QuestionCreation</result>
+</action>
+
 </package>
 </struts>

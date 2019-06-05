@@ -89,7 +89,7 @@
 </action>
 
 <action name="ModifyFeedbackP" method="execute" class="actionsupportpackage.ModifyFeedbackPActionSupport"> 
-<result name="success" type="redirectAction">QuestionCreation</result>
+<result name="success">CreateFeedbackP.jsp</result>
 </action>
 
 </package>

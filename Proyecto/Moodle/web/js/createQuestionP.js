@@ -7,7 +7,7 @@ function App() {
     { className: 'App' },
     React.createElement(Header, { user: user }),
     React.createElement(Titulo, { title: 'Create a New Partial Credit Question' }),
-    React.createElement(FeedbackP, null)
+    React.createElement(FeedbackP, { initial: 'initial' })
   );
 }
 

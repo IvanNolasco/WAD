@@ -132,7 +132,6 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
                             this.mediaFileName = question.getAttributeValue("source");
                             this.mediaContentType = question.getAttributeValue("type");
                             List options = question.getChildren("option");
-                            System.out.println(">>>>>>>>>>>>>>>>>" + options.size());
                             for(int k=0; k<options.size(); k++){
                                 Element optionE = (Element) options.get(k);
                                 String auxText = optionE.getAttributeValue("text");
@@ -150,14 +149,12 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
 
                 }
             }
-            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
              
         }
         catch(JDOMException e) {
-            System.out.println("#################################");
             e.printStackTrace();
         }
-        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        
         return SUCCESS;
     }
     

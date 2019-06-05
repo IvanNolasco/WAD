@@ -42,7 +42,7 @@
             <s:set var="contentvar" value="mediaContentType"/>
             <jsp:useBean id="contentvar" type="java.lang.String" />
             
-            <s:form action="ModifyQuestion"  method="post" enctype="multipart/form-data">
+            <s:form action="ModifyQuestionP"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
                     <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" placeholder="Question ID" value="%{id}" readonly="true"/>

@@ -8,6 +8,7 @@ package actionsupportpackage;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.jdom2.Document;
@@ -107,6 +108,7 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String path = ServletActionContext.getServletContext().getRealPath("/");
+        optionList = new ArrayList<>();
         try {
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");
@@ -130,12 +132,17 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
                             this.mediaFileName = question.getAttributeValue("source");
                             this.mediaContentType = question.getAttributeValue("type");
                             List options = question.getChildren("option");
+                            System.out.println(">>>>>>>>>>>>>>>>>" + options.size());
                             for(int k=0; k<options.size(); k++){
                                 Element optionE = (Element) options.get(k);
                                 String auxText = optionE.getAttributeValue("text");
                                 int auxPoints = Integer.parseInt(optionE.getAttributeValue("points"));
                                 Option o = new Option(auxText, auxPoints);
+                                System.out.println(o.toString());
                                 this.optionList.add(o);
+                            }
+                            for (Option option : optionList) {
+                                System.out.println(option.toString());
                             }
                             break;
                         }
@@ -143,12 +150,14 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
 
                 }
             }
+            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
              
         }
         catch(JDOMException e) {
+            System.out.println("#################################");
             e.printStackTrace();
         }
-        
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         return SUCCESS;
     }
     

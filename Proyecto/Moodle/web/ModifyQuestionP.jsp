@@ -72,13 +72,14 @@
                 <div class="form-group">
                     <label class="form-label" >Options:</label>
                     <div class="row" id="optionL">
-                        <s:iterator value="optionList" />
+                        <s:iterator value="optionList" >
                             <div class="col-10">
                                 <input type="text" class="form-control" name="optionList[0].text" placeholder="Option Answer" value="%{optionList.text}"/> 
                             </div>
                             <div class="col-2">
                                 <input type="number" class="form-control" name="optionList[0].points" placeholder="Points" min="1" max="5" value="%{optionList.points}"/>
                             </div>
+                        </s:iterator>
                     </div>
                     <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
                     <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />

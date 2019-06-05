@@ -55,6 +55,7 @@ class TableObj extends React.Component{
                         const listElement = type < 0 
                             ? Object.values(elem).reverse() 
                             : Object.values(elem).reverse().slice(1);
+
                         const a = actions
                             ? <Actions {...(type < 0 ? { type: "Exam", param: elem.name } : { type: "Question", param: elem.id })} />
                             : null;

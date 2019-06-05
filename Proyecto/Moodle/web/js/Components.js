@@ -145,7 +145,8 @@ var TableObj = function (_React$Component3) {
                     list.map(function (elem) {
                         var type = Object.keys(elem).indexOf("id");
                         var listElement = type < 0 ? Object.values(elem).reverse() : Object.values(elem).reverse().slice(1);
-                        var a = actions ? React.createElement(Actions, type < 0 ? { type: "Exam", param: elem.name } : { type: "Question", param: elem.id }) : null;
+                        var qtype = qtype = elem["qtype"] === "fill" ? "Question" : "QuestionP";
+                        var a = actions ? React.createElement(Actions, type < 0 ? { type: "Exam", param: elem.name } : { type: qtype, param: elem.id }) : null;
                         return React.createElement(
                             Row,
                             { element: listElement, key: elem.id },

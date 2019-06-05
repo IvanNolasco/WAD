@@ -30,7 +30,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try{           
@@ -68,7 +67,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
                     break;
                 }
             }
-            //AGREGA EL USUARIO AL ELEMENTO RAIZ
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
             FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");

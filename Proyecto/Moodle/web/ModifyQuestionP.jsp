@@ -45,19 +45,19 @@
             <s:form action="ModifyQuestion"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
-                    <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" placeholder="Question ID" value="{$id}" readonly="true"/>
+                    <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" placeholder="Question ID" value="%{id}" readonly="true"/>
                 </div>
                 <div class="form-group">
                     <s:label for="name" theme="simple" cssClass="form-label" value="Name:"/>
-                    <s:textfield name="name" id="name" theme="simple" cssClass="form-control" required="true" placeholder="Question Name" value="{$name}" />
+                    <s:textfield name="name" id="name" theme="simple" cssClass="form-control" required="true" placeholder="Question Name" value="%{name}" />
                 </div>
                 <div class="form-group">
                     <s:label for="question" theme="simple" cssClass="form-label" value="Question:"/>
-                    <s:textarea name="question" id="question" theme="simple" cssClass="form-control" required="true" placeholder="Question Text" value="{$question}" />
+                    <s:textarea name="question" id="question" theme="simple" cssClass="form-control" required="true" placeholder="Question Text" value="%{question}" />
                 </div>
                 <div class="form-group">
                     <label class="form-label" >Maximum number of options:</label>
-                    <input type="number" class="form-control" name="maxQuant" id="maxQuant" required="true" placeholder="Amount" min="1" max="1" value="{$maxQuant}" />
+                    <input type="number" class="form-control" name="maxQuant" id="maxQuant" required="true" placeholder="Amount" min="1" max="1" value="%{maxQuant}" />
                 </div>
                 <div class="form-group">
                     <label class="for-label" >Media File:</label>
@@ -74,10 +74,10 @@
                     <div class="row" id="optionL">
                         <s:iterator value="optionList" />
                             <div class="col-10">
-                                <input type="text" class="form-control" name="optionList[0].text" placeholder="Option Answer" value="{$optionList.text}"/> 
+                                <input type="text" class="form-control" name="optionList[0].text" placeholder="Option Answer" value="%{optionList.text}"/> 
                             </div>
                             <div class="col-2">
-                                <input type="number" class="form-control" name="optionList[0].points" placeholder="Points" min="1" max="5" value="{$optionList.points}"/>
+                                <input type="number" class="form-control" name="optionList[0].points" placeholder="Points" min="1" max="5" value="%{optionList.points}"/>
                             </div>
                     </div>
                     <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />

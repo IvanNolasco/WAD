@@ -18,6 +18,9 @@ public class Option {
         this.points = points;
     }
 
+    public Option() {
+    }
+
     public int getPoints() {
         return points;
     }

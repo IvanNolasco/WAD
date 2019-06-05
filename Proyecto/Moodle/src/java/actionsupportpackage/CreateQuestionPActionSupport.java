@@ -24,11 +24,7 @@ import org.jdom2.output.XMLOutputter;
  *
  * @author navi_
  */
-public class CreateQuestionPActionSupport extends ActionSupport {
-    
-    public CreateQuestionPActionSupport() {
-    }
-    
+public class CreateQuestionPActionSupport extends ActionSupport {    
     private String id;
     private String qtype;
     private String name;
@@ -43,6 +39,11 @@ public class CreateQuestionPActionSupport extends ActionSupport {
     public String execute() throws Exception {
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
+        
+        for (Option option : optionList) {
+            System.out.println("Option:"+option);
+        }
+        
         try{           
             //se define la ruta para escribir el archivo multimedia 
             File salida = new File(pathString+"media/"+mediaFileName);

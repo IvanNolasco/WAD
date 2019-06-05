@@ -657,11 +657,11 @@ var FeedbackP = function (_React$Component11) {
             console.log(this.props.id);
             return React.createElement(
                 "form",
-                (_React$createElement4 = { action: "FeedbackQuestionP", method: "POST", id: "formQP", className: "container text-left" }, _defineProperty(_React$createElement4, "id", "formQP"), _defineProperty(_React$createElement4, "enctype", "multipart/form-data"), _React$createElement4),
+                (_React$createElement4 = { action: "CreateFeedbackP", method: "POST", id: "formQP", className: "container text-left" }, _defineProperty(_React$createElement4, "id", "formQP"), _defineProperty(_React$createElement4, "enctype", "multipart/form-data"), _React$createElement4),
                 React.createElement(FormGroup, {
                     onChange: this.handleChange,
                     ph: "Question ID",
-                    readonly: true,
+                    readonly: false,
                     text: "ID",
                     title: "id",
                     type: "number",

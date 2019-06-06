@@ -9,7 +9,9 @@
         <title>Create Feedback</title>
     </head>
     <body>
-        <div id="root"></div>       
+        <div id="root"></div> 
+        <s:set var="idvar" value="id"/>
+        <jsp:useBean id="idvar" type="java.lang.String" />
         <!-- Cargar React. -->
         <script src="js/react.min.js" crossorigin></script>
         <script src="js/react-dom.min.js" crossorigin></script>
@@ -17,6 +19,7 @@
         <script type="module" src="js/Components.js"></script>
         <script>
             var user = "<%=(String)session.getAttribute("userName")%>";
+            var id = "<%= idvar %>";
         </script>
     </body>
 </html>

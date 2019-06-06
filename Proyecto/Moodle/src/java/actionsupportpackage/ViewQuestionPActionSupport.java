@@ -16,7 +16,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
-public class ModifyQuestionPActionSupport extends ActionSupport {
+public class ViewQuestionPActionSupport extends ActionSupport {
     
     private String id;
     private String qtype;
@@ -27,6 +27,10 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
     private File media;
     private String mediaContentType;
     private String mediaFileName;
+    private String initial;
+    private String evaluate;
+    private String correct;
+    private String incorrect;
 
     public String getId() {
         return id;
@@ -35,12 +39,12 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
     public void setId(String id) {
         this.id = id;
     }
-    
-    public String getQtype(){
+
+    public String getQtype() {
         return qtype;
     }
-    
-    public void setQtype(String qtype){
+
+    public void setQtype(String qtype) {
         this.qtype = qtype;
     }
 
@@ -59,7 +63,7 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
     public void setQuestion(String question) {
         this.question = question;
     }
-    
+
     public List<Option> getOptionList() {
         return optionList;
     }
@@ -99,11 +103,42 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
     public void setMediaFileName(String mediaFileName) {
         this.mediaFileName = mediaFileName;
     }
-    
-    public ModifyQuestionPActionSupport() {
+
+    public String getInitial() {
+        return initial;
+    }
+
+    public void setInitial(String initial) {
+        this.initial = initial;
+    }
+
+    public String getEvaluate() {
+        return evaluate;
+    }
+
+    public void setEvaluate(String evaluate) {
+        this.evaluate = evaluate;
+    }
+
+    public String getCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(String correct) {
+        this.correct = correct;
+    }
+
+    public String getIncorrect() {
+        return incorrect;
+    }
+
+    public void setIncorrect(String incorrect) {
+        this.incorrect = incorrect;
     }
     
-    @Override
+    public ViewQuestionPActionSupport() {
+    }
+    
     public String execute() throws Exception {
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         String path = ServletActionContext.getServletContext().getRealPath("/");
@@ -139,6 +174,36 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
                                 System.out.println(o.toString());
                                 this.optionList.add(o);
                             }
+                            break;
+                        }
+                    }
+                }
+            }
+             
+        }
+        catch(JDOMException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            File xmlFile = new File(path+"\\xmls\\Questions.xml");
+            Document document = builder.build(xmlFile);
+            Element root = document.getRootElement();
+            List teachersList = root.getChildren("teacher");
+            for(int i=0;i<teachersList.size();i++) {
+                Element teacher = (Element)teachersList.get(i);
+                String username = teacher.getAttributeValue("username");  
+                if(username.equals(userName)){
+                    List feedbacksList = teacher.getChildren("feedback");
+                    for(int j=0;j<feedbacksList.size();j++){
+                        Element feedback = (Element)feedbacksList.get(j);
+                        String feedbackid = feedback.getAttributeValue("id");
+                        if(feedbackid.equals(this.id)){
+                            this.correct = feedback.getAttributeValue("correct");
+                            this.incorrect = feedback.getAttributeValue("incorrect");
+                            this.initial = feedback.getAttributeValue("initial");
+                            this.evaluate = feedback.getAttributeValue("evaluate");
                             break;
                         }
                     }

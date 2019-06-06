@@ -338,7 +338,6 @@ class Feedback extends React.Component{
         this.setState({[name]: target.value});
     }
     render(){
-        console.log(this.props.id);
         return(
             <form action="FeedbackQuestion" method="POST" id="formQ" className="container text-left" id="formQ" enctype="multipart/form-data">
                 <FormGroup 
@@ -420,7 +419,7 @@ class FeedbackP extends React.Component{
     render(){
         console.log(this.props.id);
         return(
-            <form action="FeedbackQuestionP" method="POST" id="formQP" className="container text-left" id="formQP" enctype="multipart/form-data">
+            <form action="CreateFeedbackP" method="POST" id="formQP" className="container text-left" id="formQP" enctype="multipart/form-data">
                 <FormGroup 
                     onChange={this.handleChange}
                     ph="Question ID"

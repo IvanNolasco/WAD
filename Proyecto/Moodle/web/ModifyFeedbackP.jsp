@@ -36,10 +36,10 @@
          </header>
         <div class="container">
             <h1 class="text-center">Modify Feedback</h1>
-            <s:form action="ModifyFeedbackP"  method="post" enctype="multipart/form-data">        
+            <s:form action="ModifyFeedbackP"  method="post" enctype="multipart/form-data"> 
                 <div class="form-group">
-                    <s:label for="tries" theme="simple" cssClass="form-label" value="Tries:"/>
-                    <s:textfield type="number" name="tries" id="tries" theme="simple" cssClass="form-control" required="true" min="1" value="%{tries}"/>
+                    <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
+                    <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" value="%{id}" readonly="true"/>
                 </div>
                 <div class="form-group">
                 <s:label for="initial" theme="simple" cssClass="form-label" value="Initial Feedback:"/>

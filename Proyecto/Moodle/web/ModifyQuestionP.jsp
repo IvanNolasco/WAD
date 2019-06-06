@@ -1,3 +1,5 @@
+<%@page import="actionsupportpackage.Option"%>
+<%@page import="java.util.ArrayList"%>
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -44,7 +46,7 @@
             <s:set var="maxvar" value="maxQuant"/>
             <jsp:useBean id="maxvar" type="java.lang.String" />
             
-            <s:form action="ModifyQuestionP"  method="post" enctype="multipart/form-data">
+            <s:form action="ModifyQuestion2P"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <s:label for="id" theme="simple" cssClass="form-label" value="ID:"/>
                     <s:textfield name="id" id="id" theme="simple" cssClass="form-control" required="true" placeholder="Question ID" value="%{id}" readonly="true"/>
@@ -58,17 +60,20 @@
                     <s:textarea name="question" id="question" theme="simple" cssClass="form-control" required="true" placeholder="Question Text" value="%{question}" />
                 </div>
                 <div class="form-group">
+                    <s:set var="optionsvar" value="optionList"/>
+                    <jsp:useBean id="optionsvar" type="java.util.ArrayList" />
                     <label class="form-label" >Maximum number of options:</label>
                     <%
-                        int m = Integer.parseInt(maxvar);
-                        out.println("<input type='number' class='form-control' id='maxQuant' required='true' placeholder='Amount' min='1' max='1' value='"+m+"'/>");
+                        ArrayList<Option> op = optionsvar;
+                        String m = maxvar;
+                        out.println("<input type='number' class='form-control' id='maxQuant' name='maxQuant' required='true' placeholder='Amount' min='1' max='"+(op.size()-1)+"' value='"+m+"'/>");
                     %>
                  </div>
                 <div class="form-group">
                     <label class="for-label" >Media File:</label>
                     <div class="custom-file">
                         <label for="media" class="custom-file-label">Choose a file</label>
-                        <input type="file" name="media" id="media" class="custom-file-input" required="true" accept="image/*,audio/*,video/*"/>
+                        <input type="file" name="media" id="media" class="custom-file-input" accept="image/*,audio/*,video/*"/>
                     </div>
                     <div class="alert alert-warning" role="alert">
                         If you do not choose a new file, it will stay the original.
@@ -77,8 +82,8 @@
                 <div class="form-group">
                     <label class="form-label" >Options:</label>
                     <div class="row" id="optionL">
-                        <%! 
-                            int i=0;
+                        <%
+                            int j=0;
                         %>
                         <s:iterator value="optionList" var="option">
                             <s:set var="textvar" value="text"/>
@@ -87,15 +92,19 @@
                             <jsp:useBean id="pointsvar" type="java.lang.Integer" />
                             <div class="col-10">
                                 <%
+                                    int n=j;
                                     String text=textvar;
-                                    out.println("<input type='text' class='form-control' name='optionList["+i+"].text' placeholder='Option Answer' value='"+text+"'/> ");
+                                    out.println("<input type='text' class='form-control' name='optionList["+n+"].text' placeholder='Option Answer' value='"+text+"'/> ");
                                 %>
                             </div>
                             <div class="col-2">
                                 <%
-                                    int points=pointsvar;
-                                    out.println("<input type='number' class='form-control' name='optionList["+i+"].points' placeholder='Points' min='1' max='5' value='"+points+"'/>");
-                                    i++;
+                                    String points=pointsvar.toString();
+                                    out.println("<input type='number' class='form-control' name='optionList["+n+"].points' placeholder='Points' min='1' max='5' value='"+points+"'/>");
+                                    j++;
+                                    System.out.println(j);
+                                    out.print("<input type=\"text\" name= \"mediaFileName\" id=\"mediaFileName\" class=\"form-control\" required=\"true\" value=\""+sourcevar+"\" style='display:none' />");
+                                    out.print("<input type=\"text\" name= \"mediaContentType\" id=\"mediaContentType\" class=\"form-control\" required=\"true\" value=\""+contentvar+"\" style='display:none' />");  
                                 %>
                              </div>
                         </s:iterator>
@@ -109,8 +118,9 @@
         </div>
         <script src="js/jquery-3.4.1.min.js"></script>
         <script>
-            var i = 2;
-            var max;
+            
+            var options = document.getElementById("optionL");
+            var i = options.childElementCount/2;
             $("#addBtn").click(function (){
                 var optList = document.getElementById("optionL");
                 document.getElementById("maxQuant").setAttribute("max",optList.childElementCount / 2-1);

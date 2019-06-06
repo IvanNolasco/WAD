@@ -84,5 +84,13 @@
 <result name="success" type="redirectAction">QuestionCreation</result>
 </action>
 
+<action name="ModifyQuestionP" method="execute" class="actionsupportpackage.ModifyQuestionPActionSupport"> 
+<result name="success">ModifyQuestionP.jsp</result>
+</action>
+
+<action name="ModifyQuestion2P" method="execute" class="actionsupportpackage.ModifyQuestion2PActionSupport"> 
+<result name="success">ModifyFeedbackP.jsp</result>
+</action>
+
 </package>
 </struts>

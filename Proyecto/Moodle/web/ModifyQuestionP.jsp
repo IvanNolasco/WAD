@@ -41,6 +41,8 @@
             <jsp:useBean id="sourcevar" type="java.lang.String" />
             <s:set var="contentvar" value="mediaContentType"/>
             <jsp:useBean id="contentvar" type="java.lang.String" />
+            <s:set var="maxvar" value="maxQuant"/>
+            <jsp:useBean id="maxvar" type="java.lang.String" />
             
             <s:form action="ModifyQuestionP"  method="post" enctype="multipart/form-data">
                 <div class="form-group">
@@ -57,8 +59,11 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" >Maximum number of options:</label>
-                    <input type="number" class="form-control" name="maxQuant" id="maxQuant" required="true" placeholder="Amount" min="1" max="1" value="%{maxQuant}" />
-                </div>
+                    <%
+                        int m = Integer.parseInt(maxvar);
+                        out.println("<input type='number' class='form-control' id='maxQuant' required='true' placeholder='Amount' min='1' max='1' value='"+m+"'/>");
+                    %>
+                 </div>
                 <div class="form-group">
                     <label class="for-label" >Media File:</label>
                     <div class="custom-file">
@@ -72,13 +77,28 @@
                 <div class="form-group">
                     <label class="form-label" >Options:</label>
                     <div class="row" id="optionL">
-                        <s:iterator value="optionList" />
+                        <%! 
+                            int i=0;
+                        %>
+                        <s:iterator value="optionList" var="option">
+                            <s:set var="textvar" value="text"/>
+                            <jsp:useBean id="textvar" type="java.lang.String" />
+                            <s:set var="pointsvar" value="points"/>
+                            <jsp:useBean id="pointsvar" type="java.lang.Integer" />
                             <div class="col-10">
-                                <input type="text" class="form-control" name="optionList[0].text" placeholder="Option Answer" value="%{optionList.text}"/> 
+                                <%
+                                    String text=textvar;
+                                    out.println("<input type='text' class='form-control' name='optionList["+i+"].text' placeholder='Option Answer' value='"+text+"'/> ");
+                                %>
                             </div>
                             <div class="col-2">
-                                <input type="number" class="form-control" name="optionList[0].points" placeholder="Points" min="1" max="5" value="%{optionList.points}"/>
-                            </div>
+                                <%
+                                    int points=pointsvar;
+                                    out.println("<input type='number' class='form-control' name='optionList["+i+"].points' placeholder='Points' min='1' max='5' value='"+points+"'/>");
+                                    i++;
+                                %>
+                             </div>
+                        </s:iterator>
                     </div>
                     <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
                     <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />

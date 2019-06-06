@@ -16,11 +16,11 @@ import org.jdom2.input.SAXBuilder;
 
 public class CreateQuestionActionSupport extends ActionSupport {
     
-    public String id;
-    public String qtype;
-    public String name;
-    public String question;
-    public String answer;
+    private String id;
+    private String qtype;
+    private String name;
+    private String question;
+    private String answer;
     private File media;
     private String mediaContentType;
     private String mediaFileName;
@@ -30,7 +30,9 @@ public class CreateQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
+        //se define la ruta en la que se van a buscar los xml
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try{           
             //se define la ruta para escribir el archivo multimedia 
@@ -46,15 +48,18 @@ public class CreateQuestionActionSupport extends ActionSupport {
             in.close();
             out.close();
 
-            //Write XML
+            //procedimiento para leer contenido de xml
             SAXBuilder builder = new SAXBuilder();
             File archivoXML = new File(pathString+"/xmls/Questions.xml");
             Document documento=builder.build(archivoXML);
             Element raiz = documento.getRootElement();
             List lista=raiz.getChildren("teacher");
+            //iteramos los nodos de profesores
             for (Object l : lista) {
                 Element teacher = (Element)l;
                 if (teacher.getAttributeValue("username").equals(userName)) {
+                    //al encontrar al profesor que buscamos, creamos un nodo para la pregunta
+                    //escribimos los atributos de la pregunta y se añade al nodo del profesor
                     Element quest = new Element("question");
                     quest.setAttribute("id", id);
                     quest.setAttribute("qtype", qtype);
@@ -67,6 +72,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
                     break;
                 }
             }
+            //procedimiento para escribir contenido en el xml
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
             FileWriter writer= new FileWriter(pathString+"/xmls/Questions.xml");

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -17,35 +12,36 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-/**
- *
- * @author navi_
- */
 public class CreateFeedbackPActionSupport extends ActionSupport {
     
-    public String id;
-    public String initial;
-    public String evaluate;
-    public String correct;
-    public String incorrect;
+    private String id;
+    private String initial;
+    private String evaluate;
+    private String correct;
+    private String incorrect;
     
     public CreateFeedbackPActionSupport() {
     }
     
+    @Override
     public String execute() throws Exception {
-        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
+        //se define la ruta en la que se van a buscar los xml*
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try{
-             //Write XML
+            //procedimiento para leer contenido de xml
             SAXBuilder builder = new SAXBuilder();
             File archivoXML = new File(pathString+"\\xmls\\Questions.xml\\");
             Document documento=builder.build(archivoXML);
             Element raiz = documento.getRootElement();
             List lista=raiz.getChildren("teacher");
+            //iteramos los nodos de los profesores
             for (Object l : lista) {
                 Element teacher = (Element)l;
                 if (teacher.getAttributeValue("username").equals(userName)) {
+                    //al encontrar al profesor que buscamos
+                    //creamos un nodo feedback y lo añadimos al nodo del profesor
                     Element quest = new Element("feedback");
                     quest.setAttribute("id", id);
                     quest.setAttribute("initial", initial);
@@ -55,7 +51,7 @@ public class CreateFeedbackPActionSupport extends ActionSupport {
                     teacher.addContent(quest);
                 }
             }
-            //AGREGA EL USUARIO AL ELEMENTO RAIZ
+            //procedimiento para escribir contenido en el xml
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
             FileWriter writer= new FileWriter(pathString+"\\xmls\\Questions.xml\\");

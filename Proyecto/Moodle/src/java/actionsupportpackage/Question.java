@@ -2,12 +2,12 @@ package actionsupportpackage;
 
 class Question {
     
-    public String id;
-    public String qtype;
-    public String name;
-    public String question;
-    public String answer;
-    public String check;
+    private String id;
+    private String qtype;
+    private String name;
+    private String question;
+    private String answer;
+    private String check;
 
     public Question() {
     }

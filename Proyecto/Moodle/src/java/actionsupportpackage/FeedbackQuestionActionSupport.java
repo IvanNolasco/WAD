@@ -3,9 +3,7 @@ package actionsupportpackage;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.net.URL;
 import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.jdom2.Document;
@@ -16,33 +14,36 @@ import org.jdom2.output.XMLOutputter;
 
 public class FeedbackQuestionActionSupport extends ActionSupport {
     
-    public String id;
-    public String tries;
-    public String initial;
-    public String evaluate;
-    public String correct;
-    public String incorrect;
-    public String triesFB;
-           
+    private String id;
+    private String tries;
+    private String initial;
+    private String evaluate;
+    private String correct;
+    private String incorrect;
+    private String triesFB;
     
     public FeedbackQuestionActionSupport() {
     }
     
     @Override
     public String execute() throws Exception {
-        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
+        //se define la ruta donde se van a buscar los xml
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        //se recupera el username de la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try{
-             //Write XML
+            //procedimiento para leer contenido del xml
             SAXBuilder builder = new SAXBuilder();
             File archivoXML = new File(pathString+"\\xmls\\Questions.xml\\");
             Document documento=builder.build(archivoXML);
             Element raiz = documento.getRootElement();
             List lista=raiz.getChildren("teacher");
+            //se iteran los nodos de los profesores
             for (Object l : lista) {
                 Element teacher = (Element)l;
                 if (teacher.getAttributeValue("username").equals(userName)) {
+                    //al encontrar al profesor que buscamos se crea un nodo feedback
+                    //se escriben los atributos de feedback y se añade al nodo del profesor
                     Element quest = new Element("feedback");
                     quest.setAttribute("id", id);
                     quest.setAttribute("tries", tries);
@@ -54,7 +55,7 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
                     teacher.addContent(quest);
                 }
             }
-            //AGREGA EL USUARIO AL ELEMENTO RAIZ
+            //procedimiento para escribir contenido en el xml
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
             FileWriter writer= new FileWriter(pathString+"\\xmls\\Questions.xml\\");

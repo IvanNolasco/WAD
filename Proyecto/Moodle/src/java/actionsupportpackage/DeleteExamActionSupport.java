@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actionsupportpackage;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -16,39 +11,34 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-/**
- *
- * @author luis_
- */
 public class DeleteExamActionSupport extends ActionSupport {
-    public String id;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
     
+    private String id;
+    
+    @Override
     public String execute() throws Exception {
-        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
+        //se define la ruta donde se van a buscar los xml
         String path = ServletActionContext.getServletContext().getRealPath("/");
+        //se recupera el username de la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         try {
+            //procedimiento para leer contenido xml
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Exams.xml");
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            //iteramos los nodos de los profesores
             for (Object t : teachersList) {
                 Element teacher = (Element)t;
                 String username = teacher.getAttributeValue("username");
                 if(username.equals(userName)){
+                    //al encontrar al profesor que buscamos se iteran sus nodos de examenes
                     List examList = teacher.getChildren("exam");
                     for (Object e : examList) {
                         Element exam = (Element)e;
                         if (exam.getAttributeValue("name").equals(id)) {
+                            //al encontrar el nodo del examen que buscamos se elimina
                             examList.remove(e);
                             break;
                         }
@@ -56,7 +46,7 @@ public class DeleteExamActionSupport extends ActionSupport {
                     break;
                 }
             }
-             //AGREGA EL USUARIO AL ELEMENTO RAIZ
+            //procedimiento para escribir contenido en el xml
             Format formato = Format.getPrettyFormat();
             XMLOutputter xmloutputter = new XMLOutputter(formato);
             FileWriter writer= new FileWriter(path+"\\xmls\\Exams.xml");
@@ -65,6 +55,14 @@ public class DeleteExamActionSupport extends ActionSupport {
         } catch (Exception e) {
         }
         return SUCCESS;
+    }
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
     
 }

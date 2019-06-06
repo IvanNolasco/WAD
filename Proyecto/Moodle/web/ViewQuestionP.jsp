@@ -40,15 +40,23 @@
                 <div class="col">
                    <p class="h4"><s:property value="initial" />:</p> 
                 </div>
+                 <div class="col" id="tr">                   
+                    <p class='h4 text-right'>Max Options: <s:property value="maxQuant" /></p>
+                </div>
             </div>           
             <p class="h2 text-center border border-dark rounded bg-light"><s:property value="question" /></p>
             <div class="row">
                 <div class="col">
-                    <form  method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="ans" class="form-label">Your answer:</label>
-                            <textarea name='ans' id='ans' class='form-control'></textarea>
-                        </div>
+                    <form  method="post" class="text-center" enctype="multipart/form-data">
+                        <s:iterator value="optionList">
+                            <div class="form-check ml-4">
+                                <s:checkbox name="questionList" theme="simple" onchange="maxCheck()" name="option" cssClass="form-check-input" value="false" fieldValue="%{points}"/>
+                                <label class="form-check-label" for="option">
+                                    <s:property value="text"/>
+                                </label>
+                            </div>
+                            
+                        </s:iterator>
                         <div id="feed">
                         </div>
                         <input type="button" id="send" value="Send answer" onclick="eval()"  class="btn btn-block btn-primary mb-2"/>
@@ -78,8 +86,60 @@
             <jsp:useBean id="varCorrect" type="java.lang.String" />
             <s:set var="varIncorrect" value="incorrect"/>
             <jsp:useBean id="varIncorrect" type="java.lang.String" />
+            <s:set var="max" value="maxQuant"/>
+            <jsp:useBean id="max" type="java.lang.String" />
             <script>
-                
+                function eval(){
+                    var maxPoints = 0;
+                    var max = <%= max %>;
+                    var options = document.getElementsByName("option");
+                    var p = [];
+                    var points = 0;
+                    var correct = document.getElementById("feed");
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].checked) {
+                            points = points + parseInt(options[i].value);
+                        }
+                        p[i] = parseInt(options[i].value);
+                    }
+                    p.sort().reverse();
+                    for (var i = 0; i < max; i++) {
+                        maxPoints = maxPoints + p[i];
+                    }
+                    console.log(points,",",maxPoints);
+                    if (points === maxPoints) {
+                        correct.innerHTML = "<div class='alert alert-success'><p><%= varCorrect %>, you've got "+points+" points of "+maxPoints+"</p></div>";
+                        document.getElementById("send").disabled = true;
+                    }else{
+                        correct.innerHTML = "<div class='alert alert-danger'><p><%= varIncorrect %>, you've got "+points+" points of "+maxPoints+"</p></div>";
+                        document.getElementById("send").disabled = true;
+                    }
+                }
+                function maxCheck(){
+                    var options = document.getElementsByName("option");
+                    var max = <%= max %>;
+                    var checked = 0;
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].checked) {
+                            checked = checked + 1;
+                        }
+                    }
+                    console.log("checked",checked)
+                    if (checked == 2) {
+                        console.log("checked2",checked)
+                        for (var i = 0; i < options.length; i++){
+                            if (!options[i].checked){
+                                console.log("3:",options[i].checked);
+                                options[i].disabled = true;
+                            }
+                        }
+                    }
+                    else {
+                        for (var i = 0; i < options.length; i++){
+                            options[i].disabled = false;
+                        }
+                    }
+                }
             </script>
     </body>
 </html>

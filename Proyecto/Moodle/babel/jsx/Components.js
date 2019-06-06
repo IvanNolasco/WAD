@@ -1,5 +1,6 @@
 /* global fetch */
-
+// Componente que representa una fila de la tabla TableObj, Listando ya sean las preguntas o los examenes,
+//junto con los botones que representan las acciones ver, modificar y eliminar
 class Row extends React.Component{
   render() {
     const { element, children } = this.props;
@@ -15,18 +16,19 @@ class Row extends React.Component{
     );
   }
 };
-
+// Componente que representa el grupo de botones de acciones de cada pregunta/examen
 class Actions extends React.Component{
     render(){
         const { 
             param,
             type
         } = this.props;
+        const typeAction = type !== "Exam" ? "Question" : type;
         return(
             <div className="btn-group btn-block" role="group" aria-label="Basic example">
-                <button className="btn btn-link" onClick={() => location.href = 'View' + type + '?id=' + param}>View {type}</button>
-                <button className="btn btn-link" onClick={() => location.href = 'Modify' + type +'?id=' + param}>Modify {type}</button>
-                <button className="btn btn-link" onClick={() => confirmar(param, type)}>Delete {type}</button>
+                <button className="btn btn-link" onClick={() => location.href = 'View' + type + '?id=' + param}>View {typeAction}</button>
+                <button className="btn btn-link" onClick={() => location.href = 'Modify' + type +'?id=' + param}>Modify {typeAction}</button>
+                <button className="btn btn-link" onClick={() => confirmar(param, typeAction)}>Delete {typeAction}</button>
             </div>
         )
     }
@@ -580,11 +582,12 @@ function changeF (){
 
 export default Titulo;
 export {
+    FeedbackP,
+    FormGroup,
     FormQuestion,
     Header,
     Login, 
     TableObj,
     Welcome,
-    FeedbackP
 };
 

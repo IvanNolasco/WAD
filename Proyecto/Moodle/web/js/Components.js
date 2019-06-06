@@ -9,7 +9,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /* global fetch */
-
+// Componente que representa una fila de la tabla TableObj, Listando ya sean las preguntas o los examenes,
+//junto con los botones que representan las acciones ver, modificar y eliminar
 var Row = function (_React$Component) {
     _inherits(Row, _React$Component);
 
@@ -49,6 +50,7 @@ var Row = function (_React$Component) {
 }(React.Component);
 
 ;
+// Componente que representa el grupo de botones de acciones de cada pregunta/examen
 
 var Actions = function (_React$Component2) {
     _inherits(Actions, _React$Component2);
@@ -66,6 +68,7 @@ var Actions = function (_React$Component2) {
                 param = _props2.param,
                 type = _props2.type;
 
+            var typeAction = type !== "Exam" ? "Question" : type;
             return React.createElement(
                 "div",
                 { className: "btn-group btn-block", role: "group", "aria-label": "Basic example" },
@@ -75,7 +78,7 @@ var Actions = function (_React$Component2) {
                             return location.href = 'View' + type + '?id=' + param;
                         } },
                     "View ",
-                    type
+                    typeAction
                 ),
                 React.createElement(
                     "button",
@@ -83,15 +86,15 @@ var Actions = function (_React$Component2) {
                             return location.href = 'Modify' + type + '?id=' + param;
                         } },
                     "Modify ",
-                    type
+                    typeAction
                 ),
                 React.createElement(
                     "button",
                     { className: "btn btn-link", onClick: function onClick() {
-                            return confirmar(param, type);
+                            return confirmar(param, typeAction);
                         } },
                     "Delete ",
-                    type
+                    typeAction
                 )
             );
         }
@@ -949,4 +952,4 @@ function changeF() {
 }
 
 export default Titulo;
-export { FormQuestion, Header, Login, TableObj, Welcome, FeedbackP };
+export { FeedbackP, FormGroup, FormQuestion, Header, Login, TableObj, Welcome };

@@ -146,7 +146,7 @@ var FormAnswer = function (_React$Component4) {
         value: function render() {
             return React.createElement(
                 'form',
-                { method: 'post' },
+                { onSubmit: this.handleSubmit, method: 'post' },
                 React.createElement(FormGroup, {
                     onChange: this.handleChange,
                     ph: 'Write your answer here',
@@ -154,12 +154,42 @@ var FormAnswer = function (_React$Component4) {
                     title: 'ans',
                     type: 'textarea',
                     value: this.state.question
-                })
+                }),
+                React.createElement('input', { type: 'submit', value: 'Next', className: 'btn btn-block btn-primary mb-2' })
             );
         }
     }]);
 
     return FormAnswer;
+}(React.Component);
+
+var Media = function (_React$Component5) {
+    _inherits(Media, _React$Component5);
+
+    function Media() {
+        _classCallCheck(this, Media);
+
+        return _possibleConstructorReturn(this, (Media.__proto__ || Object.getPrototypeOf(Media)).apply(this, arguments));
+    }
+
+    _createClass(Media, [{
+        key: 'render',
+        value: function render() {
+            var mediaType = this.props.mediaType;
+
+            return React.createElement(
+                'div',
+                { 'class': 'col' },
+                function () {
+                    if (mediaType.startsWith("image")) {
+                        return null;
+                    }
+                }
+            );
+        }
+    }]);
+
+    return Media;
 }(React.Component);
 
 var domContainer = document.querySelector('#root');

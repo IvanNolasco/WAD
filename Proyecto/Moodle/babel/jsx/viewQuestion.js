@@ -94,7 +94,7 @@ class Media extends React.Component {
             }
             }}   
             </div>
-
+        )
     }
 }
 

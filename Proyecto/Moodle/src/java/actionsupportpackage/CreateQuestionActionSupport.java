@@ -114,5 +114,10 @@ public class CreateQuestionActionSupport extends ActionSupport {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }     
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }

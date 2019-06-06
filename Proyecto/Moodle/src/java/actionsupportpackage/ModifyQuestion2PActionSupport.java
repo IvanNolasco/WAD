@@ -78,10 +78,12 @@ public class ModifyQuestion2PActionSupport extends ActionSupport {
                         option.setAttribute("points", String.valueOf(optionList.get(i).getPoints()));
                         quest.addContent(option);
             }
-            if (sobre == 0)
-                quest.setAttribute("source", mediaFileName);
-            else
-                quest.setAttribute("source", "media\\"+mediaFileName);
+            if (sobre == 0){
+                System.out.println("no hay archivo");
+                quest.setAttribute("source", mediaFileName);}
+            else{
+                System.out.println("si hay archivo");
+                quest.setAttribute("source", "media\\"+mediaFileName);}
             quest.setAttribute("type", mediaContentType);
             
             //Se recupera el elemento raiz

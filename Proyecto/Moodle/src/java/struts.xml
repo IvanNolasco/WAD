@@ -92,5 +92,9 @@
 <result name="success">ModifyFeedbackP.jsp</result>
 </action>
 
+<action name="ModifyFeedbackP" method="execute" class="actionsupportpackage.ModifyFeedbackPActionSupport"> 
+<result name="success" type="redirectAction">QuestionCreation</result>
+</action>
+
 </package>
 </struts>

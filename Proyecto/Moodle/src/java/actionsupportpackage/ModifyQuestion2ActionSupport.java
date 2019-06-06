@@ -99,6 +99,7 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
                                 file.delete();
                             }
                             questions.remove(qu);
+                            break;
                         }
                     }
                     teacher.addContent(quest);

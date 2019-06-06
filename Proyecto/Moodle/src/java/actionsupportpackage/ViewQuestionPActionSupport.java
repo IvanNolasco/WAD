@@ -24,9 +24,9 @@ public class ViewQuestionPActionSupport extends ActionSupport {
     private String question;
     private List<Option> optionList;
     private String maxQuant;
-    private File media;
-    private String mediaContentType;
-    private String mediaFileName;
+    private String source;
+    private String type;
+    
     private String initial;
     private String evaluate;
     private String correct;
@@ -80,28 +80,20 @@ public class ViewQuestionPActionSupport extends ActionSupport {
         this.maxQuant = maxQuant;
     }
 
-    public File getMedia() {
-        return media;
+    public String getType() {
+        return type;
     }
 
-    public void setMedia(File media) {
-        this.media = media;
+    public void setType(String Type) {
+        this.type = Type;
     }
 
-    public String getMediaContentType() {
-        return mediaContentType;
+    public String getSource() {
+        return source;
     }
 
-    public void setMediaContentType(String mediaContentType) {
-        this.mediaContentType = mediaContentType;
-    }
-
-    public String getMediaFileName() {
-        return mediaFileName;
-    }
-
-    public void setMediaFileName(String mediaFileName) {
-        this.mediaFileName = mediaFileName;
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getInitial() {
@@ -163,8 +155,8 @@ public class ViewQuestionPActionSupport extends ActionSupport {
                             this.name = question.getAttributeValue("name");
                             this.question = question.getAttributeValue("question");
                             this.maxQuant = question.getAttributeValue("max");
-                            this.mediaFileName = question.getAttributeValue("source");
-                            this.mediaContentType = question.getAttributeValue("type");
+                            this.source = question.getAttributeValue("source");
+                            this.type = question.getAttributeValue("type");
                             List options = question.getChildren("option");
                             for(int k=0; k<options.size(); k++){
                                 Element optionE = (Element) options.get(k);

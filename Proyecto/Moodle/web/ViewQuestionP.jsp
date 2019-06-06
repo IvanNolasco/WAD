@@ -74,29 +74,12 @@
                 </div>
             </div>           
         </div>
-            <s:set var="varAns" value="answer"/>
-            <jsp:useBean id="varAns" type="java.lang.String" />
             <s:set var="varCorrect" value="correct"/>
             <jsp:useBean id="varCorrect" type="java.lang.String" />
             <s:set var="varIncorrect" value="incorrect"/>
             <jsp:useBean id="varIncorrect" type="java.lang.String" />
-            <s:set var="varTries" value="tries"/>
-            <jsp:useBean id="varTries" type="java.lang.String" />
-            <s:set var="varTriesFB" value="triesFB"/>
-            <jsp:useBean id="varTriesFB" type="java.lang.String" />
             <script>
-                function eval(){
-                    var correctAns = "<%= varAns %>";
-                    var correct = document.getElementById("feed");
-                    var answer = document.getElementById("ans").value;
-                    if (answer === correctAns) {
-                        correct.innerHTML = "<div class='alert alert-success'><p><%= varCorrect %></p></div>";
-                        document.getElementById("send").disabled = true;
-                    }else{
-                        correct.innerHTML = "<div class='alert alert-danger'><p><%= varIncorrect %></p></div>";
-                        document.getElementById("send").disabled = true;
-                    }
-                }
+                
             </script>
     </body>
 </html>

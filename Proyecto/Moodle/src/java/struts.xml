@@ -96,5 +96,9 @@
 <result name="success" type="redirectAction">QuestionCreation</result>
 </action>
 
+<action name="ViewQuestionP" method="execute" class="actionsupportpackage.ViewQuestionPActionSupport"> 
+<result name="success">ViewQuestionP.jsp</result>
+</action>
+
 </package>
 </struts>

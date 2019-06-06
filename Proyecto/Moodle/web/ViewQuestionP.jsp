@@ -40,9 +40,6 @@
                 <div class="col">
                    <p class="h4"><s:property value="initial" />:</p> 
                 </div>
-                <div class="col" id="tr">                   
-                    <p class='h4 text-right'>Tries: <s:property value="tries" /></p>
-                </div>
             </div>           
             <p class="h2 text-center border border-dark rounded bg-light"><s:property value="question" /></p>
             <div class="row">
@@ -88,19 +85,13 @@
             <s:set var="varTriesFB" value="triesFB"/>
             <jsp:useBean id="varTriesFB" type="java.lang.String" />
             <script>
-                window.tries = <%= varTries %>;
                 function eval(){
-                    var triesDiv = document.getElementById("tr")
                     var correctAns = "<%= varAns %>";
                     var correct = document.getElementById("feed");
                     var answer = document.getElementById("ans").value;
                     if (answer === correctAns) {
                         correct.innerHTML = "<div class='alert alert-success'><p><%= varCorrect %></p></div>";
                         document.getElementById("send").disabled = true;
-                    }else if(tries > 0){
-                        triesDiv.innerHTML = "<p class='h4 text-right'>Tries:"+--tries+"</p>"
-                        correct.innerHTML = "<div class='alert alert-warning'><p><%= varTriesFB %></p></div>";
-                        
                     }else{
                         correct.innerHTML = "<div class='alert alert-danger'><p><%= varIncorrect %></p></div>";
                         document.getElementById("send").disabled = true;

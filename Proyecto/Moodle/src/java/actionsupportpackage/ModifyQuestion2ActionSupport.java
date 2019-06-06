@@ -5,9 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.net.URL;
 import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.jdom2.Document;
@@ -19,28 +17,30 @@ import org.jdom2.output.XMLOutputter;
 
 public class ModifyQuestion2ActionSupport extends ActionSupport {
     
-    public String id;
-    public String qtype;
-    public String name;
-    public String question;
-    public String answer;
+    private String id;
+    private String qtype;
+    private String name;
+    private String question;
+    private String answer;
     private File media;
     private String mediaContentType;
     private String mediaFileName;
     
-    public String tries;
-    public String initial;
-    public String evaluate;
-    public String correct;
-    public String incorrect;
-    public String triesFB;
+    private String tries;
+    private String initial;
+    private String evaluate;
+    private String correct;
+    private String incorrect;
+    private String triesFB;
     
     public ModifyQuestion2ActionSupport() {
     }
     
+    @Override
     public String execute() throws Exception {
+        //recuperamos el usarname de la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
-        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
+        //se define la ruta donde se van a buscar los feedback
         String path = ServletActionContext.getServletContext().getRealPath("/");
   
         int sobre=0; //Variable para sobreescribir el archivo si es necesario
@@ -48,7 +48,6 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         //Si el usuario mete un archivo nuevo se crea el file y se guarda en el servidor
         if(media!=null)
         {
-            
             File salida = new File(path+"media/"+mediaFileName);
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
@@ -62,6 +61,7 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             sobre=1;
         }
         try {
+            //procedimiento para leer contenido xml
             SAXBuilder builder = new SAXBuilder();
             File archivoXML = new File(path+"/xmls/Questions.xml");
             Document documento=builder.build(archivoXML);
@@ -72,8 +72,10 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             quest.setAttribute("name", name);
             quest.setAttribute("question", question);
             quest.setAttribute("answer", answer);
+            //en caso de no sobreescribir el multimedia
             if (sobre == 0)
                 quest.setAttribute("source", mediaFileName);
+            //en caso de sobreescribir el multimedia
             else
                 quest.setAttribute("source", "media\\"+mediaFileName);
             quest.setAttribute("type", mediaContentType);
@@ -116,20 +118,24 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             e.printStackTrace();
         }
         try {
+            //procedimiento para leer contenido de xml
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            //iteramos los nodos de los profesores
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
                 if(username.equals(userName)){
+                    //al encontrar al profesor que buscamos, iteramos sus nodos feedback
                     List feedbacksList = teacher.getChildren("feedback");
                     for(int j=0;j<feedbacksList.size();j++){
                         Element feedback = (Element)feedbacksList.get(j);
                         String feedbackid = feedback.getAttributeValue("id");
                         if(feedbackid.equals(this.id)){
+                            //al encontrar el feedback que buscamos, recuperamos sus atributos
                             this.tries = feedback.getAttributeValue("tries");
                             this.correct = feedback.getAttributeValue("correct");
                             this.incorrect = feedback.getAttributeValue("incorrect");

@@ -34,24 +34,29 @@ public class ViewQuestionActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
-        //SE DEFINE LA RUTA DONDE SE VAN A BUSCAR LOS JSON QUE CONTIENEN LA INFORMACION DE LAS PREGUNTAS
+        //se define la ruta donde se van a buscar los xml
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try {
+            //procedimiento para leer contenido xml
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            //iteramos los nodos de los profesores
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
                 if(username.equals(userName)){
+                    //al enconetrar al profesor que buscamos
+                    //iteramos sus nodos de preguntas y luego de feedback
                     List questionsList = teacher.getChildren("question");
                     List feedbacksList = teacher.getChildren("feedback");
                     for(int j=0;j<questionsList.size();j++){
                         Element questionE = (Element)questionsList.get(j);
                         String idQ = questionE.getAttributeValue("id");
                         if(idQ.equals(this.id)) {
+                            //al encontrar la pregunta que buscamos, recuperamos sus atributos
                             this.name = questionE.getAttributeValue("name");
                             this.qtype = questionE.getAttributeValue("qtype");
                             this.question = questionE.getAttributeValue("question");
@@ -65,6 +70,7 @@ public class ViewQuestionActionSupport extends ActionSupport {
                         Element feedbackE = (Element)feedbacksList.get(k);
                         String idF = feedbackE.getAttributeValue("id");
                         if(idF.equals(this.id)) {
+                            //al encontrar el feedback que buscamos, recuperamos sus atributos
                             this.tries = feedbackE.getAttributeValue("tries");
                             this.initial = feedbackE.getAttributeValue("initial");
                             this.evaluate = feedbackE.getAttributeValue("evaluate");

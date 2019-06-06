@@ -12,46 +12,37 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
 public class ExamCreationActionSupport extends ActionSupport {
+    
     private List<String> exams;
     private String examsJSON;
+    
     public ExamCreationActionSupport() {
     }
-
-    public List<String> getExams() {
-        return exams;
-    }
-
-    public void setExams(List<String> exams) {
-        this.exams = exams;
-    }
-
-    public String getExamsJSON() {
-        return examsJSON;
-    }
-
-    public void setExamsJSON(String examsJSON) {
-        this.examsJSON = examsJSON;
-    }
     
+    @Override
     public String execute() throws Exception {
         //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         exams = new ArrayList<String>();
-        //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas
+        //se define la ruta donde se va a buscar los xml
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try {
+            //procedimiento para leer contenido xml
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Exams.xml");
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
             JSONArray list = new JSONArray();
+            //se iteran los nodos de los profesores
             for (Object t : teachersList) {
                 Element teacher = (Element)t;
                 String username = teacher.getAttributeValue("username");
                 if (username.equals(userName)) {
+                    //al encontrar al profesor que buscamos se iteran sus nodos examen
                     List examList = teacher.getChildren("exam");
                     for (Object e : examList) {
+                        //se recupera del xml el nombre del examen y se escribe en un objeto json
                         Element exam = (Element)e;
                         JSONObject obj = new JSONObject();
                         obj.put("name", exam.getAttributeValue("name"));
@@ -68,4 +59,19 @@ public class ExamCreationActionSupport extends ActionSupport {
         return SUCCESS;
     }
     
+    public List<String> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<String> exams) {
+        this.exams = exams;
+    }
+
+    public String getExamsJSON() {
+        return examsJSON;
+    }
+
+    public void setExamsJSON(String examsJSON) {
+        this.examsJSON = examsJSON;
+    }
 }

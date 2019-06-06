@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package actionsupportpackage;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -39,8 +34,11 @@ public class ModifyQuestion2PActionSupport extends ActionSupport {
     public ModifyQuestion2PActionSupport() {
     }
     
+    @Override
     public String execute() throws Exception {
+        //se define la ruta donde se van a buscar los xml
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
+        //se recupera el username de la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         
         int sobre=0; //Variable para sobreescribir el archivo si es necesario
@@ -48,7 +46,6 @@ public class ModifyQuestion2PActionSupport extends ActionSupport {
         //Si el usuario mete un archivo nuevo se crea el file y se guarda en el servidor
         if(media!=null)
         {
-            
             File salida = new File(pathString+"media/"+mediaFileName);
             FileInputStream in = new FileInputStream(media);
             FileOutputStream out = new FileOutputStream(salida);
@@ -62,6 +59,7 @@ public class ModifyQuestion2PActionSupport extends ActionSupport {
             sobre=1;
         }
         try {
+            //procedimiento para leer contenido xml
             SAXBuilder builder = new SAXBuilder();
             File archivoXML = new File(pathString+"/xmls/Questions.xml");
             Document documento=builder.build(archivoXML);
@@ -78,12 +76,10 @@ public class ModifyQuestion2PActionSupport extends ActionSupport {
                         option.setAttribute("points", String.valueOf(optionList.get(i).getPoints()));
                         quest.addContent(option);
             }
-            if (sobre == 0){
-                System.out.println("no hay archivo");
-                quest.setAttribute("source", mediaFileName);}
-            else{
-                System.out.println("si hay archivo");
-                quest.setAttribute("source", "media\\"+mediaFileName);}
+            if (sobre == 0)
+                quest.setAttribute("source", mediaFileName);
+            else
+                quest.setAttribute("source", "media\\"+mediaFileName);
             quest.setAttribute("type", mediaContentType);
             
             //Se recupera el elemento raiz
@@ -124,20 +120,24 @@ public class ModifyQuestion2PActionSupport extends ActionSupport {
         }
         
         try {
+            //procedimiento para leer contenido de xml
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(pathString+"\\xmls\\Questions.xml");
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            //iteramos los nodos de los profesores
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
                 if(username.equals(userName)){
+                    //al encontrar al profesor que buscamos iteramos sus nodos feedback 
                     List feedbacksList = teacher.getChildren("feedback");
                     for(int j=0;j<feedbacksList.size();j++){
                         Element feedback = (Element)feedbacksList.get(j);
                         String feedbackid = feedback.getAttributeValue("id");
                         if(feedbackid.equals(this.id)){
+                            //el encontrar el feedback que buscamos, se recuoeran sus atributos
                             this.correct = feedback.getAttributeValue("correct");
                             this.incorrect = feedback.getAttributeValue("incorrect");
                             this.initial = feedback.getAttributeValue("initial");

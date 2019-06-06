@@ -10,20 +10,15 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+
 public class CreateExamActionSupport extends ActionSupport {
-     private List<Question> questions;
+    
+    private List<Question> questions;
     
     public CreateExamActionSupport() {
     }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
     
+    @Override
     public String execute() throws Exception {
         //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
@@ -31,17 +26,21 @@ public class CreateExamActionSupport extends ActionSupport {
         //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try {
+            //procedimiento para leer el contenido de xml
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            //se iteran los nodos de profesores
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
                 if(username.equals(userName)){
+                    //al encontrar al profesor que buscamos, se iteran sus nodos de preguntas
                     List questionsList = teacher.getChildren("question");
                     for(int j=0;j<questionsList.size();j++){
+                        //de cada pregunta se recuperan sus atributos y se guardan en una lista
                         Element question = (Element)questionsList.get(j);
                         String id = question.getAttributeValue("id");
                         String qtype = question.getAttributeValue("qtype");
@@ -60,5 +59,13 @@ public class CreateExamActionSupport extends ActionSupport {
             e.printStackTrace();
         }
         return SUCCESS;
+    }
+    
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

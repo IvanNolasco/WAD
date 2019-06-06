@@ -11,16 +11,10 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+
 public class QuestionCreationActionSupport extends ActionSupport {
+    
     private String questionsJSON;
-
-    public String getQuestionsJSON() {
-        return questionsJSON;
-    }
-
-    public void setQuestionsJSON(String questionsJSON) {
-        this.questionsJSON = questionsJSON;
-    }
     
     @Override
     public String execute() throws IOException {
@@ -29,18 +23,23 @@ public class QuestionCreationActionSupport extends ActionSupport {
         //se define la ruta donde se va a buscar el archivo XML que contiene las preguntas
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try {
+            //procedimiento para leer contenido xml
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path+"\\xmls\\Questions.xml");
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
             JSONArray list = new JSONArray();
+            //se iteran los nodos de los profesores 
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
                 String username = teacher.getAttributeValue("username");  
                 if(username.equals(userName)){
+                    //al encontrar al profesor que buscamos iteramos sus nodos sus nodos de preguntas
                     List questionsList = teacher.getChildren("question");
                     for(int j=0;j<questionsList.size();j++){
+                        //de cada pregunta recuperamos sus atributos
+                        //y los escribimos en un objeto json
                         Element question = (Element)questionsList.get(j);
                         String id = question.getAttributeValue("id");
                         String qtype = question.getAttributeValue("qtype");
@@ -61,5 +60,13 @@ public class QuestionCreationActionSupport extends ActionSupport {
             e.printStackTrace();
         }
         return SUCCESS;
+    }
+    
+    public String getQuestionsJSON() {
+        return questionsJSON;
+    }
+
+    public void setQuestionsJSON(String questionsJSON) {
+        this.questionsJSON = questionsJSON;
     }
 }

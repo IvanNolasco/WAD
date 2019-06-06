@@ -47,7 +47,7 @@
             <p class="h2 text-center border border-dark rounded bg-light"><s:property value="question" /></p>
             <div class="row">
                 <div class="col">
-                    <form  method="post" class="text-center" enctype="multipart/form-data">
+                    <form  method="post" enctype="multipart/form-data">
                         <s:iterator value="optionList">
                             <div class="form-check ml-4">
                                 <s:checkbox name="questionList" theme="simple" onchange="maxCheck()" name="option" cssClass="form-check-input" value="false" fieldValue="%{points}"/>
@@ -125,7 +125,7 @@
                         }
                     }
                     console.log("checked",checked)
-                    if (checked == 2) {
+                    if (checked == max) {
                         console.log("checked2",checked)
                         for (var i = 0; i < options.length; i++){
                             if (!options[i].checked){

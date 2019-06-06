@@ -25,6 +25,7 @@ public class CreateFeedbackPActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
+        System.out.println(id);
         //se define la ruta en la que se van a buscar los xml*
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         //se recupera el username desde la sesion
@@ -67,12 +68,12 @@ public class CreateFeedbackPActionSupport extends ActionSupport {
         return "fail";
     }
 
-    public String getID() {
+    public String getId() {
         return id;
     }
 
-    public void setID(String ID) {
-        this.id = ID;
+    public void setId(String Id) {
+        this.id = Id;
     }
 
     public String getInitial() {

@@ -59,6 +59,8 @@
                         <jsp:useBean id="checkvar" type="java.lang.String" />
                         <s:set var="idvar" value="id"/>
                         <jsp:useBean id="idvar" type="java.lang.String" />
+                        <s:set var="qtypevar" value="qtype"/>
+                        <jsp:useBean id="qtypevar" type="java.lang.String" />
                         <%
                             String check = checkvar;
                             String id = idvar;
@@ -70,7 +72,13 @@
                     </td>
                     <td>
                         <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                            <%="<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ViewQuestion.action?id="+idvar+"'\">View Question</button>"%>  
+                            <%
+                                String t = qtypevar;
+                                if(t=="fill")
+                                    out.println("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ViewQuestion.action?id="+idvar+"'\">View Question</button>");
+                                else
+                                    out.println("<button type=\"button\" class=\"btn btn-link\" onclick=\"location.href='ViewQuestionP.action?id="+idvar+"'\">View Question</button>");                                    
+                            %> 
                         </div>                 
                     </td>
                 </tr>

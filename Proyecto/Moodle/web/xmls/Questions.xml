@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <questions>
-    <teacher username="ivan">
-        <question id="3" question="What animal appears in the video?" answer="eagle" name="Eagle video" source="media\\Eagle - 748.mp4" type="video\/mp4" />
-        <feedback id="3" tries="2" correct="Yes, that is a eagle." incorrect="No, that is incorrect." initial="View the video and answer the question." triesFB="No, that is incorrect. Try again." evaluate="Click on the Send Ansewer button" />
-        <question id="2" question="Which animal sounds like that?" answer="bear" name="Bear sound" source="media\\grizzlybear.mp3" type="audio\/mpeg" />
-        <feedback id="2" tries="5" correct="Yes, that is a bear." incorrect="No, that is incorrect." initial="Listen and answer" triesFB="No, that is incorrect. Try again." evaluate="Click on the Send Ansewer button" />
-        <question id="1" question="What is this animal?" answer="Owl" name="Owl image" source="media\\Owl.jpg" type="image\/jpeg" />
-        <feedback id="1" tries="3" correct="Yes, that is a owl." incorrect="No, that is incorrect." initial="Answer the question." triesFB="No, that is incorrect. Try again." evaluate="Click on the Send Ansewer button" />
-    </teacher>
+  <teacher username="ivan">
+    <question id="3" question="What animal appears in the video?" answer="eagle" name="Eagle video" source="media\\Eagle - 748.mp4" type="video\/mp4" qtype="fill" />
+    <feedback id="3" tries="2" correct="Yes, that is a eagle." incorrect="No, that is incorrect." initial="View the video and answer the question." triesFB="No, that is incorrect. Try again." evaluate="Click on the Send Ansewer button" />
+    <question id="2" question="Which animal sounds like that?" answer="bear" name="Bear sound" source="media\\grizzlybear.mp3" type="audio\/mpeg" qtype="fill" />
+    <feedback id="2" tries="5" correct="Yes, that is a bear." incorrect="No, that is incorrect." initial="Listen and answer" triesFB="No, that is incorrect. Try again." evaluate="Click on the Send Ansewer button" />
+    <question id="1" question="What is this animal?" answer="Owl" name="Owl image" source="media\\Owl.jpg" type="image\/jpeg" qtype="fill" />
+    <feedback id="1" tries="3" correct="Yes, that is a owl." incorrect="No, that is incorrect." initial="Answer the question." triesFB="No, that is incorrect. Try again." evaluate="Click on the Send Ansewer button" />
+    <question id="4" qtype="partial" name="Dolphin Question" question="What animal sound llike that?" max="2" source="media\dolphin1.mp3" type="audio/mpeg">
+      <option text="Dolphin" points="3" />
+      <option text="Delfin" points="1" />
+      <option text="Baby dolphin" points="2" />
+    </question>
+    <feedback id="4" initial="You can choose more than one." evaluate="Click on the Send button" correct="Correct!" incorrect="Incorrect! This is an english exam." />
+    <question id="5" qtype="partial" name="Giraffe" question="What animal is this?" max="3" source="media\nigeriana.jpg" type="image/jpeg">
+      <option text="Giraffe" points="4" />
+      <option text="Yellow Giraffe" points="3" />
+      <option text="Mammal" points="2" />
+      <option text="Long-necked mammal" points="2" />
+    </question>
+    <feedback id="5" initial="You can choose more than one." evaluate="Click on the Send button" correct="Correct!" incorrect="Incorrect!" />
+    <question id="6" qtype="partial" name="Dragon fly Question" question="What animal appears in the video?" max="2" source="media\Dragonfly - 12942.mp4" type="video/mp4">
+      <option text="Dragon" points="1" />
+      <option text="Bug" points="2" />
+      <option text="Dragon fly" points="5" />
+      <option text="Fly" points="1" />
+    </question>
+    <feedback id="6" initial="You can choose more than one." evaluate="Click on the Send button" correct="Correct!" incorrect="So close!" />
+  </teacher>
 </questions>

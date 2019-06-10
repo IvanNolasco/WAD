@@ -54,6 +54,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             Document documento=builder.build(archivoXML);
             Element raiz = documento.getRootElement();
             List lista=raiz.getChildren("teacher");
+            int existnode=0; //bandera para saber si exite o no el nodo del profesor
             //iteramos los nodos de profesores
             for (Object l : lista) {
                 Element teacher = (Element)l;
@@ -69,8 +70,23 @@ public class CreateQuestionActionSupport extends ActionSupport {
                     quest.setAttribute("source", "media\\"+mediaFileName);
                     quest.setAttribute("type", mediaContentType);
                     teacher.addContent(quest);
+                    existnode = 1;
                     break;
                 }
+            }
+            //si no se encontro el nodo del profesor porque no existe, lo creamos
+            if(existnode == 0){
+                Element teacher = new Element("teacher");
+                Element quest = new Element("question");
+                quest.setAttribute("id", id);
+                quest.setAttribute("qtype", qtype);
+                quest.setAttribute("name", name);
+                quest.setAttribute("question", question);
+                quest.setAttribute("answer", answer);
+                quest.setAttribute("source", "media\\"+mediaFileName);
+                quest.setAttribute("type", mediaContentType);
+                teacher.addContent(quest);
+                raiz.addContent(teacher);   
             }
             //procedimiento para escribir contenido en el xml
             Format formato = Format.getPrettyFormat();

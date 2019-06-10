@@ -54,6 +54,7 @@ public class CreateQuestionPActionSupport extends ActionSupport {
             Document documento=builder.build(archivoXML);
             Element raiz = documento.getRootElement();
             List lista=raiz.getChildren("teacher");
+            int existnode = 0; //bandera para saber si existe el nodo del profesor
             //iteramos los nodos de profesores
             for (Object l : lista) {
                 Element teacher = (Element)l;
@@ -77,8 +78,31 @@ public class CreateQuestionPActionSupport extends ActionSupport {
                         quest.addContent(option);
                     }
                     teacher.addContent(quest);
+                    existnode = 1;
                     break;
                 }
+            }
+            //si no se encontro el nodo del profesor, lo creamos
+            if(existnode == 0){
+                Element teacher = new Element("teacher");
+                Element quest = new Element("question");
+                quest.setAttribute("id", id);
+                quest.setAttribute("qtype", qtype);
+                quest.setAttribute("name", name);
+                quest.setAttribute("question", question);
+                quest.setAttribute("max", maxQuant);
+                quest.setAttribute("source", "media\\"+mediaFileName);
+                quest.setAttribute("type", mediaContentType);
+                //se iteran las opciones de la pregunta recuperados del formulario
+                for(int i=0; i<optionList.size(); i++){
+                    //por cada opcion se crea un nodo y se añade al nodo de pregunta
+                    Element option = new Element("option");
+                    option.setAttribute("text", optionList.get(i).getText());
+                    option.setAttribute("points", String.valueOf(optionList.get(i).getPoints()));
+                    quest.addContent(option);
+                }
+                teacher.addContent(quest);
+                raiz.addContent(teacher);
             }
             //procedimiento para escribir el contenido al xml
             Format formato = Format.getPrettyFormat();

@@ -29,6 +29,7 @@ public class CreateExam2ActionSupport extends ActionSupport {
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            int existnode = 0; //bandera para saber si existe el nodo del profesor 
             //iteramos los nodos de profesores
             for (Object t : teachersList) {
                 Element teacher = (Element)t;
@@ -44,8 +45,23 @@ public class CreateExam2ActionSupport extends ActionSupport {
                         exam.addContent(quest);
                     }
                     teacher.addContent(exam);
+                    existnode = 1;
                     break;
                 }
+            }
+            //si no se encuentra el nodo de profesor porque no existe, lo creamos
+            if(existnode == 0){
+                Element teacher = new Element("teacher");
+                Element exam = new Element("exam");
+                exam.setAttribute("name",nameE);
+                for (String id : questionList) {
+                    //por cada pregunta creamos un nodo y lo añadimos al nodo de examen
+                    Element quest = new Element("question");
+                    quest.setAttribute("id", id);
+                    exam.addContent(quest);
+                }
+                teacher.addContent(exam);
+                root.addContent(teacher);
             }
             //procedimiento para escribir el contenido en el xml
             Format formato = Format.getPrettyFormat();

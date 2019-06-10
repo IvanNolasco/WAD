@@ -3,6 +3,7 @@ package actionsupportpackage;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.struts2.ServletActionContext;
 import org.jdom2.Document;
@@ -16,7 +17,9 @@ public class ModifyQuestionActionSupport extends ActionSupport {
     private String qtype;
     private String name;
     private String question;
-    private String answer;
+    private String casechk;
+    private String exactchk;
+    private List<String> optionList;
     private File media;
     private String mediaContentType;
     private String mediaFileName;
@@ -27,6 +30,7 @@ public class ModifyQuestionActionSupport extends ActionSupport {
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         //se define la ruta donde se van a buscar los xml
         String path = ServletActionContext.getServletContext().getRealPath("/");
+        optionList = new ArrayList<>();
         try {
             //procedimiento para leer contenido de xml
             SAXBuilder builder = new SAXBuilder();
@@ -49,7 +53,14 @@ public class ModifyQuestionActionSupport extends ActionSupport {
                             this.qtype = question.getAttributeValue("qtype");
                             this.name = question.getAttributeValue("name");
                             this.question = question.getAttributeValue("question");
-                            this.answer = question.getAttributeValue("answer");
+                            this.casechk = question.getAttributeValue("case");
+                            this.exactchk = question.getAttributeValue("exact");
+                            List options = question.getChildren("option");
+                            for(int k=0; k<options.size(); k++){
+                                Element optionE = (Element) options.get(k);
+                                String auxText = optionE.getAttributeValue("text");
+                                this.optionList.add(auxText);
+                            }
                             this.mediaFileName = question.getAttributeValue("source");
                             this.mediaContentType = question.getAttributeValue("type");
                             break;
@@ -99,14 +110,32 @@ public class ModifyQuestionActionSupport extends ActionSupport {
         this.question = question;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getCasechk() {
+        return casechk;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setCasechk(String casechk) {
+        this.casechk = casechk;
     }
 
+    public String getExactchk() {
+        return exactchk;
+    }
+
+    public void setExactchk(String exactchk) {
+        this.exactchk = exactchk;
+    }
+
+    public List<String> getOptionList() {
+        return optionList;
+    }
+
+    public void setOptionList(List<String> optionList) {
+        this.optionList = optionList;
+    }
+    
+    
+    
     public File getMedia() {
         return media;
     }

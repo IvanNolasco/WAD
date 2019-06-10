@@ -93,6 +93,7 @@ class Welcome extends React.Component{
       }
 }; 
 
+
 class FormGroup extends React.Component{
     handleChange = (e) => {
         this.props.onChange(e);
@@ -246,6 +247,7 @@ class QuestionP extends React.Component{
                     type ="number" 
                 />
                 <input type="hidden" name="qtype" value="partial" id="qtype" />
+                
                 <input type="submit" value="Next" className="btn btn-block btn-primary mb-2"/>
             </form>
         );
@@ -316,6 +318,21 @@ class Question extends React.Component{
                     type="file" 
                 />
                 <input type="hidden" name="qtype" value="fill" id="qtype" />
+                <label class="form-label" >Options:</label>
+                <div class="row" id="optionL">
+                 <input type="text" className="form-control" name="optionList[0].text" placeholder="Option Answer"/> 
+                </div>
+                <input type="button" id="addBtn" className="btn btn-primary mt-2" value="Add option" onClick={() => addOption()} />
+                <input type="button" id="quitBtn" className="btn btn-primary mt-2" value="Quit option" onClick={() => quitOption()} />
+                        <p></p>
+                <div className="form-check align-center">
+                    <input className="form-check1-input" type="checkbox" id="coseChk" />
+                    <label className="form-check1-label" for="coseChk">Cose sensitive</label>
+                </div>
+                <div className="form-check align-center">
+                    <input className="form-check2-input" type="checkbox" id="exactChk" />
+                    <label className="form-check2-label" for="exactChk">Exact Result</label>
+                </div>
                 <input type="submit" value="Next" className="btn btn-block btn-primary mb-2"/>
             </form>
         );

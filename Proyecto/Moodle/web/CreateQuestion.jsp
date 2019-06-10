@@ -18,5 +18,43 @@
         <script>
             var user = "<%=(String)session.getAttribute("userName")%>";
         </script>
+        
+         <script src="js/jquery-3.4.1.min.js"></script>
+        <script>
+            var i = 1;
+            $("#addBtn").click(function (){
+                var optList = document.getElementById("optionL");
+            });
+            $("#quitBtn").click(function (){
+                var optList = document.getElementById("optionL");
+            });
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+            function addOption(){
+                var optList = document.getElementById("optionL");
+                var col = document.createElement("div");
+
+                var input = document.createElement("input");
+                input.setAttribute("type","text");
+                input.setAttribute("class","form-control");
+                input.setAttribute("name","optionList["+i+"].text");
+                input.setAttribute("placeholder","Option Answer");
+
+                col.appendChild(input);
+                optList.appendChild(col);
+                
+                i ++;               
+            }
+            function quitOption(){
+                var optList = document.getElementById("optionL");
+                if (optList.childElementCount > 1) {
+                    optList.removeChild(optList.lastChild);
+                    i--;
+                }
+            }
+        </script>
     </body>
 </html>

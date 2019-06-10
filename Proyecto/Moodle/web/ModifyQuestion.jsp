@@ -74,10 +74,69 @@
                 </div>
                      
                <s:hidden name="qtype" id="qtype" value="fill" />
+               
+               
+               <label class="form-label" >Options:</label>
+                <div class="row" id="optionL">
+                    <%  int j=0;  %>
+                    <s:iterator value="optionList">
+                            <s:set var="textvar" value="text"/>
+                            <jsp:useBean id="textvar" type="java.lang.String" />
+                            <%
+                                    int n=j;
+                                    String text=textvar;
+                                    out.println("<input type='text' class='form-control' name='optionList["+n+"].text' placeholder='Option Answer' value='"+text+"'/> ");
+                                    j++;
+                            %>
+                        </s:iterator>
+                 </div>
+                <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
+                <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption" />
+                <br/>
+                <div class="form-check align-center">
+                    <input class="form-check1-input" type="checkbox" id="coseChk" />
+                    <label class="form-check1-label" for="coseChk">Cose sensitive</label>
+                </div>
+                <div class="form-check align-center">
+                    <input class="form-check2-input" type="checkbox" id="exactChk" />
+                    <label class="form-check2-label" for="exactChk">Exact Result</label>
+                </div>
+               
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-primary mb-2"/>
             </s:form>
         </div>
         
+                 <script src="js/jquery-3.4.1.min.js"></script>
+        <script>
+            var i = 1;
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+            function addOption(){
+                var optList = document.getElementById("optionL");
+                var col = document.createElement("div");
+
+                var input = document.createElement("input");
+                input.setAttribute("type","text");
+                input.setAttribute("class","form-control");
+                input.setAttribute("name","optionList["+i+"].text");
+                input.setAttribute("placeholder","Option Answer");
+
+                col.appendChild(input);
+                optList.appendChild(col);
+                
+                i ++;               
+            }
+            function quitOption(){
+                var optList = document.getElementById("optionL");
+                if (optList.childElementCount > 1) {
+                    optList.removeChild(optList.lastChild);
+                    i--;
+                }
+            }
+        </script>
     </body>
 </html>
 

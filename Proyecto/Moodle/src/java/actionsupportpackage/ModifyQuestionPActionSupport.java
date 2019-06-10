@@ -64,7 +64,6 @@ public class ModifyQuestionPActionSupport extends ActionSupport {
                                 String auxText = optionE.getAttributeValue("text");
                                 int auxPoints = Integer.parseInt(optionE.getAttributeValue("points"));
                                 Option o = new Option(auxText, auxPoints);
-                                System.out.println(o.toString());
                                 this.optionList.add(o);
                             }
                             break;

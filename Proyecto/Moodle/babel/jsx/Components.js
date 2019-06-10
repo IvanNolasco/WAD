@@ -264,11 +264,25 @@ class Question extends React.Component{
         media: null,
         name: "",
         qtype: "",
-        question: ""
+        question: "",
+        optionList: [],
+        exactchk : false,
+        cosechk : false
     }
     handleChange = (e) => {
         const target = e.target;
-        const value = target.type === 'file' ? target.files[0] : target.value;
+        var value;
+        switch (target.type)
+        {
+            case 'file':
+                value=target.files[0];
+                break;
+            case 'checkbox':
+                value=target.checked;
+                break;
+            default:
+                value = target.value;
+        }
         const name = target.name;
         this.setState({[name]: value});
     }
@@ -322,18 +336,18 @@ class Question extends React.Component{
                 <input type="hidden" name="qtype" value="fill" id="qtype" />
                 <label class="form-label" >Options:</label>
                 <div class="row" id="optionL">
-                 <input type="text" className="form-control" name="optionList[0].text" placeholder="Option Answer"/> 
+                 <input type="text" className="form-control" name="optionList[0].text" placeholder="Option Answer" onChange={this.handleChange}/> 
                 </div>
                 <input type="button" id="addBtn" className="btn btn-primary mt-2" value="Add option" onClick={() => addOption()} />
                 <input type="button" id="quitBtn" className="btn btn-primary mt-2" value="Quit option" onClick={() => quitOption()} />
                         <p></p>
                 <div className="form-check align-center">
-                    <input className="form-check1-input" type="checkbox" id="coseChk" />
-                    <label className="form-check1-label" for="coseChk">Cose sensitive</label>
+                    <input className="form-check1-input" type="checkbox" id="cosechk" onChange={this.handleChange} />
+                    <label className="form-check1-label" for="cosechk">Cose sensitive</label>
                 </div>
                 <div className="form-check align-center">
-                    <input className="form-check2-input" type="checkbox" id="exactChk" />
-                    <label className="form-check2-label" for="exactChk">Exact Result</label>
+                    <input className="form-check2-input" type="checkbox" id="exactchk" onChange={this.handleChange}/>
+                    <label className="form-check2-label" for="exactchk">Exact Result</label>
                 </div>
                 <input type="submit" value="Next" className="btn btn-block btn-primary mb-2"/>
             </form>

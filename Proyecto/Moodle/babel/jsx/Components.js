@@ -265,7 +265,7 @@ class Question extends React.Component{
         name: "",
         qtype: "",
         question: "",
-        optionList: [],
+        optionList: ["",""],
         exactchk : false,
         cosechk : false
     }
@@ -286,6 +286,25 @@ class Question extends React.Component{
         const name = target.name;
         this.setState({[name]: value});
     }
+    handleOptions = (e) => {
+        i = e.target.name;
+        let copy = this.state.optionList;
+        copy[i] = e.target.value;
+        this.setState({optionList: copy})
+    }
+
+    add = () => {
+        this.setState(state =>{
+            {optionList: state.optionList.push("")}
+        })
+    }
+    quit = () => {
+        this.setState(state => {
+            state.optionList.pop();
+            { optionList: state.optionList}
+        })
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
@@ -336,17 +355,19 @@ class Question extends React.Component{
                 <input type="hidden" name="qtype" value="fill" id="qtype" />
                 <label class="form-label" >Options:</label>
                 <div class="row" id="optionL">
-                 <input type="text" className="form-control" name="optionList[0].text" placeholder="Option Answer" onChange={this.handleChange}/> 
+                    {this.state.optionList.map((option,index) =>{
+                        return <input key={index} type="text" value={option} className="form-control" name={index} placeholder="Option Answer" onChange={this.handleOptions} />   
+                    })}
                 </div>
-                <input type="button" id="addBtn" className="btn btn-primary mt-2" value="Add option" onClick={() => addOption()} />
-                <input type="button" id="quitBtn" className="btn btn-primary mt-2" value="Quit option" onClick={() => quitOption()} />
+                <input type="button" id="addBtn" className="btn btn-primary mt-2" value="Add option" onClick={this.add} />
+                <input type="button" id="quitBtn" className="btn btn-primary mt-2" value="Quit option" onClick={this.quit} />
                         <p></p>
                 <div className="form-check align-center">
-                    <input className="form-check1-input" type="checkbox" id="cosechk" onChange={this.handleChange} />
+                    <input className="form-check1-input" type="checkbox" name="cosechk" onChange={this.handleChange} />
                     <label className="form-check1-label" for="cosechk">Cose sensitive</label>
                 </div>
                 <div className="form-check align-center">
-                    <input className="form-check2-input" type="checkbox" id="exactchk" onChange={this.handleChange}/>
+                    <input className="form-check2-input" type="checkbox" name="exactchk" onChange={this.handleChange}/>
                     <label className="form-check2-label" for="exactchk">Exact Result</label>
                 </div>
                 <input type="submit" value="Next" className="btn btn-block btn-primary mb-2"/>

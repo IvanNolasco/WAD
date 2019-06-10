@@ -452,12 +452,43 @@ var Question = function (_React$Component9) {
             media: null,
             name: "",
             qtype: "",
-            question: ""
+            question: "",
+            optionList: ["", ""],
+            exactchk: false,
+            cosechk: false
         }, _this10.handleChange = function (e) {
             var target = e.target;
-            var value = target.type === 'file' ? target.files[0] : target.value;
+            var value;
+            switch (target.type) {
+                case 'file':
+                    value = target.files[0];
+                    break;
+                case 'checkbox':
+                    value = target.checked;
+                    break;
+                default:
+                    value = target.value;
+            }
             var name = target.name;
             _this10.setState(_defineProperty({}, name, value));
+        }, _this10.handleOptions = function (e) {
+            i = e.target.name;
+            var copy = _this10.state.optionList;
+            copy[i] = e.target.value;
+            _this10.setState({ optionList: copy });
+        }, _this10.add = function () {
+            _this10.setState(function (state) {
+                {
+                    optionList: state.optionList.push("");
+                }
+            });
+        }, _this10.quit = function () {
+            _this10.setState(function (state) {
+                state.optionList.pop();
+                {
+                    optionList: state.optionList;
+                }
+            });
         }, _this10.handleSubmit = function (event) {
             event.preventDefault();
             var data = new FormData(event.target);
@@ -468,7 +499,8 @@ var Question = function (_React$Component9) {
     _createClass(Question, [{
         key: "render",
         value: function render() {
-            var _React$createElement2;
+            var _this11 = this,
+                _React$createElement2;
 
             return React.createElement(
                 "form",
@@ -521,32 +553,30 @@ var Question = function (_React$Component9) {
                 React.createElement(
                     "div",
                     { "class": "row", id: "optionL" },
-                    React.createElement("input", { type: "text", className: "form-control", name: "optionList[0].text", placeholder: "Option Answer" })
+                    this.state.optionList.map(function (option, index) {
+                        return React.createElement("input", { key: index, type: "text", value: option, className: "form-control", name: index, placeholder: "Option Answer", onChange: _this11.handleOptions });
+                    })
                 ),
-                React.createElement("input", { type: "button", id: "addBtn", className: "btn btn-primary mt-2", value: "Add option", onClick: function onClick() {
-                        return addOption();
-                    } }),
-                React.createElement("input", { type: "button", id: "quitBtn", className: "btn btn-primary mt-2", value: "Quit option", onClick: function onClick() {
-                        return quitOption();
-                    } }),
+                React.createElement("input", { type: "button", id: "addBtn", className: "btn btn-primary mt-2", value: "Add option", onClick: this.add }),
+                React.createElement("input", { type: "button", id: "quitBtn", className: "btn btn-primary mt-2", value: "Quit option", onClick: this.quit }),
                 React.createElement("p", null),
                 React.createElement(
                     "div",
                     { className: "form-check align-center" },
-                    React.createElement("input", { className: "form-check1-input", type: "checkbox", id: "coseChk" }),
+                    React.createElement("input", { className: "form-check1-input", type: "checkbox", name: "cosechk", onChange: this.handleChange }),
                     React.createElement(
                         "label",
-                        { className: "form-check1-label", "for": "coseChk" },
+                        { className: "form-check1-label", "for": "cosechk" },
                         "Cose sensitive"
                     )
                 ),
                 React.createElement(
                     "div",
                     { className: "form-check align-center" },
-                    React.createElement("input", { className: "form-check2-input", type: "checkbox", id: "exactChk" }),
+                    React.createElement("input", { className: "form-check2-input", type: "checkbox", name: "exactchk", onChange: this.handleChange }),
                     React.createElement(
                         "label",
-                        { className: "form-check2-label", "for": "exactChk" },
+                        { className: "form-check2-label", "for": "exactchk" },
                         "Exact Result"
                     )
                 ),
@@ -566,7 +596,7 @@ var Feedback = function (_React$Component10) {
     function Feedback() {
         var _ref4;
 
-        var _temp4, _this11, _ret4;
+        var _temp4, _this12, _ret4;
 
         _classCallCheck(this, Feedback);
 
@@ -574,19 +604,19 @@ var Feedback = function (_React$Component10) {
             args[_key4] = arguments[_key4];
         }
 
-        return _ret4 = (_temp4 = (_this11 = _possibleConstructorReturn(this, (_ref4 = Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call.apply(_ref4, [this].concat(args))), _this11), _this11.state = {
-            id: _this11.props.id,
+        return _ret4 = (_temp4 = (_this12 = _possibleConstructorReturn(this, (_ref4 = Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call.apply(_ref4, [this].concat(args))), _this12), _this12.state = {
+            id: _this12.props.id,
             tries: "",
             initial: "",
             evaluate: "",
             correct: "",
             incorrect: "",
             triesFB: ""
-        }, _this11.handleChange = function (e) {
+        }, _this12.handleChange = function (e) {
             var target = e.target;
             var name = target.name;
-            _this11.setState(_defineProperty({}, name, target.value));
-        }, _temp4), _possibleConstructorReturn(_this11, _ret4);
+            _this12.setState(_defineProperty({}, name, target.value));
+        }, _temp4), _possibleConstructorReturn(_this12, _ret4);
     }
 
     _createClass(Feedback, [{
@@ -670,7 +700,7 @@ var FeedbackP = function (_React$Component11) {
     function FeedbackP() {
         var _ref5;
 
-        var _temp5, _this12, _ret5;
+        var _temp5, _this13, _ret5;
 
         _classCallCheck(this, FeedbackP);
 
@@ -678,17 +708,17 @@ var FeedbackP = function (_React$Component11) {
             args[_key5] = arguments[_key5];
         }
 
-        return _ret5 = (_temp5 = (_this12 = _possibleConstructorReturn(this, (_ref5 = FeedbackP.__proto__ || Object.getPrototypeOf(FeedbackP)).call.apply(_ref5, [this].concat(args))), _this12), _this12.state = {
-            id: _this12.props.id,
+        return _ret5 = (_temp5 = (_this13 = _possibleConstructorReturn(this, (_ref5 = FeedbackP.__proto__ || Object.getPrototypeOf(FeedbackP)).call.apply(_ref5, [this].concat(args))), _this13), _this13.state = {
+            id: _this13.props.id,
             initial: "",
             evaluate: "",
             correct: "",
             incorrect: ""
-        }, _this12.handleChange = function (e) {
+        }, _this13.handleChange = function (e) {
             var target = e.target;
             var name = target.name;
-            _this12.setState(_defineProperty({}, name, target.value));
-        }, _temp5), _possibleConstructorReturn(_this12, _ret5);
+            _this13.setState(_defineProperty({}, name, target.value));
+        }, _temp5), _possibleConstructorReturn(_this13, _ret5);
     }
 
     _createClass(FeedbackP, [{
@@ -757,7 +787,7 @@ var Login = function (_React$Component12) {
     function Login() {
         var _ref6;
 
-        var _temp6, _this13, _ret6;
+        var _temp6, _this14, _ret6;
 
         _classCallCheck(this, Login);
 
@@ -765,15 +795,15 @@ var Login = function (_React$Component12) {
             args[_key6] = arguments[_key6];
         }
 
-        return _ret6 = (_temp6 = (_this13 = _possibleConstructorReturn(this, (_ref6 = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref6, [this].concat(args))), _this13), _this13.state = {
+        return _ret6 = (_temp6 = (_this14 = _possibleConstructorReturn(this, (_ref6 = Login.__proto__ || Object.getPrototypeOf(Login)).call.apply(_ref6, [this].concat(args))), _this14), _this14.state = {
             userName: "",
             password: ""
-        }, _this13.handleChange = function (e) {
+        }, _this14.handleChange = function (e) {
             var target = e.target;
             var name = target.name;
             console.log(target.name);
-            _this13.setState(_defineProperty({}, name, e.target.value));
-        }, _temp6), _possibleConstructorReturn(_this13, _ret6);
+            _this14.setState(_defineProperty({}, name, e.target.value));
+        }, _temp6), _possibleConstructorReturn(_this14, _ret6);
     }
 
     _createClass(Login, [{

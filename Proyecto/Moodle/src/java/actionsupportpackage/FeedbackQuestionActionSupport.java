@@ -27,9 +27,6 @@ public class FeedbackQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        System.out.println(id);
-        System.out.println(tries);
-        System.out.println(initial);
         //se define la ruta donde se van a buscar los xml
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         //se recupera el username de la sesion

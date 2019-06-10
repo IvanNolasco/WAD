@@ -116,10 +116,12 @@ class FormGroup extends React.Component{
                         case "textarea":
                             return (
                                 <textarea 
-                                    className="form-control" 
+                                    className="form-control"
+                                    id = {title} 
                                     name={title} 
-                                    onChange={this.handleChange} 
-                                    required placeholder={ph} 
+                                    onChange={this.handleChange}  
+                                    placeholder={ph} 
+                                    required = {req}
                                     rows="3" 
                                     value={value} 
                                 /> 
@@ -538,26 +540,26 @@ class HeaderLogged extends React.Component{
         return (
         <div className="container-fluid">
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <button className="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation" >
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <a className="navbar-brand" href="#">
-                <h1 className="display-6">Moodle</h1>
-            </a>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                    <a className="nav-link" href="QuestionCreation">Questions</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="ExamCreation">Exams</a>
-                </li>
-                </ul>
-            </div>
-            <span className="navbar-text">
-                <button type="button" className="btn btn-link text-light" onClick={() => location.href='Login.jsp' }>Sing out</button>
-            </span>
+                <a className="navbar-brand" href="#">
+                    <h1 className="display-6">Moodle</h1>
+                </a>
+                <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation" >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <a className="nav-link" href="QuestionCreation">Questions</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="ExamCreation">Exams</a>
+                    </li>
+                    </ul>
+                </div>
+                <span className="navbar-text">
+                    <button type="button" className="btn btn-link text-light" onClick={() => location.href='Login.jsp' }>Sing out</button>
+                </span>
             </nav>
         </div>
         );

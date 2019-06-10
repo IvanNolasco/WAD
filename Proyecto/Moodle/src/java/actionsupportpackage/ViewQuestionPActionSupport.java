@@ -10,6 +10,8 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class ViewQuestionPActionSupport extends ActionSupport {
     
@@ -27,11 +29,14 @@ public class ViewQuestionPActionSupport extends ActionSupport {
     private String correct;
     private String incorrect;
     
+    private String questionJSON;
+    
     @Override
     public String execute() throws Exception {
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         String path = ServletActionContext.getServletContext().getRealPath("/");
         optionList = new ArrayList<>();
+        JSONObject obj = new JSONObject();
         try {
             SAXBuilder builder = new SAXBuilder();
             File xmlFile = new File(path + "\\xmls\\Questions.xml");
@@ -44,30 +49,42 @@ public class ViewQuestionPActionSupport extends ActionSupport {
                 if (username.equals(userName)) {
                     List questionsList = teacher.getChildren("question");
                     for (int j = 0; j < questionsList.size(); j++) {
-                        Element question = (Element) questionsList.get(j);
-                        String questionid = question.getAttributeValue("id");
+                        Element questionE = (Element) questionsList.get(j);
+                        String questionid = questionE.getAttributeValue("id");
                         if (questionid.equals(this.id)) {
 
-                            this.qtype = question.getAttributeValue("qtype");
-                            this.name = question.getAttributeValue("name");
-                            this.question = question.getAttributeValue("question");
-                            this.maxQuant = question.getAttributeValue("max");
-                            this.source = question.getAttributeValue("source");
-                            this.type = question.getAttributeValue("type");
-                            List options = question.getChildren("option");
+                            this.qtype = questionE.getAttributeValue("qtype");
+                            this.name = questionE.getAttributeValue("name");
+                            this.question = questionE.getAttributeValue("question");
+                            this.maxQuant = questionE.getAttributeValue("max");
+                            this.source = questionE.getAttributeValue("source");
+                            this.type = questionE.getAttributeValue("type");
+                            List options = questionE.getChildren("option");
+                            JSONArray list = new JSONArray();
                             for (int k = 0; k < options.size(); k++) {
                                 Element optionE = (Element) options.get(k);
+                                JSONObject objOptions = new JSONObject();
                                 String auxText = optionE.getAttributeValue("text");
                                 int auxPoints = Integer.parseInt(optionE.getAttributeValue("points"));
                                 Option o = new Option(auxText, auxPoints);
                                 this.optionList.add(o);
+                                objOptions.put("text",auxText);
+                                objOptions.put("points",auxPoints);
+                                list.add(objOptions);
                             }
+                            obj.put("question", question);
+                            obj.put("qtype", qtype);
+                            obj.put("name", name);
+                            obj.put("max", maxQuant);
+                            obj.put("source", source);
+                            obj.put("type", type);
+                            obj.put("options", list);
                             break;
                         }
                     }
                 }
             }
-
+            
         } catch (JDOMException e) {
             e.printStackTrace();
         }
@@ -91,17 +108,20 @@ public class ViewQuestionPActionSupport extends ActionSupport {
                             this.incorrect = feedback.getAttributeValue("incorrect");
                             this.initial = feedback.getAttributeValue("initial");
                             this.evaluate = feedback.getAttributeValue("evaluate");
+                            obj.put("initial", initial);
+                            obj.put("evaluate", evaluate);
+                            obj.put("correct", correct);
+                            obj.put("incorrect", incorrect);
                             break;
                         }
                     }
 
                 }
             }
-
         } catch (JDOMException e) {
             e.printStackTrace();
         }
-
+        questionJSON = obj.toJSONString();
         return SUCCESS;
     }
     
@@ -203,7 +223,13 @@ public class ViewQuestionPActionSupport extends ActionSupport {
     
     public ViewQuestionPActionSupport() {
     }
-    
-    
+
+    public String getQuestionJSON() {
+        return questionJSON;
+    }
+
+    public void setQuestionJSON(String questionJSON) {
+        this.questionJSON = questionJSON;
+    }
     
 }

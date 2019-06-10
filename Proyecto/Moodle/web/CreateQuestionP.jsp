@@ -76,9 +76,9 @@
                             <input type="number" class="form-control" name="optionList[1].points" placeholder="Points" min="1" max="5" />
                         </div>
                     </div>
-                    <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
-                    <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />
-                </div>               
+                </div>    
+                <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
+                <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />
                 <s:hidden name="qtype" id="qtype" value="partial" />
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-primary"/>
             </s:form>

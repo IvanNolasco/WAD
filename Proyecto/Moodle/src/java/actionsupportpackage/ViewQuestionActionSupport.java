@@ -9,22 +9,12 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.json.simple.JSONObject;
 
 public class ViewQuestionActionSupport extends ActionSupport {
     private String id;
-    private String name;
-    private String qtype;
-    private String question;
-    private String answer;
-    private String source;
-    private String type;
     
-    private String tries;
-    private String initial;
-    private String evaluate;
-    private String correct;
-    private String incorrect;
-    private String triesFB;
+    private String questionJSON;
     
     
     public ViewQuestionActionSupport() {
@@ -43,6 +33,7 @@ public class ViewQuestionActionSupport extends ActionSupport {
             Document document = builder.build(xmlFile);
             Element root = document.getRootElement();
             List teachersList = root.getChildren("teacher");
+            JSONObject obj = new JSONObject();
             //iteramos los nodos de los profesores
             for(int i=0;i<teachersList.size();i++) {
                 Element teacher = (Element)teachersList.get(i);
@@ -57,12 +48,16 @@ public class ViewQuestionActionSupport extends ActionSupport {
                         String idQ = questionE.getAttributeValue("id");
                         if(idQ.equals(this.id)) {
                             //al encontrar la pregunta que buscamos, recuperamos sus atributos
-                            this.name = questionE.getAttributeValue("name");
-                            this.qtype = questionE.getAttributeValue("qtype");
-                            this.question = questionE.getAttributeValue("question");
-                            this.answer = questionE.getAttributeValue("answer");
-                            this.source = questionE.getAttributeValue("source");
-                            this.type = questionE.getAttributeValue("type");
+                            String question = questionE.getAttributeValue("question");
+                            String qtype = questionE.getAttributeValue("qtype");
+                            String answer = questionE.getAttributeValue("answer");
+                            String source = questionE.getAttributeValue("source");
+                            String type = questionE.getAttributeValue("type");
+                            obj.put("question", question);
+                            obj.put("qtype", qtype);
+                            obj.put("answer", answer);
+                            obj.put("source", source);
+                            obj.put("type", type);
                             break;
                         }   
                     }
@@ -71,19 +66,26 @@ public class ViewQuestionActionSupport extends ActionSupport {
                         String idF = feedbackE.getAttributeValue("id");
                         if(idF.equals(this.id)) {
                             //al encontrar el feedback que buscamos, recuperamos sus atributos
-                            this.tries = feedbackE.getAttributeValue("tries");
-                            this.initial = feedbackE.getAttributeValue("initial");
-                            this.evaluate = feedbackE.getAttributeValue("evaluate");
-                            this.correct = feedbackE.getAttributeValue("correct");
-                            this.incorrect = feedbackE.getAttributeValue("incorrect");
-                            this.triesFB = feedbackE.getAttributeValue("triesFB");
+                            String tries = feedbackE.getAttributeValue("tries");
+                            String initial = feedbackE.getAttributeValue("initial");
+                            String evaluate = feedbackE.getAttributeValue("evaluate");
+                            String correct = feedbackE.getAttributeValue("correct");
+                            String incorrect = feedbackE.getAttributeValue("incorrect");
+                            String triesFB = feedbackE.getAttributeValue("triesFB");
+                            obj.put("tries", tries);
+                            obj.put("initial", initial);
+                            obj.put("evaluate", evaluate);
+                            obj.put("correct", correct);
+                            obj.put("incorrect", incorrect);
+                            obj.put("triesFB",triesFB);
                             break;
                         }
                         
                     }
+                    break;
                 }
             }
-             
+            questionJSON = obj.toJSONString();
         }
         catch(JDOMException e) {
             e.printStackTrace();
@@ -99,60 +101,12 @@ public class ViewQuestionActionSupport extends ActionSupport {
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getQuestion() {
-        return question;
+    
+    public void setQuestionJSON(String questionJSON) {
+        this.questionJSON = questionJSON;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getTries() {
-        return tries;
-    }
-
-    public String getInitial() {
-        return initial;
-    }
-
-    public String getCorrect() {
-        return correct;
-    }
-
-    public String getIncorrect() {
-        return incorrect;
-    }
-
-    public String getEvaluate() {
-        return evaluate;
-    }
-
-    public String getTriesFB() {
-        return triesFB;
+    public String getQuestionJSON() {
+        return questionJSON;
     }
 }

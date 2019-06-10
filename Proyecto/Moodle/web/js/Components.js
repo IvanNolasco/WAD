@@ -268,9 +268,11 @@ var FormGroup = function (_React$Component6) {
                         case "textarea":
                             return React.createElement("textarea", {
                                 className: "form-control",
+                                id: title,
                                 name: title,
                                 onChange: _this7.handleChange,
-                                required: true, placeholder: ph,
+                                placeholder: ph,
+                                required: req,
                                 rows: "3",
                                 value: value
                             });
@@ -853,12 +855,6 @@ var HeaderLogged = function (_React$Component15) {
                     "nav",
                     { className: "navbar navbar-expand-lg navbar-dark bg-primary" },
                     React.createElement(
-                        "button",
-                        { className: "navbar-toggler navbar-toggler-right", "data-toggle": "collapse", "data-target": "#navbarSupportedContent",
-                            "aria-controls": "navbarSupportedContent", "aria-expanded": "true", "aria-label": "Toggle navigation" },
-                        React.createElement("span", { className: "navbar-toggler-icon" })
-                    ),
-                    React.createElement(
                         "a",
                         { className: "navbar-brand", href: "#" },
                         React.createElement(
@@ -866,6 +862,12 @@ var HeaderLogged = function (_React$Component15) {
                             { className: "display-6" },
                             "Moodle"
                         )
+                    ),
+                    React.createElement(
+                        "button",
+                        { className: "navbar-toggler", "data-toggle": "collapse", "data-target": "#navbarSupportedContent",
+                            "aria-controls": "navbarSupportedContent", "aria-expanded": "true", "aria-label": "Toggle navigation" },
+                        React.createElement("span", { className: "navbar-toggler-icon" })
                     ),
                     React.createElement(
                         "div",

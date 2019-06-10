@@ -16,49 +16,62 @@ function App() {
         'div',
         { className: 'App' },
         React.createElement(Header, { user: user }),
-        React.createElement(Titulo, { title: 'View Question' })
+        React.createElement(Titulo, { title: 'View Question' }),
+        React.createElement(PreguntaFill, { info: question })
     );
 }
+//Componente para mostrar y responder la pregunta de tipo fill in the blank
 
-var preguntaFill = function (_React$Component) {
-    _inherits(preguntaFill, _React$Component);
+var PreguntaFill = function (_React$Component) {
+    _inherits(PreguntaFill, _React$Component);
 
-    function preguntaFill() {
-        _classCallCheck(this, preguntaFill);
+    function PreguntaFill() {
+        _classCallCheck(this, PreguntaFill);
 
-        return _possibleConstructorReturn(this, (preguntaFill.__proto__ || Object.getPrototypeOf(preguntaFill)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (PreguntaFill.__proto__ || Object.getPrototypeOf(PreguntaFill)).apply(this, arguments));
     }
 
-    _createClass(preguntaFill, [{
+    _createClass(PreguntaFill, [{
         key: 'render',
         value: function render() {
-            var children = this.props.children;
+            var info = this.props.info;
 
             return React.createElement(
                 'div',
-                null,
+                { className: 'container' },
                 React.createElement(
                     'div',
-                    { id: 'row' },
-                    React.createElement(InitialFeedback, null),
-                    React.createElement(Tries, null)
+                    { className: 'row' },
+                    React.createElement(
+                        InitialFeedback,
+                        null,
+                        info.initial
+                    ),
+                    React.createElement(
+                        Tries,
+                        null,
+                        info.qtype === "fill" ? "Tries:" + info.tries : "Max Options:" + info.max
+                    )
                 ),
                 React.createElement(
                     'p',
-                    { 'class': 'h2 text-center border border-dark rounded bg-light' },
-                    'Responde la siguiente pregunta'
+                    { className: 'h2 text-center border border-dark rounded bg-light' },
+                    info.question
                 ),
                 React.createElement(
                     'div',
-                    { id: 'row' },
-                    React.createElement(FormAnswer, null)
+                    { className: 'row' },
+                    React.createElement(FormAnswer, Object.assign({ feedback: info.evaluate, type: info.qtype }, info.qtype === "partial" ? { options: info.options } : {})),
+                    React.createElement(Media, { source: info.source, mediaType: info.type })
                 )
             );
         }
     }]);
 
-    return preguntaFill;
+    return PreguntaFill;
 }(React.Component);
+//Componente que muestra el feedback inicial, como por ejemplo "Responda la siguiente pregunta"
+
 
 var InitialFeedback = function (_React$Component2) {
     _inherits(InitialFeedback, _React$Component2);
@@ -89,6 +102,8 @@ var InitialFeedback = function (_React$Component2) {
 
     return InitialFeedback;
 }(React.Component);
+//Componente donde se imprimen los intentos para repsonder una pregunta fill in the blank
+
 
 var Tries = function (_React$Component3) {
     _inherits(Tries, _React$Component3);
@@ -110,8 +125,7 @@ var Tries = function (_React$Component3) {
                 React.createElement(
                     'p',
                     { className: 'h4 text-right' },
-                    children,
-                    ':'
+                    children
                 )
             );
         }
@@ -119,6 +133,8 @@ var Tries = function (_React$Component3) {
 
     return Tries;
 }(React.Component);
+//Componente que contiene el formulario para responder la pregunta
+
 
 var FormAnswer = function (_React$Component4) {
     _inherits(FormAnswer, _React$Component4);
@@ -138,24 +154,45 @@ var FormAnswer = function (_React$Component4) {
             var target = e.target;
             var name = target.name;
             _this4.setState(_defineProperty({}, name, target.value));
+        }, _this4.handleSubmit = function (e) {
+            event.preventDefault();
+            eval();
         }, _temp), _possibleConstructorReturn(_this4, _ret);
     }
 
     _createClass(FormAnswer, [{
         key: 'render',
         value: function render() {
+            var _props = this.props,
+                feedback = _props.feedback,
+                options = _props.options,
+                type = _props.type;
+
             return React.createElement(
-                'form',
-                { onSubmit: this.handleSubmit, method: 'post' },
-                React.createElement(FormGroup, {
-                    onChange: this.handleChange,
-                    ph: 'Write your answer here',
-                    text: 'Your Answer',
-                    title: 'ans',
-                    type: 'textarea',
-                    value: this.state.question
-                }),
-                React.createElement('input', { type: 'submit', value: 'Next', className: 'btn btn-block btn-primary mb-2' })
+                'div',
+                { className: 'col' },
+                React.createElement(
+                    'form',
+                    { onSubmit: this.handleSubmit, method: 'post' },
+                    type === "fill" ? React.createElement(FormGroup, {
+                        onChange: this.handleChange,
+                        ph: 'Write your answer here',
+                        req: false,
+                        text: 'Your Answer',
+                        title: 'ans',
+                        type: 'textarea',
+                        value: this.state.question
+                    }) : options.map(function (option, index) {
+                        return React.createElement(Options, { key: index, text: option.text, points: option.points });
+                    }),
+                    React.createElement('div', { id: 'feed' }),
+                    React.createElement('input', { type: 'submit', value: 'Next', id: 'send', className: 'btn btn-block btn-primary mb-2' })
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'alert alert-warning', role: 'alert' },
+                    feedback
+                )
             );
         }
     }]);
@@ -163,8 +200,44 @@ var FormAnswer = function (_React$Component4) {
     return FormAnswer;
 }(React.Component);
 
-var Media = function (_React$Component5) {
-    _inherits(Media, _React$Component5);
+var Options = function (_React$Component5) {
+    _inherits(Options, _React$Component5);
+
+    function Options() {
+        _classCallCheck(this, Options);
+
+        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+    }
+
+    _createClass(Options, [{
+        key: 'render',
+        value: function render() {
+            var _props2 = this.props,
+                points = _props2.points,
+                text = _props2.text;
+
+            return React.createElement(
+                'div',
+                { className: 'form-check ml-4' },
+                React.createElement('input', { type: 'checkbox', name: 'option', value: points, className: 'form-check-input', onChange: function onChange() {
+                        return maxCheck();
+                    } }),
+                React.createElement(
+                    'label',
+                    { htmlFor: 'option', className: 'form-check-label' },
+                    text
+                )
+            );
+        }
+    }]);
+
+    return Options;
+}(React.Component);
+//Componente que contiene el archivo multimedia para complementar la pregunta, ya sean imagenes, videos o audios
+
+
+var Media = function (_React$Component6) {
+    _inherits(Media, _React$Component6);
 
     function Media() {
         _classCallCheck(this, Media);
@@ -175,16 +248,22 @@ var Media = function (_React$Component5) {
     _createClass(Media, [{
         key: 'render',
         value: function render() {
-            var mediaType = this.props.mediaType;
+            var _props3 = this.props,
+                mediaType = _props3.mediaType,
+                source = _props3.source;
 
             return React.createElement(
                 'div',
-                { 'class': 'col' },
+                { className: 'col' },
                 function () {
                     if (mediaType.startsWith("image")) {
-                        return null;
+                        return React.createElement('img', { src: source, className: 'img-thumbnail mx-auto d-block' });
+                    } else if (mediaType.startsWith("audio")) {
+                        return React.createElement('audio', { src: source, controls: true });
+                    } else {
+                        return React.createElement('video', { src: source, width: '640', height: '480', controls: true });
                     }
-                }
+                }()
             );
         }
     }]);

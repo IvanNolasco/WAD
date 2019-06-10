@@ -13,6 +13,8 @@
     <!-- Cargar React. -->
     <script src="js/react.min.js" crossorigin></script>
     <script src="js/react-dom.min.js" crossorigin></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script type="module" src="js/welcome.js"></script>
     <script type="module" src="js/Components.js"></script>
     <script>

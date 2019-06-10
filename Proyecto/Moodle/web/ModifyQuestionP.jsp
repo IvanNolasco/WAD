@@ -85,7 +85,7 @@
                         <%
                             int j=0;
                         %>
-                        <s:iterator value="optionList" var="option">
+                        <s:iterator value="optionList" >
                             <s:set var="textvar" value="text"/>
                             <jsp:useBean id="textvar" type="java.lang.String" />
                             <s:set var="pointsvar" value="points"/>
@@ -102,7 +102,6 @@
                                     String points=pointsvar.toString();
                                     out.println("<input type='number' class='form-control' name='optionList["+n+"].points' placeholder='Points' min='1' max='5' value='"+points+"'/>");
                                     j++;
-                                    System.out.println(j);
                                     out.print("<input type=\"text\" name= \"mediaFileName\" id=\"mediaFileName\" class=\"form-control\" required=\"true\" value=\""+sourcevar+"\" style='display:none' />");
                                     out.print("<input type=\"text\" name= \"mediaContentType\" id=\"mediaContentType\" class=\"form-control\" required=\"true\" value=\""+contentvar+"\" style='display:none' />");  
                                 %>

@@ -513,6 +513,43 @@ var Question = function (_React$Component9) {
                     type: "file"
                 }),
                 React.createElement("input", { type: "hidden", name: "qtype", value: "fill", id: "qtype" }),
+                React.createElement(
+                    "label",
+                    { "class": "form-label" },
+                    "Options:"
+                ),
+                React.createElement(
+                    "div",
+                    { "class": "row", id: "optionL" },
+                    React.createElement("input", { type: "text", className: "form-control", name: "optionList[0].text", placeholder: "Option Answer" })
+                ),
+                React.createElement("input", { type: "button", id: "addBtn", className: "btn btn-primary mt-2", value: "Add option", onClick: function onClick() {
+                        return addOption();
+                    } }),
+                React.createElement("input", { type: "button", id: "quitBtn", className: "btn btn-primary mt-2", value: "Quit option", onClick: function onClick() {
+                        return quitOption();
+                    } }),
+                React.createElement("p", null),
+                React.createElement(
+                    "div",
+                    { className: "form-check align-center" },
+                    React.createElement("input", { className: "form-check1-input", type: "checkbox", id: "coseChk" }),
+                    React.createElement(
+                        "label",
+                        { className: "form-check1-label", "for": "coseChk" },
+                        "Cose sensitive"
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "form-check align-center" },
+                    React.createElement("input", { className: "form-check2-input", type: "checkbox", id: "exactChk" }),
+                    React.createElement(
+                        "label",
+                        { className: "form-check2-label", "for": "exactChk" },
+                        "Exact Result"
+                    )
+                ),
                 React.createElement("input", { type: "submit", value: "Next", className: "btn btn-block btn-primary mb-2" })
             );
         }

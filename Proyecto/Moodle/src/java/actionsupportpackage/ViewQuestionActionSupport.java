@@ -50,14 +50,24 @@ public class ViewQuestionActionSupport extends ActionSupport {
                             //al encontrar la pregunta que buscamos, recuperamos sus atributos
                             String question = questionE.getAttributeValue("question");
                             String qtype = questionE.getAttributeValue("qtype");
-                            String answer = questionE.getAttributeValue("answer");
                             String source = questionE.getAttributeValue("source");
                             String type = questionE.getAttributeValue("type");
+                            String exact = questionE.getAttributeValue("exact");
+                            String casechk = questionE.getAttributeValue("case");
                             obj.put("question", question);
                             obj.put("qtype", qtype);
-                            obj.put("answer", answer);
+                            obj.put("casechk", casechk);
+                            obj.put("exactchk", exact);
                             obj.put("source", source);
                             obj.put("type", type);
+                            List options = questionE.getChildren("option");
+                            JSONObject obj2 = new JSONObject();
+                            for(int k=0; k<options.size(); k++){
+                                Element opt = (Element) options.get(k);
+                                String text = opt.getAttributeValue("text");
+                                obj2.put("text", text);
+                            }
+                            obj.put("options", obj2);
                             break;
                         }   
                     }

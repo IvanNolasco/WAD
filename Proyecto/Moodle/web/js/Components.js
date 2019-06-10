@@ -447,7 +447,6 @@ var Question = function (_React$Component9) {
         }
 
         return _ret3 = (_temp3 = (_this10 = _possibleConstructorReturn(this, (_ref3 = Question.__proto__ || Object.getPrototypeOf(Question)).call.apply(_ref3, [this].concat(args))), _this10), _this10.state = {
-            answer: "",
             id: "",
             media: null,
             name: "",
@@ -464,7 +463,7 @@ var Question = function (_React$Component9) {
                     value = target.files[0];
                     break;
                 case 'checkbox':
-                    value = target.checked;
+                    value = target.checked.toString();
                     break;
                 default:
                     value = target.value;
@@ -528,14 +527,6 @@ var Question = function (_React$Component9) {
                     title: "question",
                     type: "textarea",
                     value: this.state.question
-                }),
-                React.createElement(FormGroup, {
-                    onChange: this.handleChange,
-                    ph: "Question Answer",
-                    text: "Answer",
-                    title: "answer",
-                    type: "text",
-                    value: this.state.answer
                 }),
                 React.createElement(FormGroup, {
                     onChange: this.handleChange,

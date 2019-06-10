@@ -20,7 +20,9 @@ public class CreateQuestionActionSupport extends ActionSupport {
     private String qtype;
     private String name;
     private String question;
-    private String answer;
+    private List<String> optionList;
+    private String exactchk;
+    private String casechk;
     private File media;
     private String mediaContentType;
     private String mediaFileName;
@@ -66,7 +68,15 @@ public class CreateQuestionActionSupport extends ActionSupport {
                     quest.setAttribute("qtype", qtype);
                     quest.setAttribute("name", name);
                     quest.setAttribute("question", question);
-                    quest.setAttribute("answer", answer);
+                    quest.setAttribute("exact", exactchk);
+                    quest.setAttribute("case",casechk);
+                    //se iteran las opciones de la pregunta recuperados del formulario
+                    for(int i=0; i<optionList.size(); i++){
+                        //por cada opcion se crea un nodo y se añade al nodo de pregunta
+                        Element option = new Element("option");
+                        option.setAttribute("text", optionList.get(i));
+                        quest.addContent(option);
+                    }
                     quest.setAttribute("source", "media\\"+mediaFileName);
                     quest.setAttribute("type", mediaContentType);
                     teacher.addContent(quest);
@@ -77,12 +87,21 @@ public class CreateQuestionActionSupport extends ActionSupport {
             //si no se encontro el nodo del profesor porque no existe, lo creamos
             if(existnode == 0){
                 Element teacher = new Element("teacher");
+                teacher.setAttribute("username", userName);
                 Element quest = new Element("question");
                 quest.setAttribute("id", id);
                 quest.setAttribute("qtype", qtype);
                 quest.setAttribute("name", name);
                 quest.setAttribute("question", question);
-                quest.setAttribute("answer", answer);
+                quest.setAttribute("exact", exactchk);
+                quest.setAttribute("case",casechk);
+                //se iteran las opciones de la pregunta recuperados del formulario
+                for(int i=0; i<optionList.size(); i++){
+                    //por cada opcion se crea un nodo y se añade al nodo de pregunta
+                    Element option = new Element("option");
+                    option.setAttribute("text", optionList.get(i));
+                    quest.addContent(option);
+                }
                 quest.setAttribute("source", "media\\"+mediaFileName);
                 quest.setAttribute("type", mediaContentType);
                 teacher.addContent(quest);
@@ -128,12 +147,32 @@ public class CreateQuestionActionSupport extends ActionSupport {
         this.question = question;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public List<String> getOptionList() {
+        return optionList;
+    }
+
+    public void setOptionList(List<String> optionList) {
+        this.optionList = optionList;
+    }
+
+    public String getExactchk() {
+        return exactchk;
+    }
+
+    public void setExactchk(String exactchk) {
+        this.exactchk = exactchk;
+    }
+
+    public String getCasechk() {
+        return casechk;
+    }
+
+    public void setCasechk(String casechk) {
+        this.casechk = casechk;
     }
     
 }

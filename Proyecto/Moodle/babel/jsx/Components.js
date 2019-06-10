@@ -259,7 +259,6 @@ class QuestionP extends React.Component{
 
 class Question extends React.Component{
     state = {
-        answer: "",
         id: "",
         media: null,
         name: "",
@@ -278,7 +277,7 @@ class Question extends React.Component{
                 value=target.files[0];
                 break;
             case 'checkbox':
-                value=target.checked;
+                value=target.checked.toString();
                 break;
             default:
                 value = target.value;
@@ -336,14 +335,6 @@ class Question extends React.Component{
                     title="question" 
                     type="textarea" 
                     value={this.state.question} 
-                />
-                <FormGroup 
-                    onChange={this.handleChange}
-                    ph="Question Answer" 
-                    text="Answer" 
-                    title="answer" 
-                    type="text" 
-                    value={this.state.answer} 
                 />
                 <FormGroup 
                     onChange={this.handleChange}

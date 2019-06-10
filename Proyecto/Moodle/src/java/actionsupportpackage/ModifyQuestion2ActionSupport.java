@@ -21,7 +21,9 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
     private String qtype;
     private String name;
     private String question;
-    private String answer;
+    private String exactchk;
+    private String casechk;
+    private List<String> optionList;
     private File media;
     private String mediaContentType;
     private String mediaFileName;
@@ -71,7 +73,15 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             quest.setAttribute("qtype", qtype);
             quest.setAttribute("name", name);
             quest.setAttribute("question", question);
-            quest.setAttribute("answer", answer);
+            quest.setAttribute("exact", exactchk);
+            quest.setAttribute("case", casechk);
+            //se iteran las opciones de la pregunta recuperados del formulario
+            for(int i=0; i<optionList.size(); i++){
+                //por cada opcion se crea un nodo y se añade al nodo de pregunta
+                Element option = new Element("option");
+                option.setAttribute("text", optionList.get(i));
+                quest.addContent(option);
+            }
             //en caso de no sobreescribir el multimedia
             if (sobre == 0)
                 quest.setAttribute("source", mediaFileName);
@@ -188,12 +198,28 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
         this.question = question;
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getExactchk() {
+        return exactchk;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setExactchk(String exactchk) {
+        this.exactchk = exactchk;
+    }
+
+    public String getCasechk() {
+        return casechk;
+    }
+
+    public void setCasechk(String casechk) {
+        this.casechk = casechk;
+    }
+
+    public List<String> getOptionList() {
+        return optionList;
+    }
+
+    public void setOptionList(List<String> optionList) {
+        this.optionList = optionList;
     }
 
     public File getMedia() {

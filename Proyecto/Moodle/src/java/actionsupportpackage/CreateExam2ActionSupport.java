@@ -52,6 +52,7 @@ public class CreateExam2ActionSupport extends ActionSupport {
             //si no se encuentra el nodo de profesor porque no existe, lo creamos
             if(existnode == 0){
                 Element teacher = new Element("teacher");
+                teacher.setAttribute("username", userName);
                 Element exam = new Element("exam");
                 exam.setAttribute("name",nameE);
                 for (String id : questionList) {

@@ -259,15 +259,14 @@ class QuestionP extends React.Component{
 
 class Question extends React.Component{
     state = {
-        answer: "",
         id: "",
         media: null,
         name: "",
         qtype: "",
         question: "",
         optionList: [],
-        exactchk : false,
-        cosechk : false
+        exactchk : "false",
+        casechk : "false"
     }
     handleChange = (e) => {
         const target = e.target;
@@ -278,7 +277,7 @@ class Question extends React.Component{
                 value=target.files[0];
                 break;
             case 'checkbox':
-                value=target.checked;
+                value=target.checked.toString();
                 break;
             default:
                 value = target.value;
@@ -320,14 +319,6 @@ class Question extends React.Component{
                 />
                 <FormGroup 
                     onChange={this.handleChange}
-                    ph="Question Answer" 
-                    text="Answer" 
-                    title="answer" 
-                    type="text" 
-                    value={this.state.answer} 
-                />
-                <FormGroup 
-                    onChange={this.handleChange}
                     ph="Choose a media file" 
                     text="Media File" 
                     title="media" 
@@ -342,8 +333,8 @@ class Question extends React.Component{
                 <input type="button" id="quitBtn" className="btn btn-primary mt-2" value="Quit option" onClick={() => quitOption()} />
                         <p></p>
                 <div className="form-check align-center">
-                    <input className="form-check1-input" type="checkbox" id="cosechk" onChange={this.handleChange} />
-                    <label className="form-check1-label" for="cosechk">Cose sensitive</label>
+                    <input className="form-check1-input" type="checkbox" id="casechk" onChange={this.handleChange} />
+                    <label className="form-check1-label" for="casechk">Case sensitive</label>
                 </div>
                 <div className="form-check align-center">
                     <input className="form-check2-input" type="checkbox" id="exactchk" onChange={this.handleChange}/>

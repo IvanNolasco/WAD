@@ -73,8 +73,14 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
             quest.setAttribute("qtype", qtype);
             quest.setAttribute("name", name);
             quest.setAttribute("question", question);
-            quest.setAttribute("exact", exactchk);
-            quest.setAttribute("case", casechk);
+            if(exactchk==null)
+                quest.setAttribute("exact", "false");
+            else
+                quest.setAttribute("exact", "true");
+            if(casechk==null)
+                quest.setAttribute("case","false");
+            else
+                quest.setAttribute("case", "true");
             //se iteran las opciones de la pregunta recuperados del formulario
             for(int i=0; i<optionList.size(); i++){
                 //por cada opcion se crea un nodo y se añade al nodo de pregunta

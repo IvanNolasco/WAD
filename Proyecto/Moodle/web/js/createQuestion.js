@@ -1,5 +1,5 @@
 import Titulo from './Components.js';
-import { Header, FormQuestion } from './Components.js';
+import { Header, FeedBack } from './Components.js';
 
 function App() {
   return React.createElement(
@@ -7,7 +7,7 @@ function App() {
     { className: 'App' },
     React.createElement(Header, { user: user }),
     React.createElement(Titulo, { title: 'Create a New Fill in the blank Question' }),
-    React.createElement(FormQuestion, null)
+    React.createElement(FeedBack, { id: id })
   );
 }
 

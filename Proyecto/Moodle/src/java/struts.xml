@@ -21,7 +21,7 @@
 </action>
 
 <action name="CreateQuestion" method="execute" class="actionsupportpackage.CreateQuestionActionSupport">
-    <result name="success">CreateQuestion.jsp</result>
+    <result name="success">CreateFeedback.jsp</result>
     <result name="IDExistent">IDExistent.jsp</result>
 </action>
 
@@ -78,7 +78,6 @@
 </action>
 
 <action name="CreateQuestionP" method="execute" class="actionsupportpackage.CreateQuestionPActionSupport"> 
-
 <result name="success">CreateFeedbackP.jsp</result>
 </action>
 

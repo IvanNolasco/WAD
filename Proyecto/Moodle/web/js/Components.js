@@ -336,7 +336,7 @@ var FormQuestion = function (_React$Component7) {
         key: "render",
         value: function render() {
 
-            return this.state.view ? React.createElement(Feedback, { id: this.state.id }) : React.createElement(Question, { vista: this.changeView });
+            return this.state.view ? React.createElement(FeedBack, { id: this.state.id }) : React.createElement(Question, { vista: this.changeView });
         }
     }]);
 
@@ -581,21 +581,21 @@ var Question = function (_React$Component9) {
 
 ;
 
-var Feedback = function (_React$Component10) {
-    _inherits(Feedback, _React$Component10);
+var FeedBack = function (_React$Component10) {
+    _inherits(FeedBack, _React$Component10);
 
-    function Feedback() {
+    function FeedBack() {
         var _ref4;
 
         var _temp4, _this12, _ret4;
 
-        _classCallCheck(this, Feedback);
+        _classCallCheck(this, FeedBack);
 
         for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
             args[_key4] = arguments[_key4];
         }
 
-        return _ret4 = (_temp4 = (_this12 = _possibleConstructorReturn(this, (_ref4 = Feedback.__proto__ || Object.getPrototypeOf(Feedback)).call.apply(_ref4, [this].concat(args))), _this12), _this12.state = {
+        return _ret4 = (_temp4 = (_this12 = _possibleConstructorReturn(this, (_ref4 = FeedBack.__proto__ || Object.getPrototypeOf(FeedBack)).call.apply(_ref4, [this].concat(args))), _this12), _this12.state = {
             id: _this12.props.id,
             tries: "",
             initial: "",
@@ -610,7 +610,7 @@ var Feedback = function (_React$Component10) {
         }, _temp4), _possibleConstructorReturn(_this12, _ret4);
     }
 
-    _createClass(Feedback, [{
+    _createClass(FeedBack, [{
         key: "render",
         value: function render() {
             var _React$createElement3;
@@ -680,7 +680,7 @@ var Feedback = function (_React$Component10) {
         }
     }]);
 
-    return Feedback;
+    return FeedBack;
 }(React.Component);
 
 ;
@@ -1012,4 +1012,4 @@ function changeF() {
 }
 
 export default Titulo;
-export { FeedbackP, FormGroup, FormQuestion, Header, Login, TableObj, Welcome };
+export { FeedbackP, FeedBack, FormGroup, FormQuestion, Header, Login, TableObj, Welcome };

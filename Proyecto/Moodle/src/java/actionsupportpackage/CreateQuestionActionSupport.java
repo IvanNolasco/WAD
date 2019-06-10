@@ -87,6 +87,7 @@ public class CreateQuestionActionSupport extends ActionSupport {
             //si no se encontro el nodo del profesor porque no existe, lo creamos
             if(existnode == 0){
                 Element teacher = new Element("teacher");
+                teacher.setAttribute("username", userName);
                 Element quest = new Element("question");
                 quest.setAttribute("id", id);
                 quest.setAttribute("qtype", qtype);

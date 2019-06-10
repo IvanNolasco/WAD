@@ -3,10 +3,11 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 <constant name="struts.multipart.saveDir" value="Moodle/" />
+<constant name="struts.multipart.maxSize" value="200000000" />
 <include file="example.xml"/>
 <!-- Configuration for the default package. -->
-
 <package name="actionsupportpackage" extends="struts-default">
+
     
 <action name="Login" method="execute" class="actionsupportpackage.LoginActionSupport">
     <result name="admin">WelcomeAdmin.jsp</result>
@@ -77,8 +78,10 @@
 </action>
 
 <action name="CreateQuestionP" method="execute" class="actionsupportpackage.CreateQuestionPActionSupport"> 
+
 <result name="success">CreateFeedbackP.jsp</result>
 </action>
+
 
 <action name="CreateFeedbackP" method="execute" class="actionsupportpackage.CreateFeedbackPActionSupport"> 
 <result name="success" type="redirectAction">QuestionCreation</result>

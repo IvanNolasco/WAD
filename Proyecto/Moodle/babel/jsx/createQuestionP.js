@@ -6,7 +6,6 @@ function App() {
     <div className="App">
       <Header user={user} />
       <Titulo title="Create a New Partial Credit Question"/>
-      
       <FeedbackP id={id} />
     </div>
   );      

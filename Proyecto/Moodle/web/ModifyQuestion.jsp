@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@taglib uri="/struts-tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -54,14 +55,10 @@
                     <s:label for="question" theme="simple" cssClass="form-label" value="Question:"/>
                     <s:textfield name="question" id="question" theme="simple" cssClass="form-control" required="true" value="%{question}"/>
                 </div>
-                <div class="form-group">
-                    <s:label for="answer" theme="simple" cssClass="form-label" value="Answer:"/>
-                    <s:textfield name="answer" id="answer" theme="simple" cssClass="form-control" required="true" value="%{answer}"/>
-                    <%
+                <%
                         out.print("<input type=\"text\" name= \"mediaFileName\" id=\"mediaFileName\" class=\"form-control\" required=\"true\" value=\""+sourcevar+"\" style='display:none' />");
                         out.print("<input type=\"text\" name= \"mediaContentType\" id=\"mediaContentType\" class=\"form-control\" required=\"true\" value=\""+contentvar+"\" style='display:none' />");  
-                    %>
-                </div>
+                %>
                 <div class="form-group">
                     <label class="for-label" >Media File:</label>
                     <div class="custom-file">
@@ -78,28 +75,55 @@
                
                <label class="form-label" >Options:</label>
                 <div class="row" id="optionL">
-                    <%  int j=0;  %>
-                    <s:iterator value="optionList">
+                    <s:set var="optionsvar" value="optionList"/>
+                    <jsp:useBean id="optionsvar" type="java.util.ArrayList" />
+                     <%  
+                         List<String> op = optionsvar;
+                         int j=0; %>
+                         
+                    <s:iterator value="optionList" var="text">
+                        <div class="col-10">
                             <s:set var="textvar" value="text"/>
                             <jsp:useBean id="textvar" type="java.lang.String" />
                             <%
                                     int n=j;
                                     String text=textvar;
-                                    out.println("<input type='text' class='form-control' name='optionList["+n+"].text' placeholder='Option Answer' value='"+text+"'/> ");
+                                    out.println("<input type='text' class='form-control' name='optionList["+n+"]' placeholder='Option Answer' value='"+text+"'/> ");
                                     j++;
                             %>
+                        </div>
                         </s:iterator>
                  </div>
                 <input type="button" id="addBtn" class="btn btn-primary mt-2" value="Add option" onclick="addOption()" />
-                <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption" />
-                <br/>
+                <input type="button" id="quitBtn" class="btn btn-primary mt-2" value="Quit option" onclick="quitOption()" />
+                <p></p>
                 <div class="form-check align-center">
-                    <input class="form-check1-input" type="checkbox" id="coseChk" />
-                    <label class="form-check1-label" for="coseChk">Cose sensitive</label>
-                </div>
-                <div class="form-check align-center">
-                    <input class="form-check2-input" type="checkbox" id="exactChk" />
-                    <label class="form-check2-label" for="exactChk">Exact Result</label>
+                     <s:set var="casevar" value="casechk"/>
+                     <jsp:useBean id="casevar" type="java.lang.String" />
+                     <s:set var="exactvar" value="casechk"/>
+                     <jsp:useBean id="exactvar" type="java.lang.String" />
+                     <div class="form-check align-center">
+                    <%
+                        if (casevar=="false"){
+                            out.println("<input class='form-check1-input' type='checkbox' id='casechk' value='false' name='casechk' />");
+                            out.println("<label class='form-check1-label' for='casechk'>Case Sensitive</label>");
+                        }else{
+                            out.println("<input class='form-check1-input' type='checkbox' id='casechk' name='casechk' checked/>");
+                            out.println("<label class='form-check1-label' for='casechk'>Case Sensitive</label>");
+                        }
+                   
+                    %>   
+                    </div>
+                    <div class="form-check align-center">
+                    <%
+                        if (exactvar=="false"){
+                            out.println("<input class='form-check2-input' type='checkbox' id='exactchk' value='false' name='exactchk' />");
+                            out.println("<label class='form-check2-label' for='exactchk'>Exact Result</label>");
+                        }else{
+                            out.println("<input class='form-check2-input' type='checkbox' id='exactchk' name='exactchk' checked/>");
+                            out.println("<label class='form-check2-label' for='exactchk'>Exact Result</label>");
+                        }
+                    %>
                 </div>
                
                 <s:submit value="Next" theme="simple" cssClass="btn btn-block btn-primary mb-2"/>
@@ -108,7 +132,8 @@
         
                  <script src="js/jquery-3.4.1.min.js"></script>
         <script>
-            var i = 1;
+            var i = document.getElementById("optionL").childElementCount;
+            console.log(i)
             // Add the following code if you want the name of the file appear on select
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
@@ -117,6 +142,7 @@
             function addOption(){
                 var optList = document.getElementById("optionL");
                 var col = document.createElement("div");
+                col.setAttribute("class","col-10 mt-2");
 
                 var input = document.createElement("input");
                 input.setAttribute("type","text");

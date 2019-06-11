@@ -32,6 +32,8 @@ public class CreateQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
+        System.out.println(exactchk);
+        System.out.println(casechk);
         //se define la ruta en la que se van a buscar los xml
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         //se recupera el username desde la sesion
@@ -68,8 +70,14 @@ public class CreateQuestionActionSupport extends ActionSupport {
                     quest.setAttribute("qtype", qtype);
                     quest.setAttribute("name", name);
                     quest.setAttribute("question", question);
-                    quest.setAttribute("exact", exactchk);
-                    quest.setAttribute("case",casechk);
+                    if(exactchk==null)
+                        quest.setAttribute("exact", "false");
+                    else
+                        quest.setAttribute("exact", "true");
+                    if(casechk==null)
+                        quest.setAttribute("case","false");
+                    else
+                        quest.setAttribute("case", "true");
                     //se iteran las opciones de la pregunta recuperados del formulario
                     for(int i=0; i<optionList.size(); i++){
                         //por cada opcion se crea un nodo y se añade al nodo de pregunta
@@ -137,6 +145,10 @@ public class CreateQuestionActionSupport extends ActionSupport {
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public String getId() {
+        return id;
     }
     
     public void setQtype(String qtype){

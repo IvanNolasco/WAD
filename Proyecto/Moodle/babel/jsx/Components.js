@@ -187,7 +187,7 @@ class FormQuestion extends React.Component{
     render(){
         
         return (
-            this.state.view ? <Feedback id={this.state.id} /> : <Question vista={this.changeView}/>
+            this.state.view ? <FeedBack id={this.state.id} /> : <Question vista={this.changeView}/>
         );
     }
 }
@@ -374,7 +374,7 @@ class Question extends React.Component{
     }
 };
 
-class Feedback extends React.Component{
+class FeedBack extends React.Component{
     state = {
         id: this.props.id,
         tries: "",
@@ -635,6 +635,7 @@ function changeF (){
 export default Titulo;
 export {
     FeedbackP,
+    FeedBack,
     FormGroup,
     FormQuestion,
     Header,

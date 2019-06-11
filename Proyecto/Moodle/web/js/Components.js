@@ -604,8 +604,8 @@ var FeedBack = function (_React$Component10) {
             args[_key4] = arguments[_key4];
         }
 
-        return _ret4 = (_temp4 = (_this12 = _possibleConstructorReturn(this, (_ref4 = FeedBack.__proto__ || Object.getPrototypeOf(FeedBack)).call.apply(_ref4, [this].concat(args))), _this12), _this12.state = {
-            id: _this12.props.id,
+        return _ret4 = (_temp4 = (_this11 = _possibleConstructorReturn(this, (_ref4 = FeedBack.__proto__ || Object.getPrototypeOf(FeedBack)).call.apply(_ref4, [this].concat(args))), _this11), _this11.state = {
+            id: _this11.props.id,
             tries: "",
             initial: "",
             evaluate: "",

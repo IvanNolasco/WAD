@@ -39,7 +39,7 @@ public class ModifyQuestion2ActionSupport extends ActionSupport {
     }
     
     @Override
-    public String execute() throws Exception {
+    public String execute() throws Exception {;
         //recuperamos el usarname de la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
         //se define la ruta donde se van a buscar los feedback

@@ -32,8 +32,6 @@ public class CreateQuestionActionSupport extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        System.out.println(exactchk);
-        System.out.println(casechk);
         //se define la ruta en la que se van a buscar los xml
         String pathString = ServletActionContext.getServletContext().getRealPath("/");
         //se recupera el username desde la sesion

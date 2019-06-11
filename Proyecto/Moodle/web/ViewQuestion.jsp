@@ -24,11 +24,23 @@
                 var tries = parseInt(question.tries);
                 function eval(){
                     var triesDiv = document.getElementById("tr");
-                    var correctAns = question.answer;
+                    var correctAns = question.options;
                     var correct = document.getElementById("feed");
                     var answer = document.getElementById("ans").value;
+                    var sensitive = question.casechk === "true" ? true : false;
+                    var exact = question.exactchk === "true" ? true : false;
+                    var isCorrect = false;
+                    console.log(correctAns);
+                    for (var i = 0; i < correctAns.length; i++) {
+                        if (sensitive) {
+                            answer = answer.toLowerCase();
+                            correctAns[i].text = correctAns[i].text.toLowerCase();
+                        }
+                        isCorrect = exact ? correctAns[i].text === answer : answer.includes(correctAns[i].text);
+                        if (isCorrect) break;
+                    }
                     console.log("Ans:",typeof correctAns);
-                    if (answer === correctAns) {
+                    if (isCorrect) {
                         correct.innerHTML = "<div class='alert alert-success'><p>"+question.correct+"</p></div>";
                         document.getElementById("send").disabled = true;
                     }else if(tries > 1){

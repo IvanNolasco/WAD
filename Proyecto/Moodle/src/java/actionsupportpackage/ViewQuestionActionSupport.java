@@ -9,6 +9,7 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class ViewQuestionActionSupport extends ActionSupport {
@@ -61,13 +62,15 @@ public class ViewQuestionActionSupport extends ActionSupport {
                             obj.put("source", source);
                             obj.put("type", type);
                             List options = questionE.getChildren("option");
-                            JSONObject obj2 = new JSONObject();
+                            JSONArray list = new JSONArray();
                             for(int k=0; k<options.size(); k++){
                                 Element opt = (Element) options.get(k);
                                 String text = opt.getAttributeValue("text");
+                                JSONObject obj2 = new JSONObject();
                                 obj2.put("text", text);
+                                list.add(obj2);
                             }
-                            obj.put("options", obj2);
+                            obj.put("options", list);
                             break;
                         }   
                     }

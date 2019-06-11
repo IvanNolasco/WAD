@@ -100,11 +100,11 @@
                 <div class="form-check align-center">
                      <s:set var="casevar" value="casechk"/>
                      <jsp:useBean id="casevar" type="java.lang.String" />
-                     <s:set var="exactvar" value="casechk"/>
+                     <s:set var="exactvar" value="exactchk"/>
                      <jsp:useBean id="exactvar" type="java.lang.String" />
                      <div class="form-check align-center">
                     <%
-                        if (casevar=="false"){
+                        if (casevar.equals("false")){
                             out.println("<input class='form-check1-input' type='checkbox' id='casechk' value='false' name='casechk' />");
                             out.println("<label class='form-check1-label' for='casechk'>Case Sensitive</label>");
                         }else{
@@ -116,7 +116,7 @@
                     </div>
                     <div class="form-check align-center">
                     <%
-                        if (exactvar=="false"){
+                        if (exactvar.equals("false")){
                             out.println("<input class='form-check2-input' type='checkbox' id='exactchk' value='false' name='exactchk' />");
                             out.println("<label class='form-check2-label' for='exactchk'>Exact Result</label>");
                         }else{

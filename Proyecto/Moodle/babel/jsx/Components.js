@@ -27,6 +27,11 @@ class Actions extends React.Component{
         return(
             <div className="btn-group btn-block" role="group" aria-label="Basic example">
                 <button className="btn btn-link" onClick={() => location.href = 'View' + type + '?id=' + param}>View {typeAction}</button>
+                {
+                    type === "Exam" 
+                        ? <button className="btn btn-link" onClick={() => location.href = 'TryExam?id=' + param}>Try {typeAction}</button> 
+                    : null 
+                }
                 <button className="btn btn-link" onClick={() => location.href = 'Modify' + type +'?id=' + param}>Modify {typeAction}</button>
                 <button className="btn btn-link" onClick={() => confirmar(param, typeAction)}>Delete {typeAction}</button>
             </div>
@@ -172,6 +177,7 @@ class FormQuestion extends React.Component{
     }
     
     changeView = (data) => {
+        console.log(data.get("exactchk"))
         fetch('CreateQuestion', {method: 'POST',body: data})
             .then((response)=>{
                 if(response.ok)
@@ -265,8 +271,8 @@ class Question extends React.Component{
         qtype: "",
         question: "",
         optionList: ["",""],
-        exactchk : false,
-        cosechk : false
+        exactchk : "false",
+        casechk : "false"
     }
     handleChange = (e) => {
         const target = e.target;
@@ -306,6 +312,7 @@ class Question extends React.Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log(event.target);
         const data = new FormData(event.target);
         this.props.vista(data);
     }
@@ -347,15 +354,15 @@ class Question extends React.Component{
                 <label class="form-label" >Options:</label>
                 <div class="row" id="optionL">
                     {this.state.optionList.map((option,index) =>{
-                        return <input key={index} type="text" value={option} className="form-control" name={index} placeholder="Option Answer" onChange={this.handleOptions} />   
+                        return <input key={index} type="text" className="form-control" name={"optionList["+index+"]"} placeholder="Option Answer"/>   
                     })}
                 </div>
                 <input type="button" id="addBtn" className="btn btn-primary mt-2" value="Add option" onClick={this.add} />
                 <input type="button" id="quitBtn" className="btn btn-primary mt-2" value="Quit option" onClick={this.quit} />
                         <p></p>
                 <div className="form-check align-center">
-                    <input className="form-check1-input" type="checkbox" name="cosechk" onChange={this.handleChange} />
-                    <label className="form-check1-label" for="cosechk">Cose sensitive</label>
+                    <input className="form-check1-input" type="checkbox" name="casechk" onChange={this.handleChange} />
+                    <label className="form-check1-label" for="casechk">Cose sensitive</label>
                 </div>
                 <div className="form-check align-center">
                     <input className="form-check2-input" type="checkbox" name="exactchk" onChange={this.handleChange}/>

@@ -58,7 +58,7 @@
                             checked = checked + 1;
                         }
                     }
-                    if (checked == max) {
+                    if (checked === max) {
                         for (var i = 0; i < options.length; i++){
                             if (!options[i].checked){
                                 options[i].disabled = true;

@@ -103,5 +103,9 @@
 <result name="success">ViewQuestionP.jsp</result>
 </action>
 
+<action name="TryExam" method="execute" class="actionsupportpackage.TryExamActionSupport"> 
+<result name="success">TryExam.jsp</result>
+</action>
+
 </package>
 </struts>

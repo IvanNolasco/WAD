@@ -22,12 +22,6 @@
          <script src="js/jquery-3.4.1.min.js"></script>
         <script>
             var i = 1;
-            $("#addBtn").click(function (){
-                var optList = document.getElementById("optionL");
-            });
-            $("#quitBtn").click(function (){
-                var optList = document.getElementById("optionL");
-            });
             // Add the following code if you want the name of the file appear on select
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();

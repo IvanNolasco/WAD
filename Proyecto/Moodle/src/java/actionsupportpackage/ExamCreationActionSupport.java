@@ -12,8 +12,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
 public class ExamCreationActionSupport extends ActionSupport {
-    
-    private List<String> exams;
     private String examsJSON;
     
     public ExamCreationActionSupport() {
@@ -23,7 +21,6 @@ public class ExamCreationActionSupport extends ActionSupport {
     public String execute() throws Exception {
         //se recupera el username desde la sesion
         String userName = (String) ServletActionContext.getRequest().getSession().getAttribute("userName");
-        exams = new ArrayList<String>();
         //se define la ruta donde se va a buscar los xml
         String path = ServletActionContext.getServletContext().getRealPath("/");
         try {
@@ -46,7 +43,6 @@ public class ExamCreationActionSupport extends ActionSupport {
                         Element exam = (Element)e;
                         JSONObject obj = new JSONObject();
                         obj.put("name", exam.getAttributeValue("name"));
-                        exams.add(exam.getAttributeValue("name"));
                         list.add(obj);
                     }
                     break;
@@ -59,14 +55,6 @@ public class ExamCreationActionSupport extends ActionSupport {
         return SUCCESS;
     }
     
-    public List<String> getExams() {
-        return exams;
-    }
-
-    public void setExams(List<String> exams) {
-        this.exams = exams;
-    }
-
     public String getExamsJSON() {
         return examsJSON;
     }
